@@ -7,7 +7,7 @@ use Phizzl\Deployee\Dispatcher\Filesystem\Utils\Chmod;
 use Phizzl\Deployee\Dispatcher\Filesystem\Utils\Rm;
 use Phizzl\Deployee\Dispatcher\Filesystem\Utils\RmDir;
 use Phizzl\Deployee\Dispatcher\TaskDispatchException;
-use Phizzl\Deployee\Dispatcher\TaskDispatchResultInterface;
+use Phizzl\Deployee\Dispatcher\TaskDispatchResult;
 use Phizzl\Deployee\Tasks\TaskInterface;
 
 class FilesystemTaskDispatcher extends AbstractTaskDispatcher
@@ -26,16 +26,27 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
 
     /**
      * @param TaskInterface $task
-     * @return TaskDispatchResultInterface
+     * @return TaskDispatchResult
      */
     public function disptach(TaskInterface $task)
     {
         $dispatchMethod = "dispatch" . basename(get_class($task));
-        return call_user_func_array([$this, $dispatchMethod], [$task]);
+        $message = '';
+
+        try {
+            $exitCode = call_user_func_array([$this, $dispatchMethod], [$task]);
+        }
+        catch(\Exception $e){
+            $exitCode = $e->getCode() ? $e->getCode() : 255;
+            $message = $e->getMessage();
+        }
+
+        return new TaskDispatchResult($task, $message, $exitCode);
     }
 
     /**
      * @param TaskInterface $task
+     * @return int
      */
     private function dispatchFileTask(TaskInterface $task)
     {
@@ -43,10 +54,23 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
         if($definition->offsetGet('remove') === true){
             $rm = new Rm();
             $rm->remove($definition->offsetGet('path'));
+            return 0;
         }
-        elseif(file_put_contents($definition->offsetGet('path'), $definition->offsetGet('contents')) === false){
+
+        if(strlen($definition->offsetGet('copy')) > 0) {
+            if (copy($definition->offsetGet('copy'), $definition->offsetGet('path')) === false) {
+                throw new \RuntimeException(
+                    "Could not copy file \"{$definition->offsetGet('copy')}\" to \"{$definition->offsetGet('path')}\""
+                );
+            }
+            return 0;
+        }
+
+        if(file_put_contents($definition->offsetGet('path'), $definition->offsetGet('contents')) === false){
             throw new \RuntimeException("Could not write to file \"{$definition->offsetGet('path')}\"");
         }
+
+        return 0;
     }
 
     /**
@@ -59,6 +83,8 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
             $chmod = new Chmod();
             $chmod->chmod($definition->offsetGet('path'), $definition->offsetGet('recursive'));
         }
+
+        return 0;
     }
 
     /**
@@ -79,5 +105,7 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
             $rmDir = new RmDir();
             $rmDir->remove($definition->offsetGet('path'), $definition->offsetGet('recursive'));
         }
+
+        return 0;
     }
 }

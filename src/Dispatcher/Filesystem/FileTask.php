@@ -25,6 +25,11 @@ class FileTask implements TaskInterface
     private $remove;
 
     /**
+     * @var string
+     */
+    private $copy;
+
+    /**
      * DirectoryTask constructor.
      * @param string $path
      */
@@ -33,6 +38,7 @@ class FileTask implements TaskInterface
         $this->path = $path;
         $this->contents = '';
         $this->remove = false;
+        $this->copy = '';
     }
 
     /**
@@ -43,6 +49,7 @@ class FileTask implements TaskInterface
     {
         $this->contents = $contents;
         $this->remove = false;
+        $this->copy = '';
         return $this;
     }
 
@@ -53,6 +60,19 @@ class FileTask implements TaskInterface
     {
         $this->remove = true;
         $this->contents = '';
+        $this->copy = '';
+        return $this;
+    }
+
+    /**
+     * @param string $source
+     * @return $this
+     */
+    public function copy($source)
+    {
+        $this->copy = $source;
+        $this->contents = '';
+        $this->remove = false;
         return $this;
     }
 

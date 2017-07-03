@@ -18,6 +18,10 @@ class RecursiveDirectoryRemover
 
         $this->removeItem($path);
 
+        if(rmdir($path) === false){
+            throw new \RuntimeException("Could not remove directory \"{$path}\"");
+        }
+
         return true;
     }
 

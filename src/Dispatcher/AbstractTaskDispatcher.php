@@ -20,4 +20,24 @@ abstract class AbstractTaskDispatcher implements TaskDispatcherInterface
     {
         return in_array(get_class($task), $this->getDispatchableClasses());
     }
+
+    /**
+     * @param TaskInterface $task
+     * @return TaskDispatchResult
+     */
+    public function disptach(TaskInterface $task)
+    {
+        $dispatchMethod = "dispatch" . basename(get_class($task));
+        $message = '';
+
+        try {
+            $exitCode = call_user_func_array([$this, $dispatchMethod], [$task]);
+        }
+        catch(\Exception $e){
+            $exitCode = $e->getCode() ? $e->getCode() : 255;
+            $message = $e->getMessage();
+        }
+
+        return new TaskDispatchResult($task, $message, $exitCode);
+    }
 }

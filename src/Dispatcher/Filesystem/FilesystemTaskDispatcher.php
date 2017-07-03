@@ -7,7 +7,6 @@ use Phizzl\Deployee\Dispatcher\Filesystem\Utils\Chmod;
 use Phizzl\Deployee\Dispatcher\Filesystem\Utils\Rm;
 use Phizzl\Deployee\Dispatcher\Filesystem\Utils\RmDir;
 use Phizzl\Deployee\Dispatcher\TaskDispatchException;
-use Phizzl\Deployee\Dispatcher\TaskDispatchResult;
 use Phizzl\Deployee\Tasks\TaskInterface;
 
 class FilesystemTaskDispatcher extends AbstractTaskDispatcher
@@ -26,29 +25,9 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
 
     /**
      * @param TaskInterface $task
-     * @return TaskDispatchResult
-     */
-    public function disptach(TaskInterface $task)
-    {
-        $dispatchMethod = "dispatch" . basename(get_class($task));
-        $message = '';
-
-        try {
-            $exitCode = call_user_func_array([$this, $dispatchMethod], [$task]);
-        }
-        catch(\Exception $e){
-            $exitCode = $e->getCode() ? $e->getCode() : 255;
-            $message = $e->getMessage();
-        }
-
-        return new TaskDispatchResult($task, $message, $exitCode);
-    }
-
-    /**
-     * @param TaskInterface $task
      * @return int
      */
-    private function dispatchFileTask(TaskInterface $task)
+    public function dispatchFileTask(TaskInterface $task)
     {
         $definition = $task->getDefinition();
         if($definition->offsetGet('remove') === true){
@@ -76,7 +55,7 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
     /**
      * @param TaskInterface $task
      */
-    private function dispatchFilePermissionsTask(TaskInterface $task)
+    public function dispatchFilePermissionsTask(TaskInterface $task)
     {
         $definition = $task->getDefinition();
         if($definition->offsetGet('permissions')){
@@ -91,7 +70,7 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
      * @param TaskInterface $task
      * @used-by FilesystemTaskDispatcher::dispatch
      */
-    private function dispatchDirectoryTask(TaskInterface $task)
+    public function dispatchDirectoryTask(TaskInterface $task)
     {
         $definition = $task->getDefinition();
         if($definition->offsetGet('create') === true

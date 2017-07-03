@@ -4,8 +4,10 @@ namespace Phizzl\Deployee\Dispatcher;
 
 use Phizzl\Deployee\Collection;
 
-class TaskDispatcherCollection extends Collection implements TaskDispatcherCollectionInterface
+class TaskDispatcherCollection extends Collection
 {
+    const CONTAINER_ID = "deployee.tasks.dispatcher.collection";
+
     /**
      * @param TaskDispatcherInterface $dispatcher
      */

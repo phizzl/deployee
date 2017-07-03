@@ -5,6 +5,7 @@ namespace Phizzl\Deployee;
 
 use Composer\Autoload\ClassLoader;
 use Phizzl\Deployee\Config\Config;
+use Phizzl\Deployee\Dispatcher\TaskDispatcherCollection;
 use Phizzl\Deployee\Events\EventDispatcher;
 use Phizzl\Deployee\Plugins\PluginContainer;
 
@@ -40,5 +41,13 @@ class Container extends \Pimple\Container
     public function classLoader()
     {
         return $this['composer.classloader'];
+    }
+
+    /**
+     * @return TaskDispatcherCollection
+     */
+    public function taskDispatcher()
+    {
+        return $this[TaskDispatcherCollection::CONTAINER_ID];
     }
 }

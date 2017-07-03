@@ -9,6 +9,7 @@ use Phizzl\Deployee\CollectionInterface;
 use Phizzl\Deployee\Plugins\Deploy\Definitions\DefinitionFinder;
 use Phizzl\Deployee\Plugins\Deploy\Definitions\DeploymentDefinitionInterface;
 use Phizzl\Deployee\Plugins\Deploy\Events\PreRunDeployEvent;
+use Phizzl\Deployee\Tasks\TaskInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -40,11 +41,15 @@ class RunDeployCommand extends Command
         /* @var DeploymentDefinitionInterface $definition */
         foreach($definitions as $definition){
             $output->writeln("Executing definition " . get_class($definition));
-            $this->runTasks($definition->getTasks());
+            $this->runTasks($definition->getTasks(), $output);
         }
     }
 
-    private function runTasks(CollectionInterface $tasks){
+    private function runTasks(CollectionInterface $tasks, OutputInterface $output){
+        /* @var TaskInterface $task */
+        foreach($tasks as $task) {
+            $output->writeln("Executing task " . get_class($task), OutputInterface::VERBOSITY_DEBUG);
 
+        }
     }
 }

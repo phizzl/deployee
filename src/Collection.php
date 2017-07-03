@@ -15,4 +15,14 @@ class Collection implements CollectionInterface
     {
         $this->array = $array;
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->array);
+    }
+
+
 }

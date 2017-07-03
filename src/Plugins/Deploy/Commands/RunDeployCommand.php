@@ -39,6 +39,7 @@ class RunDeployCommand extends Command
 
         /* @var DeploymentDefinitionInterface $definition */
         foreach($definitions as $definition){
+            $output->writeln("Executing definition " . get_class($definition));
             $this->runTasks($definition->getTasks());
         }
     }

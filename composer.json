@@ -1,0 +1,22 @@
+{
+  "name": "phizzl/deployee",
+  "description": "Taskrunner for PHP",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Phillip Schleicher",
+      "email": "the@phizzl.de"
+    }
+  ],
+  "require": {
+    "symfony/event-dispatcher": "^3.3",
+    "symfony/yaml": "^3.3",
+    "symfony/finder": "^3.3",
+    "symfony/console": "^3.3",
+    "pimple/pimple": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {"Phizzl\\Deployee\\": "src/"}
+  }
+}

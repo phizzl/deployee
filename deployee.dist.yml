@@ -1,0 +1,3 @@
+plugins:
+    - Phizzl\Deployee\Plugins\Deploy\DeployPlugin:
+        path: deployments

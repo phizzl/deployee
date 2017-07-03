@@ -2,10 +2,12 @@
 
 namespace Phizzl\Deployee\Tasks;
 
+use Phizzl\Deployee\CollectionInterface;
+
 interface TaskInterface
 {
     /**
-     * @return TaskResultInterface
+     * @return CollectionInterface
      */
     public function getDefinition();
 }

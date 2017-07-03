@@ -8,6 +8,8 @@ use Phizzl\Deployee\Tasks\TaskInterface;
 
 interface TaskDispatchResultInterface
 {
+    const STATUS_OK = 0;
+
     /**
      * @return TaskInterface
      */

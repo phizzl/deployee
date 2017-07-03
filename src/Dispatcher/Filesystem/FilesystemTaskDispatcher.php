@@ -3,6 +3,8 @@
 namespace Phizzl\Deployee\Dispatcher\Filesystem;
 
 use Phizzl\Deployee\Dispatcher\AbstractTaskDispatcher;
+use Phizzl\Deployee\Dispatcher\Filesystem\Utils\Chmod;
+use Phizzl\Deployee\Dispatcher\Filesystem\Utils\Rm;
 use Phizzl\Deployee\Dispatcher\Filesystem\Utils\RmDir;
 use Phizzl\Deployee\Dispatcher\TaskDispatchException;
 use Phizzl\Deployee\Dispatcher\TaskDispatchResultInterface;
@@ -17,7 +19,8 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
     {
         return [
             'Phizzl\Deployee\Dispatcher\Filesystem\DirectoryTask',
-            'Phizzl\Deployee\Dispatcher\Filesystem\FilePermissionsTask'
+            'Phizzl\Deployee\Dispatcher\Filesystem\PermissionsTask',
+            'Phizzl\Deployee\Dispatcher\Filesystem\FileTask'
         ];
     }
 
@@ -31,9 +34,31 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
         return call_user_func_array([$this, $dispatchMethod], [$task]);
     }
 
+    /**
+     * @param TaskInterface $task
+     */
+    private function dispatchFileTask(TaskInterface $task)
+    {
+        $definition = $task->getDefinition();
+        if($definition->offsetGet('remove') === true){
+            $rm = new Rm();
+            $rm->remove($definition->offsetGet('path'));
+        }
+        elseif(file_put_contents($definition->offsetGet('path'), $definition->offsetGet('contents')) === false){
+            throw new \RuntimeException("Could not write to file \"{$definition->offsetGet('path')}\"");
+        }
+    }
+
+    /**
+     * @param TaskInterface $task
+     */
     private function dispatchFilePermissionsTask(TaskInterface $task)
     {
         $definition = $task->getDefinition();
+        if($definition->offsetGet('permissions')){
+            $chmod = new Chmod();
+            $chmod->chmod($definition->offsetGet('path'), $definition->offsetGet('recursive'));
+        }
     }
 
     /**

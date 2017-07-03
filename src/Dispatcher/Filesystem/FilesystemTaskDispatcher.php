@@ -2,9 +2,8 @@
 
 namespace Phizzl\Deployee\Dispatcher\Filesystem;
 
-
-use Phizzl\Deployee\CollectionInterface;
 use Phizzl\Deployee\Dispatcher\AbstractTaskDispatcher;
+use Phizzl\Deployee\Dispatcher\Filesystem\Utils\RmDir;
 use Phizzl\Deployee\Dispatcher\TaskDispatchException;
 use Phizzl\Deployee\Dispatcher\TaskDispatchResultInterface;
 use Phizzl\Deployee\Tasks\TaskInterface;
@@ -17,7 +16,8 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
     protected function getDispatchableClasses()
     {
         return [
-            'Phizzl\Deployee\Dispatcher\Filesystem\DirectoryTask'
+            'Phizzl\Deployee\Dispatcher\Filesystem\DirectoryTask',
+            'Phizzl\Deployee\Dispatcher\Filesystem\FilePermissionsTask'
         ];
     }
 
@@ -29,6 +29,11 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
     {
         $dispatchMethod = "dispatch" . basename(get_class($task));
         return call_user_func_array([$this, $dispatchMethod], [$task]);
+    }
+
+    private function dispatchFilePermissionsTask(TaskInterface $task)
+    {
+        $definition = $task->getDefinition();
     }
 
     /**
@@ -46,24 +51,8 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
             );
         }
         elseif($definition->offsetGet('remove') === true) {
-            $this->handleDirectoryRemove($definition);
-        }
-    }
-
-    /**
-     * @param CollectionInterface $definition
-     */
-    private function handleDirectoryRemove(CollectionInterface $definition)
-    {
-        if($definition->offsetGet('recursive') === true){
-            $recursiveDirectoryRemover = new RecursiveDirectoryRemover();
-            $recursiveDirectoryRemover->remove($definition->offsetGet('path'));
-        }
-        elseif(rmdir($definition->offsetGet('path')) === false){
-            throw new \RuntimeException(
-                "Could not remove directory \"{$definition->offsetGet('path')}\". "
-                . print_r(error_get_last(), true)
-            );
+            $rmDir = new RmDir();
+            $rmDir->remove($definition->offsetGet('path'), $definition->offsetGet('recursive'));
         }
     }
 }

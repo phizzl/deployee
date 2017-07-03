@@ -7,5 +7,5 @@ interface TaskInterface
     /**
      * @return TaskResultInterface
      */
-    public function run();
+    public function getDefinition();
 }

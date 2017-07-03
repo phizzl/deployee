@@ -7,7 +7,7 @@ namespace Phizzl\Deployee\Dispatcher\Filesystem;
 use Phizzl\Deployee\Collection;
 use Phizzl\Deployee\Tasks\TaskInterface;
 
-class FilePermissionsTask implements TaskInterface
+class PermissionsTask implements TaskInterface
 {
     /**
      * @var string

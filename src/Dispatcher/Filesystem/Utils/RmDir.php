@@ -7,6 +7,19 @@ namespace Phizzl\Deployee\Dispatcher\Filesystem\Utils;
 class RmDir
 {
     /**
+     * @var Rm
+     */
+    private $rm;
+
+    /**
+     * RmDir constructor.
+     */
+    public function __construct()
+    {
+        $this->rm = new Rm();
+    }
+
+    /**
      * @param string $path
      * @return bool
      */
@@ -20,7 +33,7 @@ class RmDir
             $this->removeRecursive($path);
         }
         else{
-            $this->removeFile($path);
+            $this->rm->remove($path);
         }
 
         return true;
@@ -40,26 +53,10 @@ class RmDir
                 $this->removeRecursive($item->getRealPath());
             }
             else{
-                $this->removeFile($item->getRealPath());
+                $this->rm->remove($item->getRealPath());
             }
         }
 
-        $this->removeFile($path);
-    }
-
-    /**
-     * @param string $path
-     */
-    private function removeFile($path)
-    {
-        if(is_file($path)
-            && unlink($path) === false){
-            throw new \RuntimeException("Could not remove file \"{$path}\"");
-        }
-
-        if(is_dir($path)
-            && rmdir($path) === false){
-            throw new \RuntimeException("Could not remove directory \"{$path}\"");
-        }
+        $this->rm->remove($path);
     }
 }

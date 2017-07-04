@@ -1,13 +1,13 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\TasksFilesystem;
+namespace Phizzl\Deployee\Plugins\DeployFilesystem;
 
 
 use Phizzl\Deployee\Container;
 use Phizzl\Deployee\Plugins\AbstractPlugin;
-use Phizzl\Deployee\Plugins\TasksFilesystem\Subscriber\TasksFilesystemSubscriber;
+use Phizzl\Deployee\Plugins\DeployFilesystem\Subscriber\TasksFilesystemSubscriber;
 
-class TasksFilesystemPlugin extends AbstractPlugin
+class DeployFilesystemPlugin extends AbstractPlugin
 {
     const PLUGIN_ID = "filesystemtasks";
 

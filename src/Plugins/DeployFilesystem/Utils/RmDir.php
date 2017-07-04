@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\TasksFilesystem\Utils;
+namespace Phizzl\Deployee\Plugins\DeployFilesystem\Utils;
 
 
 class RmDir

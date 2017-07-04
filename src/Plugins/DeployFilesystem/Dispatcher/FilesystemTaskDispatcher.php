@@ -1,11 +1,11 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\TasksFilesystem\Dispatcher;
+namespace Phizzl\Deployee\Plugins\DeployFilesystem\Dispatcher;
 
 use Phizzl\Deployee\Dispatcher\AbstractTaskDispatcher;
-use Phizzl\Deployee\Plugins\TasksFilesystem\Utils\Chmod;
-use Phizzl\Deployee\Plugins\TasksFilesystem\Utils\Rm;
-use Phizzl\Deployee\Plugins\TasksFilesystem\Utils\RmDir;
+use Phizzl\Deployee\Plugins\DeployFilesystem\Utils\Chmod;
+use Phizzl\Deployee\Plugins\DeployFilesystem\Utils\Rm;
+use Phizzl\Deployee\Plugins\DeployFilesystem\Utils\RmDir;
 use Phizzl\Deployee\Dispatcher\TaskDispatchException;
 use Phizzl\Deployee\Tasks\TaskInterface;
 
@@ -17,9 +17,9 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
     protected function getDispatchableClasses()
     {
         return [
-            'Phizzl\Deployee\Plugins\TasksFilesystem\Tasks\DirectoryTask',
-            'Phizzl\Deployee\Plugins\TasksFilesystem\Tasks\PermissionsTask',
-            'Phizzl\Deployee\Plugins\TasksFilesystem\Tasks\FileTask'
+            'Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\DirectoryTask',
+            'Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\PermissionsTask',
+            'Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\FileTask'
         ];
     }
 

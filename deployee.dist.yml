@@ -1,4 +1,4 @@
 plugins:
     - Phizzl\Deployee\Plugins\Deploy\DeployPlugin:
         path: deployments
-    - Phizzl\Deployee\Plugins\TasksFilesystem\TasksFilesystemPlugin
+    - Phizzl\Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin

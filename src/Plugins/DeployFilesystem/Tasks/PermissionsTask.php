@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\TasksFilesystem\Tasks;
+namespace Phizzl\Deployee\Plugins\DeployFilesystem\Tasks;
 
 
 use Phizzl\Deployee\Collection;

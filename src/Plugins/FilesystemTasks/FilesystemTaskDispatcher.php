@@ -1,11 +1,11 @@
 <?php
 
-namespace Phizzl\Deployee\Dispatcher\Filesystem;
+namespace Phizzl\Deployee\Plugins\FilesystemTasks;
 
 use Phizzl\Deployee\Dispatcher\AbstractTaskDispatcher;
-use Phizzl\Deployee\Dispatcher\Filesystem\Utils\Chmod;
-use Phizzl\Deployee\Dispatcher\Filesystem\Utils\Rm;
-use Phizzl\Deployee\Dispatcher\Filesystem\Utils\RmDir;
+use Phizzl\Deployee\Plugins\FilesystemTasks\Utils\Chmod;
+use Phizzl\Deployee\Plugins\FilesystemTasks\Utils\Rm;
+use Phizzl\Deployee\Plugins\FilesystemTasks\Utils\RmDir;
 use Phizzl\Deployee\Dispatcher\TaskDispatchException;
 use Phizzl\Deployee\Tasks\TaskInterface;
 

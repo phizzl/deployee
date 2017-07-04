@@ -5,7 +5,9 @@ namespace Phizzl\Deployee\Plugins\Deploy;
 
 use Phizzl\Deployee\Container;
 use Phizzl\Deployee\Plugins\AbstractPlugin;
+use Phizzl\Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
 use Phizzl\Deployee\Plugins\Deploy\Subscriber\ApplicationSubscriber;
+use Phizzl\Deployee\Plugins\Deploy\Tasks\TaskHelper;
 
 class DeployPlugin extends AbstractPlugin
 {
@@ -28,6 +30,13 @@ class DeployPlugin extends AbstractPlugin
 
         $container->classLoader()->add("\\", $this->config['path']);
         $container->events()->addSubscriber(new ApplicationSubscriber($this));
+
+        $container[TaskHelper::CONTAINER_ID] = function(Container $di){
+            $helper = new TaskHelper();
+            $event = new TaskHelperCreatedEvent($di, $helper);
+            $di->events()->dispatch(TaskHelperCreatedEvent::EVENT_NAME, $event);
+            return $helper;
+        };
     }
 
     /**

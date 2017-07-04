@@ -49,8 +49,8 @@ class DefinitionFinder
             }
 
             /* @var DeploymentDefinitionInterface $definition */
-            $definition = new $classname;
-            $return[] = new $definition;
+            $definition = new $classname($this->container);
+            $return[] = $definition;
         }
 
         return $return;

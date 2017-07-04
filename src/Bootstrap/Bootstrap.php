@@ -11,6 +11,7 @@ class Bootstrap
     use RegisterConfigTrait;
     use RegisterPluginsTrait;
     use RegisterTaskDispatcherCollectionTrait;
+    use RegisterLoggerTrait;
 
     /**
      * @var Container
@@ -45,6 +46,7 @@ class Bootstrap
         $this->registerConfig();
         $this->registerPlugins();
         $this->registerTaskDispatcherCollection();
+        $this->registerLogger();
 
         return $this->getContainer();
     }

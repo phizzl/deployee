@@ -9,7 +9,7 @@ use Phizzl\Deployee\Plugins\DeployFilesystem\Subscriber\TasksFilesystemSubscribe
 
 class DeployFilesystemPlugin extends AbstractPlugin
 {
-    const PLUGIN_ID = "filesystemtasks";
+    const PLUGIN_ID = "deploy.filesystem";
 
     /**
      * @return string

@@ -35,11 +35,10 @@ class ShellCommand
      */
     public function run()
     {
-        $return = $this->exec($this->command);
-        $exitCode = $this->getExitCode();
+        exec($this->command, $output, $exitCode);
 
         return [
-            'output' => $return,
+            'output' => $output,
             'code' => $exitCode
         ];
     }
@@ -50,6 +49,7 @@ class ShellCommand
      */
     private function exec($command)
     {
+
         return trim(shell_exec($command));
     }
 

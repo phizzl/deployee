@@ -68,6 +68,6 @@ class ExecutableFinderService
         $command = $this->container[ShellCommandFactory::CONTAINER_ID]->create("$which $name");
         $return = $command->run();
 
-        return $return['code'] > 0 ? '' : $return['output'];
+        return $return['code'] > 0 ? '' : current($return['output']);
     }
 }

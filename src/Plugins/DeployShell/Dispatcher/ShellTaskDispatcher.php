@@ -47,8 +47,14 @@ class ShellTaskDispatcher extends AbstractTaskDispatcher
         $arguments = isset($definition['arguments']) ? $definition['arguments'] : '';
 
         /* @var ShellCommand $command */
-        $command = $this->container[ShellCommandFactory::CONTAINER_ID]->create(trim("$executable $arguments"));
+        $commandStr = trim("$executable $arguments");
+
+        $this->container->logger()->debug("Dispatching Shell command: $commandStr");
+
+        $command = $this->container[ShellCommandFactory::CONTAINER_ID]->create($commandStr);
         $return = $command->run();
+
+        $this->container->logger()->debug("Return is: " . print_r($return, true));
 
         if($return['code'] !== ShellCommand::EXIT_CODE_OK){
             throw new \RuntimeException("Failed executing shell task. " . print_r($return, true));

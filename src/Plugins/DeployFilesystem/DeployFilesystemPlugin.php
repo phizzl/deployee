@@ -5,7 +5,7 @@ namespace Phizzl\Deployee\Plugins\DeployFilesystem;
 
 use Phizzl\Deployee\Container;
 use Phizzl\Deployee\Plugins\AbstractPlugin;
-use Phizzl\Deployee\Plugins\DeployFilesystem\Subscriber\TasksFilesystemSubscriber;
+use Phizzl\Deployee\Plugins\DeployFilesystem\Subscriber\DeployFilesystemSubscriber;
 
 class DeployFilesystemPlugin extends AbstractPlugin
 {
@@ -28,6 +28,6 @@ class DeployFilesystemPlugin extends AbstractPlugin
             throw new \RuntimeException("DeployPlugin is required!");
         }
 
-        $container->events()->addSubscriber(new TasksFilesystemSubscriber());
+        $container->events()->addSubscriber(new DeployFilesystemSubscriber());
     }
 }

@@ -8,7 +8,7 @@ use Phizzl\Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
 use Phizzl\Deployee\Plugins\DeployFilesystem\Dispatcher\FilesystemTaskDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class TasksFilesystemSubscriber implements EventSubscriberInterface
+class DeployFilesystemSubscriber implements EventSubscriberInterface
 {
     /**
      * @return array

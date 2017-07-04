@@ -24,6 +24,10 @@ class TasksFilesystemPlugin extends AbstractPlugin
      */
     public function initialize(Container $container)
     {
+        if(!class_exists('Phizzl\Deployee\Plugins\Deploy\DeployPlugin')){
+            throw new \RuntimeException("DeployPlugin is required!");
+        }
+
         $container->events()->addSubscriber(new TasksFilesystemSubscriber());
     }
 }

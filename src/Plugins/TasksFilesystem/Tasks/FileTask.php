@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\FilesystemTasks;
+namespace Phizzl\Deployee\Plugins\TasksFilesystem\Tasks;
 
 
 use Phizzl\Deployee\Collection;
 use Phizzl\Deployee\Tasks\TaskInterface;
 
-class DirectoryTask implements TaskInterface
+class FileTask implements TaskInterface
 {
     /**
      * @var string
@@ -15,9 +15,9 @@ class DirectoryTask implements TaskInterface
     private $path;
 
     /**
-     * @var bool
+     * @var int
      */
-    private $create;
+    private $contents;
 
     /**
      * @var bool
@@ -25,9 +25,9 @@ class DirectoryTask implements TaskInterface
     private $remove;
 
     /**
-     * @var bool
+     * @var string
      */
-    private $recursive;
+    private $copy;
 
     /**
      * DirectoryTask constructor.
@@ -36,19 +36,20 @@ class DirectoryTask implements TaskInterface
     public function __construct($path)
     {
         $this->path = $path;
-        $this->create = true;
+        $this->contents = '';
         $this->remove = false;
-        $this->recursive = false;
+        $this->copy = '';
     }
 
-
     /**
+     * @param string $contents
      * @return $this
      */
-    public function create()
+    public function contents($contents)
     {
-        $this->create = true;
+        $this->contents = $contents;
         $this->remove = false;
+        $this->copy = '';
         return $this;
     }
 
@@ -58,16 +59,20 @@ class DirectoryTask implements TaskInterface
     public function remove()
     {
         $this->remove = true;
-        $this->create = false;
+        $this->contents = '';
+        $this->copy = '';
         return $this;
     }
 
     /**
+     * @param string $source
      * @return $this
      */
-    public function recursive()
+    public function copy($source)
     {
-        $this->recursive = true;
+        $this->copy = $source;
+        $this->contents = '';
+        $this->remove = false;
         return $this;
     }
 
@@ -78,8 +83,7 @@ class DirectoryTask implements TaskInterface
     {
         return new Collection([
             'path' => $this->path,
-            'recursive' => $this->recursive,
-            'create' => $this->create,
+            'contents' => $this->contents,
             'remove' => $this->remove
         ]);
     }

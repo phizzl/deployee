@@ -1,12 +1,13 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\FilesystemTasks;
+namespace Phizzl\Deployee\Plugins\TasksFilesystem;
 
 
 use Phizzl\Deployee\Container;
 use Phizzl\Deployee\Plugins\AbstractPlugin;
+use Phizzl\Deployee\Plugins\TasksFilesystem\Subscriber\TasksFilesystemSubscriber;
 
-class FilesystemTasksPlugin extends AbstractPlugin
+class TasksFilesystemPlugin extends AbstractPlugin
 {
     const PLUGIN_ID = "filesystemtasks";
 
@@ -23,6 +24,6 @@ class FilesystemTasksPlugin extends AbstractPlugin
      */
     public function initialize(Container $container)
     {
-
+        $container->events()->addSubscriber(new TasksFilesystemSubscriber());
     }
 }

@@ -4,7 +4,6 @@ namespace Phizzl\Deployee\Bootstrap;
 
 
 use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Subscriber\TaskDispatcherCollectionInitializedSubscriber;
 
 class Bootstrap
 {
@@ -46,16 +45,7 @@ class Bootstrap
         $this->registerConfig();
         $this->registerPlugins();
         $this->registerTaskDispatcherCollection();
-        $this->addSubscriber();
 
         return $this->getContainer();
-    }
-
-    /**
-     * Adds internal event subscriber
-     */
-    private function addSubscriber()
-    {
-        $this->container->events()->addSubscriber(new TaskDispatcherCollectionInitializedSubscriber());
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\FilesystemTasks;
+namespace Phizzl\Deployee\Plugins\TasksFilesystem\Tasks;
 
 
 use Phizzl\Deployee\Collection;
 use Phizzl\Deployee\Tasks\TaskInterface;
 
-class FileTask implements TaskInterface
+class DirectoryTask implements TaskInterface
 {
     /**
      * @var string
@@ -15,9 +15,9 @@ class FileTask implements TaskInterface
     private $path;
 
     /**
-     * @var int
+     * @var bool
      */
-    private $contents;
+    private $create;
 
     /**
      * @var bool
@@ -25,9 +25,9 @@ class FileTask implements TaskInterface
     private $remove;
 
     /**
-     * @var string
+     * @var bool
      */
-    private $copy;
+    private $recursive;
 
     /**
      * DirectoryTask constructor.
@@ -36,20 +36,19 @@ class FileTask implements TaskInterface
     public function __construct($path)
     {
         $this->path = $path;
-        $this->contents = '';
+        $this->create = true;
         $this->remove = false;
-        $this->copy = '';
+        $this->recursive = false;
     }
 
+
     /**
-     * @param string $contents
      * @return $this
      */
-    public function contents($contents)
+    public function create()
     {
-        $this->contents = $contents;
+        $this->create = true;
         $this->remove = false;
-        $this->copy = '';
         return $this;
     }
 
@@ -59,20 +58,16 @@ class FileTask implements TaskInterface
     public function remove()
     {
         $this->remove = true;
-        $this->contents = '';
-        $this->copy = '';
+        $this->create = false;
         return $this;
     }
 
     /**
-     * @param string $source
      * @return $this
      */
-    public function copy($source)
+    public function recursive()
     {
-        $this->copy = $source;
-        $this->contents = '';
-        $this->remove = false;
+        $this->recursive = true;
         return $this;
     }
 
@@ -83,7 +78,8 @@ class FileTask implements TaskInterface
     {
         return new Collection([
             'path' => $this->path,
-            'contents' => $this->contents,
+            'recursive' => $this->recursive,
+            'create' => $this->create,
             'remove' => $this->remove
         ]);
     }

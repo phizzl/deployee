@@ -33,5 +33,9 @@ class DeployDefinition_1499068619_testDirectoryTasks extends \Phizzl\Deployee\Pl
         $this
             ->file(__DIR__ . '/.gittest')
             ->remove();
+
+        $this
+            ->shell("php")
+            ->arguments("-v");
     }
 }

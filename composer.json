@@ -14,7 +14,8 @@
     "symfony/yaml": "^3.3",
     "symfony/finder": "^3.3",
     "symfony/console": "^3.3",
-    "pimple/pimple": "^3.0"
+    "pimple/pimple": "^3.0",
+    "monolog/monolog": "^1.23"
   },
   "autoload": {
     "psr-4": {"Phizzl\\Deployee\\": "src/"}

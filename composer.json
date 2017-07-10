@@ -13,7 +13,7 @@
     "symfony/event-dispatcher": "^3.3",
     "symfony/yaml": "^3.3",
     "symfony/finder": "^3.3",
-    "symfony/console": "^3.3",
+    "symfony/console": "^2.8",
     "pimple/pimple": "^3.0",
     "monolog/monolog": "^1.23"
   },

@@ -52,6 +52,18 @@ class ExecutableFinderService
     }
 
     /**
+     * Usage:
+     * ExecutableFinderService::addAlias('mysqldump', '/usr/local/mysql5/bin/mysqldump')
+     *
+     * @param string $alias
+     * @param string $resolved
+     */
+    public function addAlias($alias, $resolved)
+    {
+        $this->aliase->offsetSet($alias, $resolved);
+    }
+
+    /**
      * @param string $name
      * @return string
      */

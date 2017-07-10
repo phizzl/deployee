@@ -46,7 +46,7 @@ class OxidTaskDispatcher extends ShellTaskDispatcher
      * @param TaskInterface $task
      * @return int
      */
-    protected function disptachShopTask(TaskInterface $task)
+    protected function dispatchShopTask(TaskInterface $task)
     {
         $definition = $task->getDefinition();
         $return = 0;

@@ -1,5 +1,5 @@
 {
-  "name": "phizzl/deployee",
+  "name": "phizzl/deployee-cli",
   "description": "Taskrunner for PHP",
   "minimum-stability": "stable",
   "license": "proprietary",

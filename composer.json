@@ -9,6 +9,7 @@
       "email": "the@phizzl.de"
     }
   ],
+  "bin": ["bin/deployee"],
   "require": {
     "symfony/event-dispatcher": "^3.3",
     "symfony/yaml": "^3.3",

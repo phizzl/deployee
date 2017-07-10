@@ -15,7 +15,8 @@ class OxidTaskDispatcher extends ShellTaskDispatcher
     protected function getDispatchableClasses()
     {
         return [
-            'Phizzl\Deployee\Plugins\DeployOxid\Tasks\ModuleTask'
+            'Phizzl\Deployee\Plugins\DeployOxid\Tasks\ModuleTask',
+            'Phizzl\Deployee\Plugins\DeployOxid\Tasks\ShopTask'
         ];
     }
 
@@ -37,6 +38,51 @@ class OxidTaskDispatcher extends ShellTaskDispatcher
 
         $shellTask = new ShellTask("oxid");
         $shellTask->arguments(trim("{$shellCommand} {$definition['moduleid']} {$shopIdOptions}"));
+
+        return $this->dispatchShellTask($shellTask);
+    }
+
+    /**
+     * @param TaskInterface $task
+     * @return int
+     */
+    protected function disptachShopTask(TaskInterface $task)
+    {
+        $definition = $task->getDefinition();
+        $return = 0;
+
+        if($definition['cleartmp'] === true
+            && ($exitCode = $this->executeClearTmp()) > 0){
+            $return = $exitCode;
+        }
+
+        if($return === 0
+            && $definition['generateviews'] === true
+            && ($exitCode = $this->executeGenerateViews()) > 0){
+            $return = $exitCode;
+        }
+
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
+    private function executeGenerateViews()
+    {
+        $shellTask = new ShellTask("oxid");
+        $shellTask->arguments("oxid:db:generate-views");
+
+        return $this->dispatchShellTask($shellTask);
+    }
+
+    /**
+     * @return int
+     */
+    private function executeClearTmp()
+    {
+        $shellTask = new ShellTask("oxid");
+        $shellTask->arguments("oxid:clear-tmp");
 
         return $this->dispatchShellTask($shellTask);
     }

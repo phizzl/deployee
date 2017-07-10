@@ -50,7 +50,8 @@ class DeployOxidSubscriber implements EventSubscriberInterface
     public function onTaskHelperCreated(TaskHelperCreatedEvent $event)
     {
         $taskHelper = $event->getTaskHelper();
-        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployOxid\Tasks\ModuleTask', 'oxmodule');
+        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployOxid\Tasks\ModuleTask', 'module');
+        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployOxid\Tasks\ShopTask', 'shop');
     }
 
     /**

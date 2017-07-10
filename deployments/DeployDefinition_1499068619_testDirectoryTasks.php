@@ -37,5 +37,9 @@ class DeployDefinition_1499068619_testDirectoryTasks extends \Phizzl\Deployee\Pl
         $this
             ->shell("php")
             ->arguments("-v");
+
+        $this
+            ->oxmodule("invoicepdf")
+            ->activate();
     }
 }

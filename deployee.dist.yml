@@ -3,3 +3,4 @@ plugins:
         path: deployments
     - Phizzl\Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
     - Phizzl\Deployee\Plugins\DeployShell\DeployShellPlugin
+    - Phizzl\Deployee\Plugins\DeployOxid\DeployOxidPlugin

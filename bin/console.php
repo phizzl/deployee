@@ -9,9 +9,6 @@ use Phizzl\Deployee\Events\ApplicationInitializedEvent;
 /* @var Container $container */
 $container = require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
-// Ensure plugin container was build
-$container->plugins();
-
 $application = new Application("Deployee", "2.0.0");
 $application->setContainer($container);
 

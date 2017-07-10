@@ -4,6 +4,7 @@ namespace Phizzl\Deployee\Bootstrap;
 
 
 use Phizzl\Deployee\Container;
+use Phizzl\Deployee\Events\BootstrapFinishedEvent;
 
 class Bootstrap
 {
@@ -47,6 +48,16 @@ class Bootstrap
         $this->registerPlugins();
         $this->registerTaskDispatcherCollection();
         $this->registerLogger();
+
+        // phs: Ensure plugin container is build an all plugins are initialized
+        $this->getContainer()->plugins();
+
+        $this->getContainer()
+            ->events()
+            ->dispatch(
+                BootstrapFinishedEvent::EVENT_NAME,
+                new BootstrapFinishedEvent($this->getContainer())
+            );
 
         return $this->getContainer();
     }

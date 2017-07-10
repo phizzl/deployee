@@ -22,7 +22,11 @@ trait RegisterConfigTrait
          * @return ConfigLoaderInterface
          */
         $this->getContainer()[ConfigLoaderInterface::CONTAINER_ID] = function(){
-            $find = [getcwd() . DIRECTORY_SEPARATOR . 'deployee.yml', getcwd() . DIRECTORY_SEPARATOR . 'deployee.dist.yml'];
+            $find = [
+                getcwd() . DIRECTORY_SEPARATOR . 'deployee.yml',
+                getcwd() . DIRECTORY_SEPARATOR . 'deployee.dist.yml',
+                __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'deployee.dist.yml'
+            ];
             $file = '';
             foreach($find as $findFile){
                 if(is_file($findFile)

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @mixin ideHelperDeploymentDefinition
+ */
 class DeployDefinition_1499068619_testDirectoryTasks extends \Phizzl\Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition
 {
     public function define()

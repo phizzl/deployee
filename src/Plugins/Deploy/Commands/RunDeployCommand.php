@@ -47,29 +47,16 @@ class RunDeployCommand extends Command
         }
     }
 
-
+    /**
+     * @param CollectionInterface $tasks
+     * @param OutputInterface $output
+     */
     private function runTasks(CollectionInterface $tasks, OutputInterface $output){
         /* @var TaskInterface $task */
         foreach($tasks as $task) {
             $output->writeln("Executing task " . get_class($task), OutputInterface::VERBOSITY_DEBUG);
-            $dispatcher = $this->getDispatcherForTask($task);
+            $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($task);
             $dispatcher->disptach($task);
         }
-    }
-
-    /**
-     * @param TaskInterface $task
-     * @return TaskDispatcherInterface
-     */
-    private function getDispatcherForTask(TaskInterface $task)
-    {
-        /* @var TaskDispatcherInterface $taskDispatcher */
-        foreach($this->container->taskDispatcher() as $taskDispatcher){
-            if($taskDispatcher->canDispatch($task)){
-                return $taskDispatcher;
-            }
-        }
-
-        throw new \RuntimeException("No dispatcher defined for task " . get_class($task));
     }
 }

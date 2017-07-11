@@ -15,9 +15,29 @@ class MySqlDumpTask implements TaskInterface
     private $target;
 
     /**
-     * @var string
+     * @var bool
      */
-    private $arguments;
+    private $force;
+
+    /**
+     * @var bool
+     */
+    private $noCreateInfo;
+
+    /**
+     * @var bool
+     */
+    private $noData;
+
+    /**
+     * @var array
+     */
+    private $includeTables;
+
+    /**
+     * @var array
+     */
+    private $excludeTables;
 
     /**
      * MySqlDumpTask constructor.
@@ -27,16 +47,58 @@ class MySqlDumpTask implements TaskInterface
     {
         $this->target = $target;
         $this->arguments = "";
+        $this->force = false;
+        $this->noCreateInfo = false;
+        $this->noData = false;
+        $this->includeTables = [];
+        $this->excludeTables = [];
     }
 
     /**
-     * @param string $arguments
      * @return $this
      */
-    public function arguments($arguments)
+    public function force()
     {
-        $this->arguments = $arguments;
+        $this->force = true;
         return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function noCreateInfo()
+    {
+        $this->noCreateInfo = true;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function noData()
+    {
+        $this->noData = true;
+        return $this;
+    }
+
+    /**
+     * @param string $table
+     * @return $this
+     */
+    public function includeTable($table)
+    {
+        $this->includeTables[$table] = $table;
+        return $this;
+    }
+
+    /**
+     * @param string $table
+     * @return mixed
+     */
+    public function excludeTable($table)
+    {
+        $this->excludeTables[$table] = $table;
+        return $table;
     }
 
     /**
@@ -46,7 +108,11 @@ class MySqlDumpTask implements TaskInterface
     {
         return new Collection([
             'target' => $this->target,
-            'arguments' => $this->arguments
+            'force' => $this->force,
+            'nocreateinfo' => $this->noCreateInfo,
+            'nodata' => $this->noData,
+            'includetables' => $this->includeTables,
+            'excludeTables' => $this->excludeTables
         ]);
     }
 

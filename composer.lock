@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a83e560146f5097f3cfef5cd4a09b497",
+    "content-hash": "4a37e0f1918f51b9792842c485c76586",
     "packages": [
         {
             "name": "monolog/monolog",
@@ -83,6 +83,39 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "phizzl/mysql-definition",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:nxs_schleicher/mysql-definition.git",
+                "reference": "5f881099e1e565707895b50f72e4c4c0d6b89289"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://www.nexus-netsoft.com/.satis/dist/phizzl/mysql-definition/phizzl-mysql-definition-v0.0.1-062776.tar",
+                "reference": "5f881099e1e565707895b50f72e4c4c0d6b89289",
+                "shasum": "cf3527b3dc825b6b1c7ec268974b0f25ff23b8ef"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phizzl\\MySql\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Phillip Schleicher",
+                    "email": "the@phizzl.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP mysqldump wrapper",
+            "time": "2017-07-11T09:25:14+00:00"
         },
         {
             "name": "pimple/pimple",

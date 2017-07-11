@@ -5,6 +5,8 @@ plugins:
     - Phizzl\Deployee\Plugins\DeployShell\DeployShellPlugin
     - Phizzl\Deployee\Plugins\DeployOxid\DeployOxidPlugin
     - Phizzl\Deployee\Plugins\DeployDb\DeployDbPlugin:
+        host: "localhost"
+        port: 3306
         user: "root"
         password: ~
         name: "localdb"

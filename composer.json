@@ -16,9 +16,14 @@
     "symfony/finder": "^3.3",
     "symfony/console": "^2.8",
     "pimple/pimple": "^3.0",
-    "monolog/monolog": "^1.23"
+    "monolog/monolog": "^1.23",
+    "phizzl/mysql-definition": "^0.0.1"
   },
   "autoload": {
     "psr-4": {"Phizzl\\Deployee\\": "src/"}
-  }
+  },
+  "repositories": [{
+    "type": "composer",
+    "url": "https://nexus:nexus123@www.nexus-netsoft.com/.satis"
+  }]
 }

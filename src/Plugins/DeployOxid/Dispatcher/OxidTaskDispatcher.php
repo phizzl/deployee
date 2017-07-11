@@ -2,13 +2,28 @@
 
 namespace Phizzl\Deployee\Plugins\DeployOxid\Dispatcher;
 
+use Phizzl\Deployee\Container;
+use Phizzl\Deployee\Dispatcher\AbstractTaskDispatcher;
 use Phizzl\Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
-use Phizzl\Deployee\Plugins\DeployShell\Dispatcher\ShellTaskDispatcher;
 use Phizzl\Deployee\Plugins\DeployShell\Tasks\ShellTask;
 use Phizzl\Deployee\Tasks\TaskInterface;
 
-class OxidTaskDispatcher extends ShellTaskDispatcher
+class OxidTaskDispatcher extends AbstractTaskDispatcher
 {
+    /**
+     * @var Container
+     */
+    private $container;
+
+    /**
+     * ShellTaskDispatcher constructor.
+     * @param Container $container
+     */
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * @return array
      */
@@ -39,7 +54,9 @@ class OxidTaskDispatcher extends ShellTaskDispatcher
         $shellTask = new ShellTask("oxid");
         $shellTask->arguments(trim("{$shellCommand} {$definition['moduleid']} {$shopIdOptions}"));
 
-        return $this->dispatchShellTask($shellTask);
+        $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($shellTask);
+
+        return $dispatcher->disptach($shellTask)->getExitCode();
     }
 
     /**
@@ -73,7 +90,8 @@ class OxidTaskDispatcher extends ShellTaskDispatcher
         $shellTask = new ShellTask("oxid");
         $shellTask->arguments("oxid:db:generate-views");
 
-        return $this->dispatchShellTask($shellTask);
+        $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($shellTask);
+        return $dispatcher->disptach($shellTask)->getExitCode();
     }
 
     /**
@@ -84,6 +102,7 @@ class OxidTaskDispatcher extends ShellTaskDispatcher
         $shellTask = new ShellTask("oxid");
         $shellTask->arguments("oxid:clear-tmp");
 
-        return $this->dispatchShellTask($shellTask);
+        $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($shellTask);
+        return $dispatcher->disptach($shellTask)->getExitCode();
     }
 }

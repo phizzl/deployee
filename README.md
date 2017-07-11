@@ -60,12 +60,7 @@ $this
 ```
 
 ### Shell
-#### Execute shell command
-```php
-$this
-    ->shell("php")
-    ->arguments("-v");
-```
+See documentation [here](src/Plugins/DeployShell/README.md)
 
 ### MySQL database
 #### Create dump
@@ -84,33 +79,4 @@ $this
 ```
 
 ### OXID eShop
-#### Activate module
-```php
-$this
-    ->module("invoicepdf")
-    ->activate()
-    ->shopId(2)
-    ->shopId(4);
-```
-
-#### Deactivate module
-```php
-$this
-    ->module("invoicepdf")
-    ->activate()
-    ->shopId(3);
-```
-
-#### Clear temp directory module
-```php
-$this
-    ->shop()
-    ->clearTmp();
-```
-
-#### Generate database views
-```php
-$this
-    ->shop()
-    ->generateViews();
-```
+See documentation [here](src/Plugins/DeployOxid/README.md)

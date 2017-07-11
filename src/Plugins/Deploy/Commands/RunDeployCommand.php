@@ -6,9 +6,9 @@ namespace Phizzl\Deployee\Plugins\Deploy\Commands;
 
 use Phizzl\Deployee\Application\Command;
 use Phizzl\Deployee\CollectionInterface;
-use Phizzl\Deployee\Dispatcher\TaskDispatcherInterface;
 use Phizzl\Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition;
 use Phizzl\Deployee\Plugins\Deploy\Definitions\DefinitionFinder;
+use Phizzl\Deployee\Plugins\Deploy\Events\PostRunDeployEvent;
 use Phizzl\Deployee\Plugins\Deploy\Events\PreRunDeployEvent;
 use Phizzl\Deployee\Tasks\TaskInterface;
 use Symfony\Component\Console\Input\InputInterface;
@@ -45,6 +45,9 @@ class RunDeployCommand extends Command
             $definition->define();
             $this->runTasks($definition->getTasks(), $output);
         }
+
+        $event = new PostRunDeployEvent($this->container, $definitions);
+        $this->container->events()->dispatch(PostRunDeployEvent::EVENT_NAME, $event);
     }
 
     /**
@@ -56,7 +59,7 @@ class RunDeployCommand extends Command
         foreach($tasks as $task) {
             $output->writeln("Executing task " . get_class($task), OutputInterface::VERBOSITY_DEBUG);
             $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($task);
-            $dispatcher->disptach($task);
+            $dispatcher->dispatch($task);
         }
     }
 }

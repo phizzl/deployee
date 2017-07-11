@@ -1,6 +1,7 @@
 plugins:
     - Phizzl\Deployee\Plugins\Deploy\DeployPlugin:
         path: deployments
+    - Phizzl\Deployee\Plugins\DeployHistory\DeployHistoryPlugin
     - Phizzl\Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
     - Phizzl\Deployee\Plugins\DeployShell\DeployShellPlugin
     - Phizzl\Deployee\Plugins\DeployOxid\DeployOxidPlugin
@@ -9,4 +10,4 @@ plugins:
         port: 3306
         user: "root"
         password: ~
-        name: "localdb"
+        name: "oxid"

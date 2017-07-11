@@ -1,11 +1,11 @@
 Deployee plugin for shell commands
 ==============================
-# Dependencies
-## Deployee plugin Deploy
+## Dependencies
+### Deployee plugin Deploy
 This plugin makes use of events triggered when booting the deploy plugin. It extends the functionality to use in a deployment definition class.
 
-# New tasks
-## Shell task
+## New tasks
+### Shell task
 ```php
 $this
     ->shell("php")
@@ -13,7 +13,7 @@ $this
 ```
 This example will execute php with the argument -v.
 
-# Plugin configuration
+## Plugin configuration
 ```yaml
 plugins:
     - Phizzl\Deployee\Plugins\DeployShell\DeployShellPlugin:

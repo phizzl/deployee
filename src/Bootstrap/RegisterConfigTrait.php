@@ -27,6 +27,11 @@ trait RegisterConfigTrait
                 getcwd() . DIRECTORY_SEPARATOR . 'deployee.dist.yml',
                 __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'deployee.dist.yml'
             ];
+
+            if($envConfig = getenv("DEPLOYEE_CONFIG")){
+                array_unshift($find, $envConfig);
+            }
+
             $file = '';
             foreach($find as $findFile){
                 if(is_file($findFile)

@@ -4,3 +4,7 @@ plugins:
     - Phizzl\Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
     - Phizzl\Deployee\Plugins\DeployShell\DeployShellPlugin
     - Phizzl\Deployee\Plugins\DeployOxid\DeployOxidPlugin
+    - Phizzl\Deployee\Plugins\DeployDb\DeployDbPlugin:
+        user: "root"
+        password: ~
+        name: "localdb"

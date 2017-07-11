@@ -59,7 +59,11 @@ class RunDeployCommand extends Command
         foreach($tasks as $task) {
             $output->writeln("Executing task " . get_class($task), OutputInterface::VERBOSITY_DEBUG);
             $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($task);
-            $dispatcher->dispatch($task);
+            $result = $dispatcher->dispatch($task);
+
+            if($result->getExitCode() > 0){
+                throw new \RuntimeException("Got exit code {$result->getExitCode()} from " . get_class($task));
+            }
         }
     }
 }

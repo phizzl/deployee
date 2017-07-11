@@ -67,6 +67,22 @@ $this
     ->arguments("-v");
 ```
 
+### MySQL database
+#### Create dump
+```php
+$this
+    ->mysqldump("/path/to/dump.sql")
+    ->force()
+    ->noData();
+```
+
+#### Import MySQL file
+```php
+$this
+    ->mysqlfile("/path/to/dump.sql")
+    ->force();
+```
+
 ### OXID eShop
 #### Activate module
 ```php

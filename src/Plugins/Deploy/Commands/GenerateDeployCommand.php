@@ -51,6 +51,9 @@ class GenerateDeployCommand extends Command
         return <<<EOL
 <?php
 
+/**
+ * @mixin ideHelperDeploymentDefinition
+ */
 class $className extends \\Phizzl\\Deployee\\Plugins\\Deploy\\Definitions\\AbstractDeploymentDefinition
 {
     public function define()

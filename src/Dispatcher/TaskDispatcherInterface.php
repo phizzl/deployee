@@ -18,5 +18,5 @@ interface TaskDispatcherInterface
      * @param TaskInterface $task
      * @return TaskDispatchResultInterface
      */
-    public function disptach(TaskInterface $task);
+    public function dispatch(TaskInterface $task);
 }

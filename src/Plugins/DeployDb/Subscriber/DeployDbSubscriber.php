@@ -29,6 +29,7 @@ class DeployDbSubscriber implements EventSubscriberInterface
     {
         $taskHelper = $event->getTaskHelper();
         $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask', 'mysqldump');
+        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask', 'mysqlfile');
     }
 
     /**

@@ -9,6 +9,7 @@ use Phizzl\Deployee\Plugins\DeployDb\DeployDbPlugin;
 use Phizzl\Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
 use Phizzl\Deployee\Plugins\DeployShell\Tasks\ShellTask;
 use Phizzl\Deployee\Tasks\TaskInterface;
+use Phizzl\MySql\MySqlDefinition;
 use Phizzl\MySql\MySqlDumpDefinition;
 
 class MySqlTaskDispatcher extends AbstractTaskDispatcher
@@ -33,8 +34,41 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
     protected function getDispatchableClasses()
     {
         return [
-            'Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask'
+            'Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask',
+            'Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask'
         ];
+    }
+
+    /**
+     * @param TaskInterface $task
+     * @return int
+     */
+    public function dispatchMySqlFileImportTask(TaskInterface $task)
+    {
+        $definition = $task->getDefinition();
+        $pluginConfig = $this->container->plugins()->offsetGet(DeployDbPlugin::PLUGIN_ID)->getConfig();
+        /* @var ExecutableFinderService $executableFinder */
+        $executableFinder = $this->container[ExecutableFinderService::CONTAINER_ID];
+        $mysqlBin = $executableFinder->find("mysql");
+
+        $mysql = new MySqlDefinition($pluginConfig['name']);
+        $mysql
+            ->mysqlBin($mysqlBin)
+            ->user($pluginConfig['user'])
+            ->password($pluginConfig['password'])
+            ->host($pluginConfig['host'])
+            ->port($pluginConfig['port']);
+
+        if($definition['force'] === true){
+            $mysql->force();
+        }
+
+        $mysql->arguments(" < {$definition['source']}");
+
+        $shellTask = new ShellTask("");
+        $shellTask->arguments($mysql->getShellCommand());
+
+        return $this->container->taskDispatcher()->getDispatcherByTask($shellTask)->disptach($shellTask)->getExitCode();
     }
 
     /**

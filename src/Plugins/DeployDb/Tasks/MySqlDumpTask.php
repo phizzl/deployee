@@ -46,7 +46,6 @@ class MySqlDumpTask implements TaskInterface
     public function __construct($target)
     {
         $this->target = $target;
-        $this->arguments = "";
         $this->force = false;
         $this->noCreateInfo = false;
         $this->noData = false;

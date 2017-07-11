@@ -68,7 +68,7 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
         $shellTask = new ShellTask("");
         $shellTask->arguments($mysql->getShellCommand());
 
-        return $this->container->taskDispatcher()->getDispatcherByTask($shellTask)->disptach($shellTask)->getExitCode();
+        return $this->container->taskDispatcher()->getDispatcherByTask($shellTask)->dispatch($shellTask)->getExitCode();
     }
 
     /**
@@ -125,6 +125,6 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
         $shellTask = new ShellTask("");
         $shellTask->arguments($mysqldump->getShellCommand());
 
-        return $this->container->taskDispatcher()->getDispatcherByTask($shellTask)->disptach($shellTask)->getExitCode();
+        return $this->container->taskDispatcher()->getDispatcherByTask($shellTask)->dispatch($shellTask)->getExitCode();
     }
 }

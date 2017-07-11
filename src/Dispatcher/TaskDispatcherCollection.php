@@ -43,6 +43,6 @@ class TaskDispatcherCollection extends Collection
             }
         }
 
-        throw new \RuntimeException("No disptahcer found for task " . get_class($task));
+        throw new \RuntimeException("No dispatcher found for task " . get_class($task));
     }
 }

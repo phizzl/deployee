@@ -56,7 +56,7 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
 
         $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($shellTask);
 
-        return $dispatcher->disptach($shellTask)->getExitCode();
+        return $dispatcher->dispatch($shellTask)->getExitCode();
     }
 
     /**
@@ -91,7 +91,7 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
         $shellTask->arguments("oxid:db:generate-views");
 
         $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($shellTask);
-        return $dispatcher->disptach($shellTask)->getExitCode();
+        return $dispatcher->dispatch($shellTask)->getExitCode();
     }
 
     /**
@@ -103,6 +103,6 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
         $shellTask->arguments("oxid:clear-tmp");
 
         $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($shellTask);
-        return $dispatcher->disptach($shellTask)->getExitCode();
+        return $dispatcher->dispatch($shellTask)->getExitCode();
     }
 }

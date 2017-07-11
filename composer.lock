@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a37e0f1918f51b9792842c485c76586",
+    "content-hash": "466a254a317d04c595f0cd96ace7b543",
     "packages": [
         {
             "name": "monolog/monolog",
@@ -86,17 +86,17 @@
         },
         {
             "name": "phizzl/mysql-definition",
-            "version": "v0.0.1",
+            "version": "v0.0.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:nxs_schleicher/mysql-definition.git",
-                "reference": "5f881099e1e565707895b50f72e4c4c0d6b89289"
+                "reference": "75b7da35b8de7cb738eb5ec20d517864538c8d1a"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://www.nexus-netsoft.com/.satis/dist/phizzl/mysql-definition/phizzl-mysql-definition-v0.0.1-062776.tar",
-                "reference": "5f881099e1e565707895b50f72e4c4c0d6b89289",
-                "shasum": "cf3527b3dc825b6b1c7ec268974b0f25ff23b8ef"
+                "url": "https://www.nexus-netsoft.com/.satis/dist/phizzl/mysql-definition/phizzl-mysql-definition-v0.0.3-493eb2.tar",
+                "reference": "75b7da35b8de7cb738eb5ec20d517864538c8d1a",
+                "shasum": "2804c6122cb2960a92c7064d1b965a56ed61111c"
             },
             "type": "library",
             "autoload": {
@@ -115,7 +115,7 @@
                 }
             ],
             "description": "PHP mysqldump wrapper",
-            "time": "2017-07-11T09:25:14+00:00"
+            "time": "2017-07-11T10:17:04+00:00"
         },
         {
             "name": "pimple/pimple",

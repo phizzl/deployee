@@ -18,20 +18,7 @@ See documentation [here](src/Plugins/DeployFilesystem/README.md)
 See documentation [here](src/Plugins/DeployShell/README.md)
 
 ### MySQL database
-#### Create dump
-```php
-$this
-    ->mysqldump("/path/to/dump.sql")
-    ->force()
-    ->noData();
-```
-
-#### Import MySQL file
-```php
-$this
-    ->mysqlfile("/path/to/dump.sql")
-    ->force();
-```
+See documentation [here](src/Plugins/DeployDb/README.md)
 
 ### OXID eShop
 See documentation [here](src/Plugins/DeployOxid/README.md)

@@ -16,8 +16,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RunDeployCommand extends Command
 {
-    use SetPluginTrait;
-
     /**
      * @inheritdoc
      */

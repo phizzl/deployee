@@ -40,9 +40,7 @@ class ApplicationSubscriber implements EventSubscriberInterface
     public function onApplicationInitialized(ApplicationInitializedEvent $event)
     {
         $generateCommand = new GenerateDeployCommand();
-        $generateCommand->setPlugin($this->plugin);
         $runCommand = new RunDeployCommand();
-        $runCommand->setPlugin($this->plugin);
 
         $event->getApplication()->add($generateCommand);
         $event->getApplication()->add($runCommand);

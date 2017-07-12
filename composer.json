@@ -1,5 +1,5 @@
 {
-  "name": "phizzl/deployee-cli",
+  "name": "phizzl/deployee",
   "description": "Taskrunner for PHP",
   "minimum-stability": "stable",
   "license": "proprietary",
@@ -17,7 +17,7 @@
     "symfony/console": "^2.8",
     "pimple/pimple": "^3.0",
     "monolog/monolog": "^1.23",
-    "phizzl/php-mysql-command-builder": "@dev"
+    "phizzl/php-mysql-command-builder": "^0.1"
   },
   "autoload": {
     "psr-4": {"Deployee\\": "src/"}

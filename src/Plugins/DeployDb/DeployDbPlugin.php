@@ -1,11 +1,11 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployDb;
+namespace Deployee\Plugins\DeployDb;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\AbstractPlugin;
-use Phizzl\Deployee\Plugins\DeployDb\Subscriber\DeployDbSubscriber;
+use Deployee\Container;
+use Deployee\Plugins\AbstractPlugin;
+use Deployee\Plugins\DeployDb\Subscriber\DeployDbSubscriber;
 
 class DeployDbPlugin extends AbstractPlugin
 {

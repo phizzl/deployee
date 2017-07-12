@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Phizzl\Deployee\Logger;
+namespace Deployee\Logger;
 
 
 class Logger extends \Monolog\Logger

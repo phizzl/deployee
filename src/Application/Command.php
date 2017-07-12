@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Phizzl\Deployee\Application;
+namespace Deployee\Application;
 
 
-use Phizzl\Deployee\Container;
+use Deployee\Container;
 
 abstract class Command extends \Symfony\Component\Console\Command\Command
 {

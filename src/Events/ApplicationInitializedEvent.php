@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Phizzl\Deployee\Events;
+namespace Deployee\Events;
 
 
-use Phizzl\Deployee\Application\Application;
-use Phizzl\Deployee\Container;
+use Deployee\Application\Application;
+use Deployee\Container;
 use Symfony\Component\EventDispatcher\Event;
 
 class ApplicationInitializedEvent extends Event

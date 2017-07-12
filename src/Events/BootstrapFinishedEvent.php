@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Phizzl\Deployee\Events;
+namespace Deployee\Events;
 
 
-use Phizzl\Deployee\Container;
+use Deployee\Container;
 use Symfony\Component\EventDispatcher\Event;
 
 class BootstrapFinishedEvent extends Event

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Phizzl\Deployee\Config;
+namespace Deployee\Config;
 
 
 use Symfony\Component\Yaml\Yaml;

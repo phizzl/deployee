@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\Deploy\Events;
+namespace Deployee\Plugins\Deploy\Events;
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Container;
+use Deployee\Tasks\TaskInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class PreRunDeployTaskEvent extends Event

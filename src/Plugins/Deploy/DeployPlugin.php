@@ -1,13 +1,13 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\Deploy;
+namespace Deployee\Plugins\Deploy;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\AbstractPlugin;
-use Phizzl\Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
-use Phizzl\Deployee\Plugins\Deploy\Subscriber\ApplicationSubscriber;
-use Phizzl\Deployee\Plugins\Deploy\Tasks\TaskHelper;
+use Deployee\Container;
+use Deployee\Plugins\AbstractPlugin;
+use Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
+use Deployee\Plugins\Deploy\Subscriber\ApplicationSubscriber;
+use Deployee\Plugins\Deploy\Tasks\TaskHelper;
 
 class DeployPlugin extends AbstractPlugin
 {

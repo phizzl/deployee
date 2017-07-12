@@ -1,12 +1,12 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployHistory\Subscriber;
+namespace Deployee\Plugins\DeployHistory\Subscriber;
 
 
-use Phizzl\Deployee\Events\BootstrapFinishedEvent;
-use Phizzl\Deployee\Plugins\Deploy\Events\PostRunDeployEvent;
-use Phizzl\Deployee\Plugins\Deploy\Events\PreRunDeployEvent;
-use Phizzl\Deployee\Plugins\DeployHistory\Services\HistoryService;
+use Deployee\Events\BootstrapFinishedEvent;
+use Deployee\Plugins\Deploy\Events\PostRunDeployEvent;
+use Deployee\Plugins\Deploy\Events\PreRunDeployEvent;
+use Deployee\Plugins\DeployHistory\Services\HistoryService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DeployHistorySubscriber implements EventSubscriberInterface

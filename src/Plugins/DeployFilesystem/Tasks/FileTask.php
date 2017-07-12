@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployFilesystem\Tasks;
+namespace Deployee\Plugins\DeployFilesystem\Tasks;
 
 
-use Phizzl\Deployee\Collection;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Collection;
+use Deployee\Tasks\TaskInterface;
 
 class FileTask implements TaskInterface
 {

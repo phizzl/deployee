@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployShell\Services;
+namespace Deployee\Plugins\DeployShell\Services;
 
 
-use Phizzl\Deployee\Collection;
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\DeployShell\DeployShellPlugin;
-use Phizzl\Deployee\Plugins\DeployShell\ShellCommand;
-use Phizzl\Deployee\Plugins\DeployShell\ShellCommandFactory;
+use Deployee\Collection;
+use Deployee\Container;
+use Deployee\Plugins\DeployShell\DeployShellPlugin;
+use Deployee\Plugins\DeployShell\ShellCommand;
+use Deployee\Plugins\DeployShell\ShellCommandFactory;
 
 class ExecutableFinderService
 {

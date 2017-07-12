@@ -1,14 +1,14 @@
 <?php
 
-namespace Phizzl\Deployee;
+namespace Deployee;
 
 
 use Composer\Autoload\ClassLoader;
-use Phizzl\Deployee\Config\Config;
-use Phizzl\Deployee\Dispatcher\TaskDispatcherCollection;
-use Phizzl\Deployee\Events\EventDispatcher;
-use Phizzl\Deployee\Logger\Logger;
-use Phizzl\Deployee\Plugins\PluginContainer;
+use Deployee\Config\Config;
+use Deployee\Dispatcher\TaskDispatcherCollection;
+use Deployee\Events\EventDispatcher;
+use Deployee\Logger\Logger;
+use Deployee\Plugins\PluginContainer;
 
 class Container extends \Pimple\Container
 {

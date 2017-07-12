@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Phizzl\Deployee\Bootstrap;
+namespace Deployee\Bootstrap;
 
-use Phizzl\Deployee\Dispatcher\TaskDispatcherCollection;
-use Phizzl\Deployee\Events\TaskDispatcherCollectionInitializedEvent;
+use Deployee\Dispatcher\TaskDispatcherCollection;
+use Deployee\Events\TaskDispatcherCollectionInitializedEvent;
 
 /**
  * @mixin Bootstrap

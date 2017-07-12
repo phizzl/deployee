@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Phizzl\Deployee\Events;
+namespace Deployee\Events;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Dispatcher\TaskDispatcherCollection;
+use Deployee\Container;
+use Deployee\Dispatcher\TaskDispatcherCollection;
 use Symfony\Component\EventDispatcher\Event;
 
 class TaskDispatcherCollectionInitializedEvent extends Event

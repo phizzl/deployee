@@ -1,12 +1,12 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployOxid\Dispatcher;
+namespace Deployee\Plugins\DeployOxid\Dispatcher;
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Dispatcher\AbstractTaskDispatcher;
-use Phizzl\Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
-use Phizzl\Deployee\Plugins\DeployShell\Tasks\ShellTask;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Container;
+use Deployee\Dispatcher\AbstractTaskDispatcher;
+use Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
+use Deployee\Plugins\DeployShell\Tasks\ShellTask;
+use Deployee\Tasks\TaskInterface;
 
 class OxidTaskDispatcher extends AbstractTaskDispatcher
 {
@@ -30,8 +30,8 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
     protected function getDispatchableClasses()
     {
         return [
-            'Phizzl\Deployee\Plugins\DeployOxid\Tasks\ModuleTask',
-            'Phizzl\Deployee\Plugins\DeployOxid\Tasks\ShopTask'
+            'Deployee\Plugins\DeployOxid\Tasks\ModuleTask',
+            'Deployee\Plugins\DeployOxid\Tasks\ShopTask'
         ];
     }
 

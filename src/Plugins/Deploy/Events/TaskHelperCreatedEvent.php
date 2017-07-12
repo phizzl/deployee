@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\Deploy\Events;
+namespace Deployee\Plugins\Deploy\Events;
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\Deploy\Tasks\TaskHelper;
+use Deployee\Container;
+use Deployee\Plugins\Deploy\Tasks\TaskHelper;
 use Symfony\Component\EventDispatcher\Event;
 
 class TaskHelperCreatedEvent extends Event

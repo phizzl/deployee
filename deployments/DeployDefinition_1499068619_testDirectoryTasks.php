@@ -3,7 +3,7 @@
 /**
  * @mixin ideHelperDeploymentDefinition
  */
-class DeployDefinition_1499068619_testDirectoryTasks extends \Phizzl\Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition
+class DeployDefinition_1499068619_testDirectoryTasks extends \Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition
 {
     public function define()
     {

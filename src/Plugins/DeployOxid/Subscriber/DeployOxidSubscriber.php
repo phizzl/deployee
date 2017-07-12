@@ -1,17 +1,17 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployOxid\Subscriber;
+namespace Deployee\Plugins\DeployOxid\Subscriber;
 
 
 
-use Phizzl\Deployee\Events\BootstrapFinishedEvent;
-use Phizzl\Deployee\Events\PluginsInitializedEvent;
-use Phizzl\Deployee\Events\TaskDispatcherCollectionInitializedEvent;
-use Phizzl\Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
-use Phizzl\Deployee\Plugins\DeployOxid\DeployOxidPlugin;
-use Phizzl\Deployee\Plugins\DeployOxid\Dispatcher\OxidTaskDispatcher;
-use Phizzl\Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
+use Deployee\Events\BootstrapFinishedEvent;
+use Deployee\Events\PluginsInitializedEvent;
+use Deployee\Events\TaskDispatcherCollectionInitializedEvent;
+use Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
+use Deployee\Plugins\DeployOxid\DeployOxidPlugin;
+use Deployee\Plugins\DeployOxid\Dispatcher\OxidTaskDispatcher;
+use Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DeployOxidSubscriber implements EventSubscriberInterface
@@ -50,8 +50,8 @@ class DeployOxidSubscriber implements EventSubscriberInterface
     public function onTaskHelperCreated(TaskHelperCreatedEvent $event)
     {
         $taskHelper = $event->getTaskHelper();
-        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployOxid\Tasks\ModuleTask', 'module');
-        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployOxid\Tasks\ShopTask', 'shop');
+        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ModuleTask', 'module');
+        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopTask', 'shop');
     }
 
     /**

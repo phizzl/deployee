@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployDb\Dispatcher;
+namespace Deployee\Plugins\DeployDb\Dispatcher;
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Dispatcher\AbstractTaskDispatcher;
-use Phizzl\Deployee\Plugins\DeployDb\DeployDbPlugin;
-use Phizzl\Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
-use Phizzl\Deployee\Plugins\DeployShell\Tasks\ShellTask;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Container;
+use Deployee\Dispatcher\AbstractTaskDispatcher;
+use Deployee\Plugins\DeployDb\DeployDbPlugin;
+use Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
+use Deployee\Plugins\DeployShell\Tasks\ShellTask;
+use Deployee\Tasks\TaskInterface;
 use Phizzl\MySql\MySqlDefinition;
 use Phizzl\MySql\MySqlDumpDefinition;
 
@@ -34,8 +34,8 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
     protected function getDispatchableClasses()
     {
         return [
-            'Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask',
-            'Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask'
+            'Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask',
+            'Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask'
         ];
     }
 

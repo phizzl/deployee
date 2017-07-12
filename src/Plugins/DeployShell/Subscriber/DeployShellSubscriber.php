@@ -1,11 +1,11 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployShell\Subscriber;
+namespace Deployee\Plugins\DeployShell\Subscriber;
 
 
-use Phizzl\Deployee\Events\TaskDispatcherCollectionInitializedEvent;
-use Phizzl\Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
-use Phizzl\Deployee\Plugins\DeployShell\Dispatcher\ShellTaskDispatcher;
+use Deployee\Events\TaskDispatcherCollectionInitializedEvent;
+use Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
+use Deployee\Plugins\DeployShell\Dispatcher\ShellTaskDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DeployShellSubscriber implements EventSubscriberInterface
@@ -27,7 +27,7 @@ class DeployShellSubscriber implements EventSubscriberInterface
     public function onTaskHelperCreated(TaskHelperCreatedEvent $event)
     {
         $taskHelper = $event->getTaskHelper();
-        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployShell\Tasks\ShellTask', 'shell');
+        $taskHelper->registerTask('Deployee\Plugins\DeployShell\Tasks\ShellTask', 'shell');
     }
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Phizzl\Deployee\Bootstrap;
+namespace Deployee\Bootstrap;
 
-use Phizzl\Deployee\Config\Config;
-use Phizzl\Deployee\Config\ConfigLoaderInterface;
-use Phizzl\Deployee\Config\ConfigLoaderYaml;
-use Phizzl\Deployee\Container;
+use Deployee\Config\Config;
+use Deployee\Config\ConfigLoaderInterface;
+use Deployee\Config\ConfigLoaderYaml;
+use Deployee\Container;
 
 /**
  * @mixin Bootstrap

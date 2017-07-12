@@ -1,10 +1,10 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployHistory\Services;
+namespace Deployee\Plugins\DeployHistory\Services;
 
 
-use Phizzl\Deployee\Plugins\Deploy\Definitions\DeploymentDefinitionInterface;
-use Phizzl\Deployee\Plugins\DeployHistory\Storages\DefinitionStorageInterface;
+use Deployee\Plugins\Deploy\Definitions\DeploymentDefinitionInterface;
+use Deployee\Plugins\DeployHistory\Storages\DefinitionStorageInterface;
 
 class HistoryService
 {

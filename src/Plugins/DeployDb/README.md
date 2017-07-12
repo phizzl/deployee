@@ -78,7 +78,7 @@ Sets the --force flag while importing dump.
 # Plugin configuration
 ```yaml
 plugins:
-    - Phizzl\Deployee\Plugins\DeployDb\DeployDbPlugin:
+    - Deployee\Plugins\DeployDb\DeployDbPlugin:
         host: "localhost"
         port: 3306
         user: "root"

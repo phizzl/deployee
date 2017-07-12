@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployHistory\Storages;
+namespace Deployee\Plugins\DeployHistory\Storages;
 
 
-use Phizzl\Deployee\Plugins\Deploy\Definitions\DeploymentDefinitionInterface;
+use Deployee\Plugins\Deploy\Definitions\DeploymentDefinitionInterface;
 
 class MySqlDefinitionStorage implements DefinitionStorageInterface
 {

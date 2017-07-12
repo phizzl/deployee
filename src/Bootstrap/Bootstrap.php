@@ -1,10 +1,10 @@
 <?php
 
-namespace Phizzl\Deployee\Bootstrap;
+namespace Deployee\Bootstrap;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Events\BootstrapFinishedEvent;
+use Deployee\Container;
+use Deployee\Events\BootstrapFinishedEvent;
 
 class Bootstrap
 {

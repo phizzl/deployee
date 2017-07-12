@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Phizzl\Deployee\Bootstrap;
+namespace Deployee\Bootstrap;
 
-use Phizzl\Deployee\Logger\Logger;
+use Deployee\Logger\Logger;
 
 /**
  * @mixin Bootstrap

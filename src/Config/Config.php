@@ -1,6 +1,6 @@
 <?php
 
-namespace Phizzl\Deployee\Config;
+namespace Deployee\Config;
 
 
 class Config

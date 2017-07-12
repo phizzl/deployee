@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins;
+namespace Deployee\Plugins;
 
 abstract class AbstractPlugin implements PluginInterface
 {

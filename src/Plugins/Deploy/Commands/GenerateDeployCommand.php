@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\Deploy\Commands;
+namespace Deployee\Plugins\Deploy\Commands;
 
 
-use Phizzl\Deployee\Application\Command;
-use Phizzl\Deployee\Plugins\Deploy\DeployPlugin;
+use Deployee\Application\Command;
+use Deployee\Plugins\Deploy\DeployPlugin;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

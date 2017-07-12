@@ -1,10 +1,10 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployOxid\Tasks;
+namespace Deployee\Plugins\DeployOxid\Tasks;
 
 
-use Phizzl\Deployee\Collection;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Collection;
+use Deployee\Tasks\TaskInterface;
 
 class ShopTask implements TaskInterface
 {

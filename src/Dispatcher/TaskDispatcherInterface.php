@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Phizzl\Deployee\Dispatcher;
+namespace Deployee\Dispatcher;
 
 
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Tasks\TaskInterface;
 
 interface TaskDispatcherInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Phizzl\Deployee;
+namespace Deployee;
 
 
 class Collection implements CollectionInterface

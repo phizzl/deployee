@@ -1,11 +1,11 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\Describe;
+namespace Deployee\Plugins\Describe;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\AbstractPlugin;
-use Phizzl\Deployee\Plugins\Describe\Subscriber\DescribePluginSubscriber;
+use Deployee\Container;
+use Deployee\Plugins\AbstractPlugin;
+use Deployee\Plugins\Describe\Subscriber\DescribePluginSubscriber;
 
 class DescribePlugin extends AbstractPlugin
 {

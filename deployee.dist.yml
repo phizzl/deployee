@@ -1,12 +1,12 @@
 plugins:
-    - Phizzl\Deployee\Plugins\Deploy\DeployPlugin:
+    - Deployee\Plugins\Deploy\DeployPlugin:
         path: deployments
-    - Phizzl\Deployee\Plugins\Describe\DescribePlugin
-    - Phizzl\Deployee\Plugins\DeployHistory\DeployHistoryPlugin
-    - Phizzl\Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
-    - Phizzl\Deployee\Plugins\DeployShell\DeployShellPlugin
-    - Phizzl\Deployee\Plugins\DeployOxid\DeployOxidPlugin
-    - Phizzl\Deployee\Plugins\DeployDb\DeployDbPlugin:
+    - Deployee\Plugins\Describe\DescribePlugin
+    - Deployee\Plugins\DeployHistory\DeployHistoryPlugin
+    - Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
+    - Deployee\Plugins\DeployShell\DeployShellPlugin
+    - Deployee\Plugins\DeployOxid\DeployOxidPlugin
+    - Deployee\Plugins\DeployDb\DeployDbPlugin:
         host: "localhost"
         port: 3306
         user: "root"

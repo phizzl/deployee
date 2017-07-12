@@ -1,16 +1,16 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\Deploy\Commands;
+namespace Deployee\Plugins\Deploy\Commands;
 
 
-use Phizzl\Deployee\Application\Command;
-use Phizzl\Deployee\CollectionInterface;
-use Phizzl\Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition;
-use Phizzl\Deployee\Plugins\Deploy\Definitions\DefinitionFinder;
-use Phizzl\Deployee\Plugins\Deploy\Events\PostRunDeployEvent;
-use Phizzl\Deployee\Plugins\Deploy\Events\PreRunDeployEvent;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Application\Command;
+use Deployee\CollectionInterface;
+use Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition;
+use Deployee\Plugins\Deploy\Definitions\DefinitionFinder;
+use Deployee\Plugins\Deploy\Events\PostRunDeployEvent;
+use Deployee\Plugins\Deploy\Events\PreRunDeployEvent;
+use Deployee\Tasks\TaskInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

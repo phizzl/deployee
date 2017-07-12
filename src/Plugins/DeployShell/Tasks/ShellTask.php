@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployShell\Tasks;
+namespace Deployee\Plugins\DeployShell\Tasks;
 
-use Phizzl\Deployee\Collection;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Collection;
+use Deployee\Tasks\TaskInterface;
 
 class ShellTask implements TaskInterface
 {

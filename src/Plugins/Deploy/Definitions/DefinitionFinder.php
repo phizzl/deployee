@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\Deploy\Definitions;
+namespace Deployee\Plugins\Deploy\Definitions;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\Deploy\DeployPlugin;
+use Deployee\Container;
+use Deployee\Plugins\Deploy\DeployPlugin;
 use Symfony\Component\Finder\Finder;
 
 class DefinitionFinder

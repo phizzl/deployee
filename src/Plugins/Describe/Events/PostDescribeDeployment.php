@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\Describe\Events;
+namespace Deployee\Plugins\Describe\Events;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\Deploy\Definitions\DefinitionCollection;
+use Deployee\Container;
+use Deployee\Plugins\Deploy\Definitions\DefinitionCollection;
 use Symfony\Component\EventDispatcher\Event;
 
 class PostDescribeDeployment extends Event

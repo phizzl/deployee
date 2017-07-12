@@ -1,8 +1,8 @@
 <?php
 
-namespace Phizzl\Deployee\Tasks;
+namespace Deployee\Tasks;
 
-use Phizzl\Deployee\CollectionInterface;
+use Deployee\CollectionInterface;
 
 interface TaskInterface
 {

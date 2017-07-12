@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Phizzl\Deployee\Bootstrap;
+namespace Deployee\Bootstrap;
 
-use Phizzl\Deployee\Events\EventDispatcher;
+use Deployee\Events\EventDispatcher;
 
 /**
  * @mixin Bootstrap

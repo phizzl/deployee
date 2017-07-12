@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployOxid;
+namespace Deployee\Plugins\DeployOxid;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\AbstractPlugin;
-use Phizzl\Deployee\Plugins\DeployOxid\Subscriber\DeployOxidSubscriber;
+use Deployee\Container;
+use Deployee\Plugins\AbstractPlugin;
+use Deployee\Plugins\DeployOxid\Subscriber\DeployOxidSubscriber;
 
 class DeployOxidPlugin extends AbstractPlugin
 {

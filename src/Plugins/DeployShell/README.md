@@ -16,7 +16,7 @@ This example will execute php with the argument -v.
 ## Plugin configuration
 ```yaml
 plugins:
-    - Phizzl\Deployee\Plugins\DeployShell\DeployShellPlugin:
+    - Deployee\Plugins\DeployShell\DeployShellPlugin:
         aliase:
             php: /usr/bin/php5
             mysqldump: /usr/local/mysql5/bin/mysqldump

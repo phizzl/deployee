@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-use Phizzl\Deployee\Application\Application;
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Events\ApplicationInitializedEvent;
+use Deployee\Application\Application;
+use Deployee\Container;
+use Deployee\Events\ApplicationInitializedEvent;
 
 
 /* @var Container $container */

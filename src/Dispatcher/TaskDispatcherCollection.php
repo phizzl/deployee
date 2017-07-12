@@ -1,9 +1,9 @@
 <?php
 
-namespace Phizzl\Deployee\Dispatcher;
+namespace Deployee\Dispatcher;
 
-use Phizzl\Deployee\Collection;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Collection;
+use Deployee\Tasks\TaskInterface;
 
 class TaskDispatcherCollection extends Collection
 {

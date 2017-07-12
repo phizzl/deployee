@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Phizzl\Deployee\Events;
+namespace Deployee\Events;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\PluginContainer;
+use Deployee\Container;
+use Deployee\Plugins\PluginContainer;
 use Symfony\Component\EventDispatcher\Event;
 
 class PluginsInitializedEvent extends Event

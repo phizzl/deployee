@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\Deploy\Definitions;
+namespace Deployee\Plugins\Deploy\Definitions;
 
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\Deploy\Tasks\TaskHelper;
-use Phizzl\Deployee\Tasks\TaskCollection;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Container;
+use Deployee\Plugins\Deploy\Tasks\TaskHelper;
+use Deployee\Tasks\TaskCollection;
+use Deployee\Tasks\TaskInterface;
 
 abstract class AbstractDeploymentDefinition implements DeploymentDefinitionInterface
 {

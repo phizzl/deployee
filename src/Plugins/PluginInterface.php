@@ -1,9 +1,9 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins;
+namespace Deployee\Plugins;
 
 
-use Phizzl\Deployee\Container;
+use Deployee\Container;
 
 interface PluginInterface
 {

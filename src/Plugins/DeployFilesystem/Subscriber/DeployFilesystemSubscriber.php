@@ -1,11 +1,11 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployFilesystem\Subscriber;
+namespace Deployee\Plugins\DeployFilesystem\Subscriber;
 
 
-use Phizzl\Deployee\Events\TaskDispatcherCollectionInitializedEvent;
-use Phizzl\Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
-use Phizzl\Deployee\Plugins\DeployFilesystem\Dispatcher\FilesystemTaskDispatcher;
+use Deployee\Events\TaskDispatcherCollectionInitializedEvent;
+use Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
+use Deployee\Plugins\DeployFilesystem\Dispatcher\FilesystemTaskDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DeployFilesystemSubscriber implements EventSubscriberInterface
@@ -27,9 +27,9 @@ class DeployFilesystemSubscriber implements EventSubscriberInterface
     public function onTaskHelperCreated(TaskHelperCreatedEvent $event)
     {
         $taskHelper = $event->getTaskHelper();
-        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\DirectoryTask', 'directory');
-        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\FileTask', 'file');
-        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\PermissionsTask', 'permission');
+        $taskHelper->registerTask('Deployee\Plugins\DeployFilesystem\Tasks\DirectoryTask', 'directory');
+        $taskHelper->registerTask('Deployee\Plugins\DeployFilesystem\Tasks\FileTask', 'file');
+        $taskHelper->registerTask('Deployee\Plugins\DeployFilesystem\Tasks\PermissionsTask', 'permission');
     }
 
     /**

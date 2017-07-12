@@ -1,9 +1,9 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins;
+namespace Deployee\Plugins;
 
 
-use Phizzl\Deployee\ArrayAccessImplementation;
+use Deployee\ArrayAccessImplementation;
 
 class PluginContainer implements \ArrayAccess
 {

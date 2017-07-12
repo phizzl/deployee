@@ -1,10 +1,10 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\Describe\Subscriber;
+namespace Deployee\Plugins\Describe\Subscriber;
 
 
-use Phizzl\Deployee\Events\ApplicationInitializedEvent;
-use Phizzl\Deployee\Plugins\Describe\Commands\DescribeCommand;
+use Deployee\Events\ApplicationInitializedEvent;
+use Deployee\Plugins\Describe\Commands\DescribeCommand;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DescribePluginSubscriber implements EventSubscriberInterface

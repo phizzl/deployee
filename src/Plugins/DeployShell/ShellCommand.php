@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployShell;
+namespace Deployee\Plugins\DeployShell;
 
-use Phizzl\Deployee\Container;
+use Deployee\Container;
 
 class ShellCommand
 {

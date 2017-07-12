@@ -1,12 +1,12 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployShell;
+namespace Deployee\Plugins\DeployShell;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\AbstractPlugin;
-use Phizzl\Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
-use Phizzl\Deployee\Plugins\DeployShell\Subscriber\DeployShellSubscriber;
+use Deployee\Container;
+use Deployee\Plugins\AbstractPlugin;
+use Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
+use Deployee\Plugins\DeployShell\Subscriber\DeployShellSubscriber;
 
 class DeployShellPlugin extends AbstractPlugin
 {

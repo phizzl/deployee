@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Phizzl\Deployee;
+namespace Deployee;
 
 
 interface CollectionInterface extends \ArrayAccess, \Traversable, \Iterator, \Countable

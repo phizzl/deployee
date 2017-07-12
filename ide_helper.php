@@ -1,13 +1,13 @@
 <?php
 
-use Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask;
-use Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask;
-use Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\DirectoryTask;
-use Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\FileTask;
-use Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\PermissionsTask;
-use Phizzl\Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
-use Phizzl\Deployee\Plugins\DeployOxid\Tasks\ShopTask;
-use Phizzl\Deployee\Plugins\DeployShell\Tasks\ShellTask;
+use Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask;
+use Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask;
+use Deployee\Plugins\DeployFilesystem\Tasks\DirectoryTask;
+use Deployee\Plugins\DeployFilesystem\Tasks\FileTask;
+use Deployee\Plugins\DeployFilesystem\Tasks\PermissionsTask;
+use Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
+use Deployee\Plugins\DeployOxid\Tasks\ShopTask;
+use Deployee\Plugins\DeployShell\Tasks\ShellTask;
 
 /**
  * THIS TRAIT IS JUST FOR IDE SUPPORT! IT'S NOT BEING USED ANYWHERE ELSE!

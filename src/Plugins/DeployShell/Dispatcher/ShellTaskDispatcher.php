@@ -1,14 +1,14 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployShell\Dispatcher;
+namespace Deployee\Plugins\DeployShell\Dispatcher;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Dispatcher\AbstractTaskDispatcher;
-use Phizzl\Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
-use Phizzl\Deployee\Plugins\DeployShell\ShellCommand;
-use Phizzl\Deployee\Plugins\DeployShell\ShellCommandFactory;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Container;
+use Deployee\Dispatcher\AbstractTaskDispatcher;
+use Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
+use Deployee\Plugins\DeployShell\ShellCommand;
+use Deployee\Plugins\DeployShell\ShellCommandFactory;
+use Deployee\Tasks\TaskInterface;
 
 class ShellTaskDispatcher extends AbstractTaskDispatcher
 {
@@ -32,7 +32,7 @@ class ShellTaskDispatcher extends AbstractTaskDispatcher
     protected function getDispatchableClasses()
     {
         return [
-            'Phizzl\Deployee\Plugins\DeployShell\Tasks\ShellTask'
+            'Deployee\Plugins\DeployShell\Tasks\ShellTask'
         ];
     }
 

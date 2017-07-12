@@ -11,7 +11,7 @@ Before you start writing deployments you should get familiar with the shell comm
 The deployment definition class is the metioned collection of tasks. All deployment definitions will be stored and read from your configured _path_.
 The deployment definition itself gets it's functionality by different plugins that are adding usable tasks to the definition.
 ```php
-class DeployDefinition_1499068619_Ticket008 extends \Phizzl\Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition
+class DeployDefinition_1499068619_Ticket008 extends \Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition
 {
     public function define()
     {
@@ -35,14 +35,14 @@ To execute a task you need a task dispatcher. As plugins extend Deployees functi
 
 Let's take a look at the task dispatcher for the FileTask class from the DeployFilesystem plugin.
 ```php
-namespace Phizzl\Deployee\Plugins\DeployFilesystem\Dispatcher;
+namespace Deployee\Plugins\DeployFilesystem\Dispatcher;
 
-use Phizzl\Deployee\Dispatcher\AbstractTaskDispatcher;
-use Phizzl\Deployee\Plugins\DeployFilesystem\Utils\Chmod;
-use Phizzl\Deployee\Plugins\DeployFilesystem\Utils\Rm;
-use Phizzl\Deployee\Plugins\DeployFilesystem\Utils\RmDir;
-use Phizzl\Deployee\Dispatcher\TaskDispatchException;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Dispatcher\AbstractTaskDispatcher;
+use Deployee\Plugins\DeployFilesystem\Utils\Chmod;
+use Deployee\Plugins\DeployFilesystem\Utils\Rm;
+use Deployee\Plugins\DeployFilesystem\Utils\RmDir;
+use Deployee\Dispatcher\TaskDispatchException;
+use Deployee\Tasks\TaskInterface;
 
 class FilesystemTaskDispatcher extends AbstractTaskDispatcher
 {
@@ -52,7 +52,7 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
     protected function getDispatchableClasses()
     {
         return [
-            'Phizzl\Deployee\Plugins\DeployFilesystem\Tasks\FileTask'
+            'Deployee\Plugins\DeployFilesystem\Tasks\FileTask'
         ];
     }
 
@@ -103,7 +103,7 @@ Run alls deployment definitions stored in the configured _path_.
 ## Plugin configuration
 ```yaml
 plugins:
-    - Phizzl\Deployee\Plugins\Deploy\DeployPlugin:
+    - Deployee\Plugins\Deploy\DeployPlugin:
         path: deployments
 ```
 ### path

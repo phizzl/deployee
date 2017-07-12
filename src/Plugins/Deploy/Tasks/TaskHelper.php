@@ -1,10 +1,10 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\Deploy\Tasks;
+namespace Deployee\Plugins\Deploy\Tasks;
 
 
-use Phizzl\Deployee\Collection;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Collection;
+use Deployee\Tasks\TaskInterface;
 
 class TaskHelper
 {

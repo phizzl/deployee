@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployDb\Subscriber;
+namespace Deployee\Plugins\DeployDb\Subscriber;
 
 
-use Phizzl\Deployee\Events\TaskDispatcherCollectionInitializedEvent;
-use Phizzl\Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
-use Phizzl\Deployee\Plugins\DeployDb\Dispatcher\MySqlTaskDispatcher;
+use Deployee\Events\TaskDispatcherCollectionInitializedEvent;
+use Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
+use Deployee\Plugins\DeployDb\Dispatcher\MySqlTaskDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DeployDbSubscriber implements EventSubscriberInterface
@@ -28,8 +28,8 @@ class DeployDbSubscriber implements EventSubscriberInterface
     public function onTaskHelperCreated(TaskHelperCreatedEvent $event)
     {
         $taskHelper = $event->getTaskHelper();
-        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask', 'mysqldump');
-        $taskHelper->registerTask('Phizzl\Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask', 'mysqlfile');
+        $taskHelper->registerTask('Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask', 'mysqldump');
+        $taskHelper->registerTask('Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask', 'mysqlfile');
     }
 
     /**

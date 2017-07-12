@@ -36,8 +36,8 @@ The system itself is designed to be event and plugin based. So the functionality
 ### Create a new plugin
 If you want to add functionality to Deployee you are able to create your own plugin. For this you need a Plugin class that extends the AbstractPlugin class.
 ```php
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\AbstractPlugin;
+use Deployee\Container;
+use Deployee\Plugins\AbstractPlugin;
 
 class MyPluginPlugin extends AbstractPlugin
 {
@@ -63,14 +63,14 @@ class MyPluginPlugin extends AbstractPlugin
 After you defined your plugin you just have to add your class to your Deployee config YAML file under the _plugin_ section.
 ```yaml
 plugins:
-    - Phizzl\Deployee\Plugins\MyPlugin\MyPluginPlugin
+    - Deployee\Plugins\MyPlugin\MyPluginPlugin
 ```
 
 ### Plugin configuration parameter
 You can also define your plugin configuration in the config YAML file. This parameters will be available in the plugins initialize method.
 ```yaml
 plugins:
-    - Phizzl\Deployee\Plugins\MyPlugin\MyPluginPlugin:
+    - Deployee\Plugins\MyPlugin\MyPluginPlugin:
         myvar1: val1
         myvar2: ["apple", "orange"]
 ```

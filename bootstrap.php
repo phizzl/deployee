@@ -3,8 +3,8 @@
  * Bootstrap file for Deployee task runner
  */
 
-use Phizzl\Deployee\Bootstrap\Bootstrap;
-use Phizzl\Deployee\Container;
+use Deployee\Bootstrap\Bootstrap;
+use Deployee\Container;
 
 $findLoader = [
     __DIR__ . '/vendor',

@@ -1,13 +1,13 @@
 <?php
 
-namespace Phizzl\Deployee\Bootstrap;
+namespace Deployee\Bootstrap;
 
-use Phizzl\Deployee\Config\Config;
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Events\EventDispatcher;
-use Phizzl\Deployee\Events\PluginsInitializedEvent;
-use Phizzl\Deployee\Plugins\PluginContainer;
-use Phizzl\Deployee\Plugins\PluginInterface;
+use Deployee\Config\Config;
+use Deployee\Container;
+use Deployee\Events\EventDispatcher;
+use Deployee\Events\PluginsInitializedEvent;
+use Deployee\Plugins\PluginContainer;
+use Deployee\Plugins\PluginInterface;
 
 /**
  * @mixin Bootstrap

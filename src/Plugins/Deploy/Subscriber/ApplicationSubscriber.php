@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\Deploy\Subscriber;
+namespace Deployee\Plugins\Deploy\Subscriber;
 
 
-use Phizzl\Deployee\Events\ApplicationInitializedEvent;
-use Phizzl\Deployee\Plugins\Deploy\Commands\GenerateDeployCommand;
-use Phizzl\Deployee\Plugins\Deploy\Commands\RunDeployCommand;
-use Phizzl\Deployee\Plugins\Deploy\DeployPlugin;
+use Deployee\Events\ApplicationInitializedEvent;
+use Deployee\Plugins\Deploy\Commands\GenerateDeployCommand;
+use Deployee\Plugins\Deploy\Commands\RunDeployCommand;
+use Deployee\Plugins\Deploy\DeployPlugin;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ApplicationSubscriber implements EventSubscriberInterface

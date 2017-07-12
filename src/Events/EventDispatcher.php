@@ -1,6 +1,6 @@
 <?php
 
-namespace Phizzl\Deployee\Events;
+namespace Deployee\Events;
 
 
 class EventDispatcher extends \Symfony\Component\EventDispatcher\EventDispatcher

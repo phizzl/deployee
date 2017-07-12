@@ -1,11 +1,11 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployFilesystem;
+namespace Deployee\Plugins\DeployFilesystem;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\AbstractPlugin;
-use Phizzl\Deployee\Plugins\DeployFilesystem\Subscriber\DeployFilesystemSubscriber;
+use Deployee\Container;
+use Deployee\Plugins\AbstractPlugin;
+use Deployee\Plugins\DeployFilesystem\Subscriber\DeployFilesystemSubscriber;
 
 class DeployFilesystemPlugin extends AbstractPlugin
 {
@@ -24,7 +24,7 @@ class DeployFilesystemPlugin extends AbstractPlugin
      */
     public function initialize(Container $container)
     {
-        if(!class_exists('Phizzl\Deployee\Plugins\Deploy\DeployPlugin')){
+        if(!class_exists('Deployee\Plugins\Deploy\DeployPlugin')){
             throw new \RuntimeException("DeployPlugin is required!");
         }
 

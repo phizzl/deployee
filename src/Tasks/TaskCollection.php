@@ -1,8 +1,8 @@
 <?php
 
-namespace Phizzl\Deployee\Tasks;
+namespace Deployee\Tasks;
 
-use Phizzl\Deployee\Collection;
+use Deployee\Collection;
 
 class TaskCollection extends Collection implements TaskCollectionInterface
 {

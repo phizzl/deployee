@@ -1,9 +1,9 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployOxid\Commands;
+namespace Deployee\Plugins\DeployOxid\Commands;
 
 
-use Phizzl\Deployee\Plugins\DeployShell\ShellCommand;
+use Deployee\Plugins\DeployShell\ShellCommand;
 
 class OxidCommand extends ShellCommand
 {

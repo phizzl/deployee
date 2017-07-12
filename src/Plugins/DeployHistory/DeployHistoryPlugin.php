@@ -1,14 +1,14 @@
 <?php
 
-namespace Phizzl\Deployee\Plugins\DeployHistory;
+namespace Deployee\Plugins\DeployHistory;
 
 
-use Phizzl\Deployee\Container;
-use Phizzl\Deployee\Plugins\AbstractPlugin;
-use Phizzl\Deployee\Plugins\DeployDb\DeployDbPlugin;
-use Phizzl\Deployee\Plugins\DeployHistory\Services\HistoryService;
-use Phizzl\Deployee\Plugins\DeployHistory\Storages\MySqlDefinitionStorage;
-use Phizzl\Deployee\Plugins\DeployHistory\Subscriber\DeployHistorySubscriber;
+use Deployee\Container;
+use Deployee\Plugins\AbstractPlugin;
+use Deployee\Plugins\DeployDb\DeployDbPlugin;
+use Deployee\Plugins\DeployHistory\Services\HistoryService;
+use Deployee\Plugins\DeployHistory\Storages\MySqlDefinitionStorage;
+use Deployee\Plugins\DeployHistory\Subscriber\DeployHistorySubscriber;
 
 class DeployHistoryPlugin extends AbstractPlugin
 {

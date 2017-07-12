@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Phizzl\Deployee\Plugins\DeployDb\Tasks;
+namespace Deployee\Plugins\DeployDb\Tasks;
 
 
-use Phizzl\Deployee\Collection;
-use Phizzl\Deployee\Tasks\TaskInterface;
+use Deployee\Collection;
+use Deployee\Tasks\TaskInterface;
 
 class MySqlDumpTask implements TaskInterface
 {

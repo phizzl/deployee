@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "466a254a317d04c595f0cd96ace7b543",
+    "content-hash": "9eaa4ab9e3fa5e17c45c0af6539934f7",
     "packages": [
         {
             "name": "monolog/monolog",
@@ -85,23 +85,23 @@
             "time": "2017-06-19T01:22:40+00:00"
         },
         {
-            "name": "phizzl/mysql-definition",
-            "version": "v0.0.3",
+            "name": "phizzl/php-mysql-command-builder",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:nxs_schleicher/mysql-definition.git",
-                "reference": "75b7da35b8de7cb738eb5ec20d517864538c8d1a"
+                "reference": "948a1e98dd69ca53f6b8ea1f50a0c52309ec117e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://www.nexus-netsoft.com/.satis/dist/phizzl/mysql-definition/phizzl-mysql-definition-v0.0.3-493eb2.tar",
-                "reference": "75b7da35b8de7cb738eb5ec20d517864538c8d1a",
-                "shasum": "2804c6122cb2960a92c7064d1b965a56ed61111c"
+                "url": "https://www.nexus-netsoft.com/.satis/dist/phizzl/php-mysql-command-builder/phizzl-php-mysql-command-builder-dev-master-eab007.tar",
+                "reference": "948a1e98dd69ca53f6b8ea1f50a0c52309ec117e",
+                "shasum": "017760a855ce0b7572fa710e3c0f848d15070c10"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Phizzl\\MySql\\": "src/"
+                    "Phizzl\\MySqlCommandBuilder\\": "src/"
                 }
             },
             "license": [
@@ -115,7 +115,7 @@
                 }
             ],
             "description": "PHP mysqldump wrapper",
-            "time": "2017-07-11T10:17:04+00:00"
+            "time": "2017-07-12T17:44:09+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -611,7 +611,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "phizzl/php-mysql-command-builder": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

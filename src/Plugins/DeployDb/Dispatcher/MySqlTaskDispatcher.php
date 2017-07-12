@@ -9,8 +9,8 @@ use Deployee\Plugins\DeployDb\DeployDbPlugin;
 use Deployee\Plugins\DeployShell\Services\ExecutableFinderService;
 use Deployee\Plugins\DeployShell\Tasks\ShellTask;
 use Deployee\Tasks\TaskInterface;
-use Phizzl\MySql\MySqlDefinition;
-use Phizzl\MySql\MySqlDumpDefinition;
+use Phizzl\MySqlCommandBuilder\MySqlCommandBuilder;
+use Phizzl\MySqlCommandBuilder\MySqlDumpCommandBuilder;
 
 class MySqlTaskDispatcher extends AbstractTaskDispatcher
 {
@@ -51,7 +51,7 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
         $executableFinder = $this->container[ExecutableFinderService::CONTAINER_ID];
         $mysqlBin = $executableFinder->find("mysql");
 
-        $mysql = new MySqlDefinition($pluginConfig['name']);
+        $mysql = new MySqlCommandBuilder($pluginConfig['name']);
         $mysql
             ->mysqlBin($mysqlBin)
             ->user($pluginConfig['user'])
@@ -66,7 +66,7 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
         $mysql->arguments(" < {$definition['source']}");
 
         $shellTask = new ShellTask("");
-        $shellTask->arguments($mysql->getShellCommand());
+        $shellTask->arguments($mysql->getCommand());
 
         return $this->container->taskDispatcher()->getDispatcherByTask($shellTask)->dispatch($shellTask)->getExitCode();
     }
@@ -84,7 +84,7 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
         $mysqldumpBin = $executableFinder->find('mysqldump');
         $mysqlBin = $executableFinder->find("mysql");
 
-        $mysqldump = new MySqlDumpDefinition($pluginConfig['name'], $definition['target']);
+        $mysqldump = new MySqlDumpCommandBuilder($pluginConfig['name'], $definition['target']);
         $mysqldump
             ->mysqldumpBin($mysqldumpBin)
             ->mysqlBin($mysqlBin)
@@ -123,7 +123,7 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
         }
 
         $shellTask = new ShellTask("");
-        $shellTask->arguments($mysqldump->getShellCommand());
+        $shellTask->arguments($mysqldump->getCommand());
 
         return $this->container->taskDispatcher()->getDispatcherByTask($shellTask)->dispatch($shellTask)->getExitCode();
     }

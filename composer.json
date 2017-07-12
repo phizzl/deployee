@@ -2,7 +2,7 @@
   "name": "phizzl/deployee",
   "description": "Taskrunner for PHP",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "GPL-3.0",
   "authors": [
     {
       "name": "Phillip Schleicher",

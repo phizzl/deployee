@@ -5,14 +5,13 @@ namespace Phizzl\Deployee\Plugins\Deploy\Commands;
 
 
 use Phizzl\Deployee\Application\Command;
+use Phizzl\Deployee\Plugins\Deploy\DeployPlugin;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateDeployCommand extends Command
 {
-    use SetPluginTrait;
-
     /**
      * @inheritdoc
      */
@@ -32,7 +31,8 @@ class GenerateDeployCommand extends Command
     {
         $name = $input->getArgument('name');
         $className = "DeployDefinition_" . time() . "_" . $name;
-        $filePath = $this->plugin->getConfig()['path'] . DIRECTORY_SEPARATOR . $className . '.php';
+        $plugin = $this->container->plugins()->offsetGet(DeployPlugin::PLUGIN_ID);
+        $filePath = $plugin->getConfig()['path'] . DIRECTORY_SEPARATOR . $className . '.php';
         $fileContents = $this->getPhpFileSkeleton($className);
 
         if(!file_put_contents($filePath, $fileContents)){

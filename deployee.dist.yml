@@ -1,6 +1,7 @@
 plugins:
     - Phizzl\Deployee\Plugins\Deploy\DeployPlugin:
         path: deployments
+    - Phizzl\Deployee\Plugins\Describe\DescribePlugin
     - Phizzl\Deployee\Plugins\DeployHistory\DeployHistoryPlugin
     - Phizzl\Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
     - Phizzl\Deployee\Plugins\DeployShell\DeployShellPlugin

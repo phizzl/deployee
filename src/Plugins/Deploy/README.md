@@ -88,6 +88,14 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
 As you can see the dispatcher return in FilesystemTaskDispatcher::getDispatchableClasses for what classes it's responsible. The method FilesystemTaskDispatcher::dispatchFileTask contains the logic to execute the defined file task.
 
 ## Shell commands
+### Install Deployee
+```bash
+vendor/bin/deployee deployee:install
+```
+This command will install or update Deployee. You are required to run it before running deployments or after updating Deployee.
+
+It just triggers an event _InstallEvent_ which all plugins can subscribe to for their installation process.
+
 ### Generate deployment
 ```bash
 vendor/bin/deployee deployee:deploy:generate Ticket008

@@ -9,6 +9,7 @@ use Deployee\Plugins\Deploy\Commands\GenerateDeployCommand;
 use Deployee\Plugins\Deploy\Commands\InstallCommand;
 use Deployee\Plugins\Deploy\Commands\RunDeployCommand;
 use Deployee\Plugins\Deploy\DeployPlugin;
+use Deployee\Plugins\Deploy\Events\InstallEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ApplicationSubscriber implements EventSubscriberInterface
@@ -32,7 +33,26 @@ class ApplicationSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return [ApplicationInitializedEvent::EVENT_NAME => 'onApplicationInitialized'];
+        return [
+            ApplicationInitializedEvent::EVENT_NAME => 'onApplicationInitialized',
+            InstallEvent::EVENT_NAME => 'onInstall'
+        ];
+    }
+
+    /**
+     * @param InstallEvent $event
+     */
+    public function onInstall(InstallEvent $event)
+    {
+        $path = $this->plugin->getConfig()['path'];
+        $event->getOutput()->writeln("Plugin Delpoy >> Creating path $path");
+        if(!($realpath = realpath($path))
+            && !mkdir($path)){
+            throw new \RuntimeException("Cannot create given path \"$path\"");
+        }
+
+
+        $event->getOutput()->writeln("Plugin Delpoy >> install complete");
     }
 
     /**

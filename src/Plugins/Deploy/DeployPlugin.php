@@ -54,12 +54,7 @@ class DeployPlugin extends AbstractPlugin
             $path = getcwd() . DIRECTORY_SEPARATOR . $path;
         }
 
-        if(!$realpath = realpath($path)){
-            if(!mkdir($path)) {
-                throw new \RuntimeException("Cannot create given path \"$path\"");
-            }
-            $realpath = realpath($path);
-        }
+        $realpath = realpath($path);
 
         $this->config['path'] = $realpath;
     }

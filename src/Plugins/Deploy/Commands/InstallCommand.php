@@ -27,11 +27,11 @@ class InstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        parent::execute($input, $output);
-
+        $output->writeln("Installing...");
         $this->container->events()->dispatch(
             InstallEvent::EVENT_NAME,
             new InstallEvent($this->container, $input, $output)
         );
+        $output->writeln("...done!");
     }
 }

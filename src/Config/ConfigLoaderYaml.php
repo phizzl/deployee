@@ -14,12 +14,18 @@ class ConfigLoaderYaml implements ConfigLoaderInterface
     private $configFile;
 
     /**
+     * @var string
+     */
+    private $defaultConfigFile;
+
+    /**
      * ConfigLoaderYaml constructor.
      * @param string $configFile
      */
-    public function __construct($configFile)
+    public function __construct($configFile, $defaultConfigFile)
     {
         $this->configFile = $configFile;
+        $this->defaultConfigFile = $defaultConfigFile;
     }
 
     /**
@@ -37,6 +43,11 @@ class ConfigLoaderYaml implements ConfigLoaderInterface
             throw new \RuntimeException("Config file could not be parsed or has invalid contents");
         }
 
-        return $config;
+        if(!($defaultConfig = Yaml::parse(file_get_contents($this->defaultConfigFile)))
+            || !is_array($defaultConfig)){
+            throw new \RuntimeException("Default config file could not be parsed or has invalid contents");
+        }
+
+        return array_merge_recursive($defaultConfig, $config);
     }
 }

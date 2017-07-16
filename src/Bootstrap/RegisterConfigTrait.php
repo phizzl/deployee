@@ -22,6 +22,7 @@ trait RegisterConfigTrait
          * @return ConfigLoaderInterface
          */
         $this->getContainer()[ConfigLoaderInterface::CONTAINER_ID] = function(){
+            $defaultConfigFile = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'deployee.dist.yml';
             $find = [
                 getcwd() . DIRECTORY_SEPARATOR . 'deployee.yml',
                 getcwd() . DIRECTORY_SEPARATOR . 'deployee.dist.yml',
@@ -41,7 +42,7 @@ trait RegisterConfigTrait
                 }
             }
 
-            return new ConfigLoaderYaml($file);
+            return new ConfigLoaderYaml($file, $defaultConfigFile);
         };
     }
 

@@ -53,7 +53,7 @@ class ConfigLoaderYaml implements ConfigLoaderInterface
             unset($defaultConfig['plugins']);
         }
 
-        return array_merge_recursive($defaultConfig, $config);
+        return array_merge($defaultConfig, $config);
     }
 
     /**

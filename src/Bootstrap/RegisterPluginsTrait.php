@@ -36,6 +36,11 @@ trait RegisterPluginsTrait
                     $pluginConfig = current(array_values($configuredPlugin));
                 }
 
+                if(isset($pluginConfig['enabled'])
+                    && $pluginConfig['enabled'] === false){
+                    continue;
+                }
+
                 if(!class_exists($pluginClass)){
                     throw new \RuntimeException("Plugin colud not be loaded \"$pluginClass\"");
                 }

@@ -9,10 +9,19 @@ composer require phizzl/deployee-cli @dev
 
 ## Configuration
 Create a file called deployee.yml. You might copy it fom vendor/phizzl/deployee-cli/deployee.dist.yml.
+
+### Load specified configuration by an OS environment var
 If you want to use another configuration you can change it by setting the environment variable DEPLOYEE_CONFIG with the absolute path to the configuration to use.
 ```bash
 export DEPLOYEE_CONFIG=/var/www/custom.deployee.yml; vendor/bin/deployee deployee:deploy:run
 ```
+
+### Load config by --env option
+You also are able to load a configuration by defining the --env option
+```bash
+vendor/bin/deployee deployee:deploy:run --env=dev
+```
+In the example above Deployee will try to read the configuration from a file called delpoyee.dev.yml in you current CWD.
 
 ## Deployments
 ### Tasks

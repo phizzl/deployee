@@ -27,6 +27,7 @@ $loader = require $loaderFile;
 
 $di = new Container();
 $di['composer.classloader'] = $loader;
+$di['args'] = isset($argv) && is_array($argv) ? $argv : [];
 $bootstrap = new Bootstrap($di);
 
 return $bootstrap->bootstrap();

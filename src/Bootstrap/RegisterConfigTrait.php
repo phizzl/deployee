@@ -21,13 +21,19 @@ trait RegisterConfigTrait
         /**
          * @return ConfigLoaderInterface
          */
-        $this->getContainer()[ConfigLoaderInterface::CONTAINER_ID] = function(){
+        $this->getContainer()[ConfigLoaderInterface::CONTAINER_ID] = function(Container $container){
             $defaultConfigFile = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'deployee.dist.yml';
             $find = [
                 getcwd() . DIRECTORY_SEPARATOR . 'deployee.yml',
                 getcwd() . DIRECTORY_SEPARATOR . 'deployee.dist.yml',
                 __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'deployee.dist.yml'
             ];
+
+            /* @var BootstrapArguments $bootstrapArguments */
+            $bootstrapArguments = $container[BootstrapArguments::CONATINER_ID];
+            if($env = $bootstrapArguments->getOption('env')){
+                array_unshift($find, getcwd() . DIRECTORY_SEPARATOR . "deployee.{$env}.yml");
+            }
 
             if($envConfig = getenv("DEPLOYEE_CONFIG")){
                 array_unshift($find, $envConfig);

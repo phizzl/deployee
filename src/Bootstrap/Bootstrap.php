@@ -13,6 +13,7 @@ class Bootstrap
     use RegisterPluginsTrait;
     use RegisterTaskDispatcherCollectionTrait;
     use RegisterLoggerTrait;
+    use RegisterBootstrapArgumentsTrait;
 
     /**
      * @var Container
@@ -42,6 +43,7 @@ class Bootstrap
      */
     public function bootstrap()
     {
+        $this->registerBootstrapArguments();
         $this->registerEventDispatcher();
         $this->registerConfigLoader();
         $this->registerConfig();

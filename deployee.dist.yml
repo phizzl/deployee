@@ -5,10 +5,11 @@ plugins:
     - Deployee\Plugins\DeployHistory\DeployHistoryPlugin
     - Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
     - Deployee\Plugins\DeployShell\DeployShellPlugin
-    - Deployee\Plugins\DeployOxid\DeployOxidPlugin
+    - Deployee\Plugins\DeployOxid\DeployOxidPlugin:
+        enabled: false
     - Deployee\Plugins\DeployDb\DeployDbPlugin:
         host: "localhost"
         port: 3306
         user: "root"
         password: ~
-        name: "oxid"
+        name: "localdb"

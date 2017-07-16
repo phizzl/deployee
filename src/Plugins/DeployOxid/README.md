@@ -7,6 +7,14 @@ This plugin makes use of nexusnetsoft/oxid-eshop-console. For this reason it has
 ## Deployee plugin DeployShell
 To execute the OXID eShop console the Shell task from Deployee plugin DeployShell is being used.
 
+# Installation
+This plugin is disabled by default. To enable it you just need to add the following configuration to your config file
+```bash
+plugins:
+    - Deployee\Plugins\DeployOxid\DeployOxidPlugin:
+        enabled: true
+```
+
 # New tasks
 ## Shop module task
 This task can be used for activating or deactivating one module.

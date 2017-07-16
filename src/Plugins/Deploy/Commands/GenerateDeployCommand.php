@@ -54,7 +54,7 @@ class GenerateDeployCommand extends Command
 /**
  * @mixin ideHelperDeploymentDefinition
  */
-class $className extends \\Phizzl\\Deployee\\Plugins\\Deploy\\Definitions\\AbstractDeploymentDefinition
+class $className extends \\Deployee\\Plugins\\Deploy\\Definitions\\AbstractDeploymentDefinition
 {
     public function define()
     {

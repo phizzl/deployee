@@ -40,4 +40,12 @@ class HistoryService
     {
         $this->storage->store($definition);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function setup()
+    {
+        $this->storage->setup();
+    }
 }

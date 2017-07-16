@@ -9,6 +9,11 @@ use Deployee\Plugins\Deploy\Definitions\DeploymentDefinitionInterface;
 interface DefinitionStorageInterface
 {
     /**
+     * @return mixed
+     */
+    public function setup();
+
+    /**
      * @param DeploymentDefinitionInterface $definition
      * @return bool
      */

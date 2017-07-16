@@ -4,6 +4,7 @@ namespace Deployee\Plugins\DeployHistory\Subscriber;
 
 
 use Deployee\Events\BootstrapFinishedEvent;
+use Deployee\Plugins\Deploy\Events\InstallEvent;
 use Deployee\Plugins\Deploy\Events\PostRunDeployEvent;
 use Deployee\Plugins\Deploy\Events\PreRunDeployEvent;
 use Deployee\Plugins\DeployHistory\Services\HistoryService;
@@ -19,8 +20,21 @@ class DeployHistorySubscriber implements EventSubscriberInterface
         return [
             PreRunDeployEvent::EVENT_NAME => "onPreDeploy",
             PostRunDeployEvent::EVENT_NAME => "onPostDeploy",
-            BootstrapFinishedEvent::EVENT_NAME => "onBootstrapFinished"
+            BootstrapFinishedEvent::EVENT_NAME => "onBootstrapFinished",
+            InstallEvent::EVENT_NAME => "onInstall"
         ];
+    }
+
+    /**
+     * @param InstallEvent $event
+     */
+    public function onInstall(InstallEvent $event)
+    {
+        /* @var HistoryService $historyService */
+        $historyService = $event->getContainer()[HistoryService::CONTAINER_ID];
+        $event->getOutput()->writeln("Plugin DeployHistory >> Running setup");
+        $historyService->setup();
+        $event->getOutput()->writeln("Plugin DeployHistory >> Done!");
     }
 
     /**

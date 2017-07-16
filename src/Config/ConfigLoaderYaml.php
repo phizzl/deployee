@@ -48,6 +48,51 @@ class ConfigLoaderYaml implements ConfigLoaderInterface
             throw new \RuntimeException("Default config file could not be parsed or has invalid contents");
         }
 
+        if(isset($config['plugins'])) {
+            $config['plugins'] = $this->mergePluginConfiguration($defaultConfig['plugins'], $config['plugins']);
+            unset($defaultConfig['plugins']);
+        }
+
         return array_merge_recursive($defaultConfig, $config);
+    }
+
+    /**
+     * @param array $array1
+     * @param array $array2
+     * @return array
+     */
+    private function mergePluginConfiguration(array $array1, array $array2)
+    {
+        $return = [];
+        $configs = array_merge(
+            $this->normalizePluginConfigurationArray($array1),
+            $this->normalizePluginConfigurationArray($array2)
+        );
+
+        foreach($configs as $key => $item){
+            if(strlen($key)) {
+                $return[] = [$key => $item];
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    private function normalizePluginConfigurationArray(array $array)
+    {
+        $return = [];
+        foreach($array as $item){
+            if(is_array($item)) {
+                $return[current(array_keys($item))] = current(array_values($item));
+            }
+            else {
+                $return[$item] = [];
+            }
+        }
+        return $return;
     }
 }

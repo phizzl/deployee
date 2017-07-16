@@ -79,7 +79,35 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
             $return = $exitCode;
         }
 
+        if($return === 0
+            && count($definition['adminuser'])
+            && ($exitCode = $this->executeCreateAdmin($definition['adminuser'])) > 0){
+            $return = $exitCode;
+        }
+
         return $return;
+    }
+
+    /**
+     * @param array $adminUser
+     * @return int
+     */
+    private function executeCreateAdmin(array $adminUser)
+    {;
+        foreach($adminUser as $user){
+            $shellTask = new ShellTask("oxid");
+            $shellTask->arguments(
+                "oxid:user:create-admin " .
+                escapeshellarg($user['username']) . " " .
+                escapeshellarg($user['password'])
+            );
+            $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($shellTask);
+            if($exitCode = $dispatcher->dispatch($shellTask)->getExitCode()){
+                return $exitCode;
+            }
+
+        }
+        return 0;
     }
 
     /**

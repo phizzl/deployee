@@ -77,3 +77,11 @@ $this
     ->generateViews();
 ```
 This task will execute the shops view generation for all shop instances.
+
+### Create admin user
+```php
+$this
+    ->shop()
+    ->createAdminUser('shopadmin', 'myawesomepassword');
+```
+Creates a new malladmin user for backend usage

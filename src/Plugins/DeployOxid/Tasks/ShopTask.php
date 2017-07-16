@@ -19,12 +19,18 @@ class ShopTask implements TaskInterface
     private $generateViews;
 
     /**
+     * @var array
+     */
+    private $adminUser;
+
+    /**
      * ShopTask constructor.
      */
     public function __construct()
     {
         $this->clearTmp = false;
         $this->generateViews = false;
+        $this->adminUser = [];
     }
 
     /**
@@ -46,13 +52,25 @@ class ShopTask implements TaskInterface
     }
 
     /**
+     * @param string $username
+     * @param string $password
+     * @return $this
+     */
+    public function createAdminUser($username, $password)
+    {
+        $this->adminUser[] = ["username" => $username, "password" => $password];
+        return $this;
+    }
+
+    /**
      * @return Collection
      */
     public function getDefinition()
     {
         return new Collection([
             'cleartmp' => $this->clearTmp,
-            'generateviews' => $this->generateViews
+            'generateviews' => $this->generateViews,
+            'adminuser' => $this->adminUser
         ]);
     }
 

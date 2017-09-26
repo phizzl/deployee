@@ -4,7 +4,7 @@ Deployee task runner
 ## Setup
 You can require deployee via composer
 ```bash
-composer require phizzl/deployee-cli @dev
+composer require phizzl/deployee @dev
 ```
 
 ## Configuration

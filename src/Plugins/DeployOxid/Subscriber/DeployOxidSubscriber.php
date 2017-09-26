@@ -4,13 +4,11 @@
 namespace Deployee\Plugins\DeployOxid\Subscriber;
 
 
-
-use Deployee\Container;
 use Deployee\Events\BootstrapFinishedEvent;
 use Deployee\Events\PluginsInitializedEvent;
 use Deployee\Events\TaskDispatcherCollectionInitializedEvent;
 use Deployee\Plugins\Deploy\Events\TaskHelperCreatedEvent;
-use Deployee\Plugins\DeployDb\DeployDbPlugin;
+use Deployee\Plugins\DeployDb\Events\ConfigureDbConnectionDataEvent;
 use Deployee\Plugins\DeployOxid\DeployOxidPlugin;
 use Deployee\Plugins\DeployOxid\Dispatcher\OxidTaskDispatcher;
 use Deployee\Plugins\DeployOxid\Shop\ShopConfig;
@@ -27,7 +25,8 @@ class DeployOxidSubscriber implements EventSubscriberInterface
         return [
             BootstrapFinishedEvent::EVENT_NAME => 'onBootstrapFinished',
             TaskHelperCreatedEvent::EVENT_NAME => 'onTaskHelperCreated',
-            TaskDispatcherCollectionInitializedEvent::EVENT_NAME => 'onTaskDispatcherCollectionInitialized'
+            TaskDispatcherCollectionInitializedEvent::EVENT_NAME => 'onTaskDispatcherCollectionInitialized',
+            ConfigureDbConnectionDataEvent::EVENT_NAME => 'onConfigureDbConnectionData'
         ];
     }
 
@@ -44,18 +43,26 @@ class DeployOxidSubscriber implements EventSubscriberInterface
             : getcwd() . '/vendor/bin/oxid';
 
         $container[ExecutableFinderService::CONTAINER_ID]->addAlias("oxid", $oxidConsole);
+    }
 
+    /**
+     * @param ConfigureDbConnectionDataEvent $event
+     */
+    public function onConfigureDbConnectionData(ConfigureDbConnectionDataEvent $event)
+    {
+        $config = $event->getContainer()->plugins()->offsetGet(DeployOxidPlugin::PLUGIN_ID)->getConfig();
         if(isset($config['configure_db_plugin'])
             && $config['configure_db_plugin'] === true){
-            $this->configureDbPlugin($container);
+            $this->configureDbPlugin($event);
         }
     }
 
     /**
-     * @param Container $container
+     * @param ConfigureDbConnectionDataEvent $event
      */
-    private function configureDbPlugin(Container $container)
+    private function configureDbPlugin(ConfigureDbConnectionDataEvent $event)
     {
+        $container = $event->getContainer();
         $config = $container->plugins()->offsetGet(DeployOxidPlugin::PLUGIN_ID)->getConfig();
         if(!isset($config['shop_path'])){
             throw new \RuntimeException("You have to configure \"shop_path\" when using \"configure_db_plugin\"");
@@ -74,8 +81,7 @@ class DeployOxidSubscriber implements EventSubscriberInterface
             throw new \RuntimeException("Unable to locate config.inc.php");
         }
 
-        $dbPlugin = $container->plugins()->offsetGet(DeployDbPlugin::PLUGIN_ID);
-        $dbPluginConfig = $dbPlugin->getConfig();
+        $dbPluginConfig = $event->getConfig();
         $shopConfig = new ShopConfig($shopPath . DIRECTORY_SEPARATOR . "config.inc.php");
         $shopHost = explode(':', $shopConfig->get('dbHost'));
         $dbPluginConfig['host'] = $shopHost[0];
@@ -83,8 +89,7 @@ class DeployOxidSubscriber implements EventSubscriberInterface
         $dbPluginConfig['user'] = $shopConfig->get('dbUser');
         $dbPluginConfig['password'] = $shopConfig->get('dbPwd');
         $dbPluginConfig['name'] = $shopConfig->get('dbName');
-        $dbPlugin->setConfig($dbPluginConfig);
-
+        $event->setConfig($dbPluginConfig);
     }
 
     /**

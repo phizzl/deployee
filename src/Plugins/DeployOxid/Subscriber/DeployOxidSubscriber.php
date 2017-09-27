@@ -18,6 +18,20 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class DeployOxidSubscriber implements EventSubscriberInterface
 {
     /**
+     * @var array
+     */
+    private $pluginConfig;
+
+    /**
+     * DeployOxidSubscriber constructor.
+     * @param array $pluginConfig
+     */
+    public function __construct(array $pluginConfig)
+    {
+        $this->pluginConfig = $pluginConfig;
+    }
+
+    /**
      * @return array
      */
     public static function getSubscribedEvents()
@@ -50,9 +64,8 @@ class DeployOxidSubscriber implements EventSubscriberInterface
      */
     public function onConfigureDbConnectionData(ConfigureDbConnectionDataEvent $event)
     {
-        $config = $event->getContainer()->plugins()->offsetGet(DeployOxidPlugin::PLUGIN_ID)->getConfig();
-        if(isset($config['configure_db_plugin'])
-            && $config['configure_db_plugin'] === true){
+        if(isset($this->pluginConfig['configure_db_plugin'])
+            && $this->pluginConfig['configure_db_plugin'] === true){
             $this->configureDbPlugin($event);
         }
     }
@@ -63,13 +76,12 @@ class DeployOxidSubscriber implements EventSubscriberInterface
     private function configureDbPlugin(ConfigureDbConnectionDataEvent $event)
     {
         $container = $event->getContainer();
-        $config = $container->plugins()->offsetGet(DeployOxidPlugin::PLUGIN_ID)->getConfig();
-        if(!isset($config['shop_path'])){
+        if(!isset($this->pluginConfig['shop_path'])){
             throw new \RuntimeException("You have to configure \"shop_path\" when using \"configure_db_plugin\"");
         }
 
         $shopPath = "";
-        $find = [$config['shop_path'], getcwd() . DIRECTORY_SEPARATOR . $config['shop_path']];
+        $find = [$this->pluginConfig['shop_path'], getcwd() . DIRECTORY_SEPARATOR . $this->pluginConfig['shop_path']];
         foreach($find as $path){
             if(realpath($path)
                 && is_file(realpath($path) . DIRECTORY_SEPARATOR . 'config.inc.php')){

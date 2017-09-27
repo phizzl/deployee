@@ -25,7 +25,7 @@ class DeployOxidPlugin extends AbstractPlugin
      */
     public function initialize(Container $container)
     {
-        $container->events()->addSubscriber(new DeployOxidSubscriber());
+        $container->events()->addSubscriber(new DeployOxidSubscriber($this->config));
     }
 
 }

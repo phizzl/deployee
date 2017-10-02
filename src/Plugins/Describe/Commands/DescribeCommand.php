@@ -39,7 +39,7 @@ class DescribeCommand extends Command
 
         /* @var AbstractDeploymentDefinition $definition */
         foreach($definitions as $definition){
-            $output->writeln("Executing definition " . get_class($definition));
+            $output->writeln("Reading definition " . get_class($definition));
             $definition->define();
             $this->describeTasks($definition->getTasks(), $output);
         }
@@ -56,12 +56,8 @@ class DescribeCommand extends Command
         /* @var TaskInterface $task */
         foreach($tasks as $task) {
             $output->writeln("Describing task " . get_class($task), OutputInterface::VERBOSITY_DEBUG);
-            $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($task);
-            $result = $dispatcher->dispatch($task);
+            $output->writeln("Describing is in development. Sorry :(");
 
-            if($result->getExitCode() > 0){
-                throw new \RuntimeException("Got exit code {$result->getExitCode()} from " . get_class($task));
-            }
         }
     }
 

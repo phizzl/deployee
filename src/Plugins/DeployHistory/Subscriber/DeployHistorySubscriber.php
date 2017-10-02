@@ -4,9 +4,11 @@ namespace Deployee\Plugins\DeployHistory\Subscriber;
 
 
 use Deployee\Events\BootstrapFinishedEvent;
+use Deployee\Events\EventDispatcher;
 use Deployee\Plugins\Deploy\Events\InstallEvent;
 use Deployee\Plugins\Deploy\Events\PostRunDeployEvent;
 use Deployee\Plugins\Deploy\Events\PreRunDeployEvent;
+use Deployee\Plugins\DeployHistory\Events\PreAddToHistoryEvent;
 use Deployee\Plugins\DeployHistory\Services\HistoryService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -61,7 +63,11 @@ class DeployHistorySubscriber implements EventSubscriberInterface
         /* @var HistoryService $historyService */
         $historyService = $event->getContainer()[HistoryService::CONTAINER_ID];
         $definitions = $event->getDefinitions();
-        foreach($definitions as $key => $definition){
+
+        $event = new PreAddToHistoryEvent($event->getContainer(), clone $definitions);
+        $event->getContainer()[EventDispatcher::CONTAINER_ID]->dispatch(PreAddToHistoryEvent::EVENT_NAME, $event);
+
+        foreach($event->getDefinitions() as $key => $definition){
             $event->getContainer()->logger()->debug("Add to history " . get_class($definition));
             $historyService->store($definition);
         }

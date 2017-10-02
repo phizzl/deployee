@@ -52,6 +52,34 @@ $this
 ```
 You can use the tasks forShopId method to add an id of a shop instance to apply the activation or deactivation to.
 
+## Shop cnfig tasks
+### Adding or modify a databse shop config
+```php
+$this->shopConfig($shopId, $varName, $varValue, $varType, $module);
+```
+The basic usage is as shown above.
+
+A real example could be like
+```php
+$this->shopConfig(1, "blShowTags", false, "bool");
+$this->shopConfig(1, "aDetailImageSizes", [
+  'oxpic1' => '579*579',
+  'oxpic2' => '579*579',
+  'oxpic3' => '579*579',
+  'oxpic4' => '579*579',
+  'oxpic5' => '579*579',
+  'oxpic6' => '579*579',
+  'oxpic7' => '579*579',
+  'oxpic8' => '579*579',
+  'oxpic9' => '579*579',
+  'oxpic10' => '579*579',
+  'oxpic11' => '579*579',
+  'oxpic12' => '579*579'
+], "aarr", "theme:azure");
+$this->shopConfig(1, "aIpWhitelist", ["127.0.0.1", "192.168.1.1"], "arr", "module:phz_ipblock");
+```
+The example above shows how to set general or module and theme specific configuration.
+
 ## Common shop tasks
 This task povides common tasks to execute in the shop instance.
 

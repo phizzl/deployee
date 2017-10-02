@@ -31,6 +31,7 @@ class GenerateDeployCommand extends Command
     {
         $name = $input->getArgument('name');
         $className = "DeployDefinition_" . time() . "_" . $name;
+        $className = str_replace(["-", " "], "_", $className);
         $plugin = $this->container->plugins()->offsetGet(DeployPlugin::PLUGIN_ID);
         $filePath = $plugin->getConfig()['path'] . DIRECTORY_SEPARATOR . $className . '.php';
         $fileContents = $this->getPhpFileSkeleton($className);

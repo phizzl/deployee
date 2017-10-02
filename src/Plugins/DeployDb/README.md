@@ -74,6 +74,21 @@ $this
     ->force();
 ```
 Sets the --force flag while importing dump.
+
+## MySQL command execution
+```php
+$this
+    ->mysqlcmd("UPDATE FROM awesometable SET name=\"Jonas\" WHERE id=5")
+```
+Execute a MySQL command
+
+### Set force flag
+```php
+$this
+    ->mysqlcmd("DELETE FROM awesometable WHERE id=5")
+    ->force();
+```
+Sets the --force flag while executing the MySQL command.
  
 # Plugin configuration
 ```yaml

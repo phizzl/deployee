@@ -82,16 +82,14 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
             ->user($pluginConfig['user'])
             ->password($pluginConfig['password'])
             ->host($pluginConfig['host'])
-            ->port($pluginConfig['port']);
+            ->port($pluginConfig['port'])
+            ->readFromFile($definition['source']);
 
         if($definition['force'] === true){
             $mysql->force();
         }
 
-        $mysql->arguments(" < {$definition['source']}");
-
-        $shellTask = new ShellTask("");
-        $shellTask->arguments($mysql->getCommand());
+        $shellTask = new ShellTask("");$shellTask->arguments($mysql->getCommand()->getCommand());
 
         return $this->container->taskDispatcher()->getDispatcherByTask($shellTask)->dispatch($shellTask)->getExitCode();
     }
@@ -148,7 +146,7 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
         }
 
         $shellTask = new ShellTask("");
-        $shellTask->arguments($mysqldump->getCommand());
+        $shellTask->arguments($mysqldump->getCommand()->getCommand());
 
         return $this->container->taskDispatcher()->getDispatcherByTask($shellTask)->dispatch($shellTask)->getExitCode();
     }

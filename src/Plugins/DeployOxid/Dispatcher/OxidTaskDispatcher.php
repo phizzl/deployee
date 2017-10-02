@@ -84,6 +84,8 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
         switch ($vartype){
             case "arr": $value = is_array($value) ? serialize(array_values($value)) : $value; break;
             case "aarr": $value = is_array($value) ? serialize($value) : $value; break;
+            case "bool": $value = !is_int($value) && (bool)$value === true ? 1 : 0; break;
+            case "num": $value = (int)$value; break;
         }
 
         $uid = md5(uniqid("", true) . rand(1, 99999));

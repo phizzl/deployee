@@ -20,7 +20,7 @@ abstract class AbstractDeploymentDefinition implements DeploymentDefinitionInter
     /**
      * @var Container
      */
-    private $container;
+    protected $container;
 
     /**
      * AbstractDeploymentDefinition constructor.

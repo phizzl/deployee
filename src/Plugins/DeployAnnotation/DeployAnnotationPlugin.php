@@ -1,10 +1,11 @@
 <?php
 
-namespace Deployee\Plugins\DeployHistory;
+namespace Deployee\Plugins\DeployAnnotation;
 
 
 use Deployee\Container;
 use Deployee\Plugins\AbstractPlugin;
+use Deployee\Plugins\DeployAnnotation\Subscriber\DeployAnnotationSubscriber;
 
 class DeployAnnotationPlugin extends AbstractPlugin
 {
@@ -23,7 +24,6 @@ class DeployAnnotationPlugin extends AbstractPlugin
      */
     public function initialize(Container $container)
     {
-
+        $container->events()->addSubscriber(new DeployAnnotationSubscriber());
     }
-
 }

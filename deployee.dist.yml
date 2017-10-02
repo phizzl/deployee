@@ -5,11 +5,12 @@ plugins:
     - Deployee\Plugins\DeployHistory\DeployHistoryPlugin
     - Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
     - Deployee\Plugins\DeployShell\DeployShellPlugin
+    - Deployee\Plugins\DeployAnnotation\DeployAnnotationPlugin
     - Deployee\Plugins\DeployOxid\DeployOxidPlugin:
         enabled: false
     - Deployee\Plugins\DeployDb\DeployDbPlugin:
         host: "localhost"
-        port: 3306
+        port: 3307
         user: "root"
-        password: ~
-        name: "localdb"
+        password: "nexus123"
+        name: "deltav"

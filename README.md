@@ -39,6 +39,9 @@ See documentation [here](src/Plugins/DeployDb/README.md)
 #### OXID eShop
 See documentation [here](src/Plugins/DeployOxid/README.md)
 
+### Annotation controlled deployments
+You can manipulate the behaviour of when a deplyoment is executed by setting annotations to the deployment definition. If you want to know more about how to force a deployment to run always or only when a specified environment is given take a look at the plugin docs [here](src/Plugins/DeployAnnotation/README.md)
+
 ## Plugins
 The system itself is designed to be event and plugin based. So the functionality to define a deployment is a plugin itself that adds events and commands to the system. 
 

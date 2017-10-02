@@ -11,6 +11,7 @@ use Deployee\Plugins\DeployShell\Tasks\ShellTask;
 use Deployee\Tasks\TaskInterface;
 use Phizzl\MySqlCommandBuilder\MySqlCommandBuilder;
 use Phizzl\MySqlCommandBuilder\MySqlDumpCommandBuilder;
+use Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask;
 
 class MySqlTaskDispatcher extends AbstractTaskDispatcher
 {
@@ -35,8 +36,32 @@ class MySqlTaskDispatcher extends AbstractTaskDispatcher
     {
         return [
             'Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask',
-            'Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask'
+            'Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask',
+            'Deployee\Plugins\DeployDb\Tasks\MySqlExecuteCommandTask'
         ];
+    }
+
+    /**
+     * @param TaskInterface $task
+     */
+    public function dispatchMySqlExecuteCommandTask(TaskInterface $task)
+    {
+        $definition = $task->getDefinition();
+        $command = $definition['command'];
+        $tmpFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid("deployee_mysql_", true) . ".sql";
+        if(file_put_contents($tmpFile, $command) === false){
+            throw new \RuntimeException("Could not write temp file to \"{$tmpFile}\"");
+        }
+
+        $subTask = new MySqlFileImportTask($tmpFile);
+        if($command['force'] === true){
+            $subTask->force();
+        }
+
+        $exitCode = $this->container->taskDispatcher()->getDispatcherByTask($subTask)->dispatch($subTask)->getExitCode();
+        unlink($tmpFile);
+
+        return $exitCode;
     }
 
     /**

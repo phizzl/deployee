@@ -4,6 +4,7 @@ namespace Deployee\Plugins\DeployOxid\Dispatcher;
 
 use Deployee\Container;
 use Deployee\Dispatcher\AbstractTaskDispatcher;
+use Deployee\Plugins\DeployDb\Tasks\MySqlExecuteCommandTask;
 use Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
 use Deployee\Plugins\DeployShell\Tasks\ShellTask;
 use Deployee\Tasks\TaskInterface;
@@ -31,7 +32,8 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
     {
         return [
             'Deployee\Plugins\DeployOxid\Tasks\ModuleTask',
-            'Deployee\Plugins\DeployOxid\Tasks\ShopTask'
+            'Deployee\Plugins\DeployOxid\Tasks\ShopTask',
+            'Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask'
         ];
     }
 
@@ -57,6 +59,39 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
         $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($shellTask);
 
         return $dispatcher->dispatch($shellTask)->getExitCode();
+    }
+
+    /**
+     * @param TaskInterface $task
+     * @return int
+     */
+    protected function dispatchShopConfigTask(TaskInterface $task)
+    {
+        $oxidConfigKey = "fq45QS09_fqyx09239QQ";
+        $definition = $task->getDefinition();
+        $varname = $definition['varname'];
+        $vartype = $definition['vartype'];
+        $shopid = $definition['shopid'];
+        $value = $definition['value'];
+        $module = $definition['module'];
+
+        $sql = "DELETE FROM oxconfig WHERE oxvarname='{$varname}' AND oxshopid='{$shopid}' AND oxmodule='{$module}';";
+        $deleteTask = new MySqlExecuteCommandTask($sql);
+        if(0 !== $this->container->taskDispatcher()->getDispatcherByTask($deleteTask)->dispatch($deleteTask)->getExitCode()){
+            throw new \RuntimeException("Error while executing config delete task");
+        }
+
+        switch ($vartype){
+            case "arr": $value = is_array($value) ? serialize(array_values($value)) : $value; break;
+            case "aarr": $value = is_array($value) ? serialize($value) : $value; break;
+        }
+
+        $uid = md5(uniqid("", true) . rand(1, 99999));
+        $sql = "REPLACE INTO oxconfig (oxid, oxshopid, oxvarname, oxvartype, oxmodule, oxvarvalue) " .
+                "VALUES ('{$uid}', '{$shopid}', '{$varname}', '{$vartype}', '{$module}', ENCODE('{$value}', '{$oxidConfigKey}'))";
+
+        $insertTask = new MySqlExecuteCommandTask($sql);
+        return $this->container->taskDispatcher()->getDispatcherByTask($insertTask)->dispatch($insertTask)->getExitCode();
     }
 
     /**

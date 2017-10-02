@@ -1,11 +1,13 @@
 <?php
 
 use Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask;
+use Deployee\Plugins\DeployDb\Tasks\MySqlExecuteCommandTask;
 use Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask;
 use Deployee\Plugins\DeployFilesystem\Tasks\DirectoryTask;
 use Deployee\Plugins\DeployFilesystem\Tasks\FileTask;
 use Deployee\Plugins\DeployFilesystem\Tasks\PermissionsTask;
 use Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
+use Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask;
 use Deployee\Plugins\DeployOxid\Tasks\ShopTask;
 use Deployee\Plugins\DeployShell\Tasks\ShellTask;
 
@@ -22,6 +24,11 @@ trait ideHelperDeploymentDefinition
     public function mysqlfile($source)
     {
         return new MySqlFileImportTask($source);
+    }
+
+    public function mysqlcmd($command)
+    {
+        return new MySqlExecuteCommandTask($command);
     }
 
     public function directory($path)
@@ -47,6 +54,11 @@ trait ideHelperDeploymentDefinition
     public function shop()
     {
         return new ShopTask();
+    }
+
+    public function shopConfig($shopId, $varName, $varValue, $varType, $module)
+    {
+        return new ShopConfigTask($shopId, $varName, $varValue, $varType, $module);
     }
 
     public function shell($executable)

@@ -112,6 +112,7 @@ class DeployOxidSubscriber implements EventSubscriberInterface
         $taskHelper = $event->getTaskHelper();
         $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ModuleTask', 'module');
         $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopTask', 'shop');
+        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask', 'shopConfig');
     }
 
     /**

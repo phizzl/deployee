@@ -48,7 +48,10 @@ trait RegisterConfigTrait
                 }
             }
 
-            return new ConfigLoaderYaml($file, $defaultConfigFile);
+            $config = new ConfigLoaderYaml($file, $defaultConfigFile);
+            $config['loaded_env'] = $env;
+
+            return $config;
         };
     }
 

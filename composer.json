@@ -17,7 +17,8 @@
     "symfony/console": "^2.8",
     "pimple/pimple": "^3.0",
     "monolog/monolog": "^1.23",
-    "phizzl/php-mysql-command-builder": "^0.2"
+    "phizzl/php-mysql-command-builder": "^0.2",
+    "phpdocumentor/reflection-docblock": "^3.2"
   },
   "autoload": {
     "psr-4": {"Deployee\\": "src/"}

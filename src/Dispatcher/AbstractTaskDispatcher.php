@@ -27,7 +27,7 @@ abstract class AbstractTaskDispatcher implements TaskDispatcherInterface
      */
     public function dispatch(TaskInterface $task)
     {
-        $dispatchMethod = "dispatch" . basename(get_class($task));
+        $dispatchMethod = "dispatch" . basename(str_replace("\\", DIRECTORY_SEPARATOR, get_class($task)));
         $message = '';
 
         try {

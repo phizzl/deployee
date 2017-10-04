@@ -51,6 +51,7 @@ class DeployHistorySubscriber implements EventSubscriberInterface
             if($historyService->isStored($definition)){
                 $event->getContainer()->logger()->debug("Already deployed " . get_class($definition));
                 $definitions->offsetUnset($key);
+                $definitions->rewind();
             }
         }
     }

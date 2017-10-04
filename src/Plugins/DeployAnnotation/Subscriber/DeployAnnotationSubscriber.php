@@ -35,6 +35,7 @@ class DeployAnnotationSubscriber implements EventSubscriberInterface
             if(!$this->canRunOnEnv($definition, $env)){
                 $event->getContainer()->logger()->debug("Skipping definition. Env does not match: " . get_class($definition));
                 $event->getDefinitions()->offsetUnset($offset);
+                $event->getDefinitions()->rewind();
             }
         }
     }
@@ -70,6 +71,7 @@ class DeployAnnotationSubscriber implements EventSubscriberInterface
             if($this->removeDefinitionFromHistory($definition)){
                 $event->getContainer()->logger()->debug("Prevent from adding to history. Run always tag found: " . get_class($definition));
                 $event->getDefinitions()->offsetUnset($offset);
+                $event->getDefinitions()->rewind();
             }
         }
     }

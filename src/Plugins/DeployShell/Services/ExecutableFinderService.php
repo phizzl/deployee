@@ -44,7 +44,8 @@ class ExecutableFinderService
         if(isset($this->aliase[$name])){
             $return = $this->aliase[$name];
         }
-        elseif($path = $this->which($name)){
+        elseif(trim($name) != ""
+            && $path = $this->which($name)){
             $return = $path;
         }
 

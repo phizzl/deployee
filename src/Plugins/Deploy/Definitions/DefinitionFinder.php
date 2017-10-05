@@ -58,8 +58,6 @@ class DefinitionFinder
         return $return;
     }
 
-    //private function get
-
     /**
      * @param string $class
      * @param string $filepath

@@ -36,6 +36,15 @@ class FilesystemTaskDispatcher extends AbstractTaskDispatcher
             return 0;
         }
 
+        if(strlen($definition->offsetGet('symlink')) > 0){
+            if(symlink($definition->offsetGet('symlink'), $definition->offsetGet('path')) === false){
+                throw new \RuntimeException(
+                    "Could not create symlink from \"{$definition->offsetGet('symlink')}\" to \"{$definition->offsetGet('path')}\""
+                );
+            }
+            return 0;
+        }
+
         if(strlen($definition->offsetGet('copy')) > 0) {
             if (copy($definition->offsetGet('copy'), $definition->offsetGet('path')) === false) {
                 throw new \RuntimeException(

@@ -36,8 +36,10 @@ class DefinitionFinder
         $finder
             ->files()
             ->name("DeployDefinition_*.php")
-            ->depth(0)
-            ->sortByName()
+            ->depth("<= 1")
+            ->sort(function(\SplFileInfo $a, \SplFileInfo $b){
+                return strcmp($a->getBasename(), $b->getBasename());
+            })
             ->in([$plugin->getConfig()['path']]);
 
         foreach($finder as $file){
@@ -55,6 +57,8 @@ class DefinitionFinder
 
         return $return;
     }
+
+    //private function get
 
     /**
      * @param string $class

@@ -85,9 +85,9 @@ class FileTask implements TaskInterface
         return $this;
     }
 
-    public function symlink($pathToPutLink)
+    public function symlink($symlinkTarget)
     {
-        $this->symlink = $pathToPutLink;
+        $this->symlink = $symlinkTarget;
         $this->copy = '';
         $this->contents = '';
         $this->remove = false;

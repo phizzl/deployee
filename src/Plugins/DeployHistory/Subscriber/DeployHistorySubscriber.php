@@ -44,16 +44,21 @@ class DeployHistorySubscriber implements EventSubscriberInterface
      */
     public function onPreDeploy(PreRunDeployEvent $event)
     {
+        $unsetElements = [];
         /* @var HistoryService $historyService */
         $historyService = $event->getContainer()[HistoryService::CONTAINER_ID];
         $definitions = $event->getDefinitions();
-        foreach($definitions as $key => $definition){
+        foreach($definitions as $offset => $definition){
             if($historyService->isStored($definition)){
                 $event->getContainer()->logger()->debug("Already deployed " . get_class($definition));
-                $definitions->offsetUnset($key);
-                $definitions->rewind();
+                $unsetElements[] = $offset;
             }
         }
+
+        foreach($unsetElements as $offset){
+            $event->getDefinitions()->offsetUnset($offset);
+        }
+        $event->getDefinitions()->rewind();
     }
 
     /**

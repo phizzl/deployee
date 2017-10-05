@@ -30,6 +30,11 @@ class FileTask implements TaskInterface
     private $copy;
 
     /**
+     * @var string
+     */
+    private $symlink;
+
+    /**
      * DirectoryTask constructor.
      * @param string $path
      */
@@ -39,6 +44,7 @@ class FileTask implements TaskInterface
         $this->contents = '';
         $this->remove = false;
         $this->copy = '';
+        $this->symlink = '';
     }
 
     /**
@@ -50,6 +56,7 @@ class FileTask implements TaskInterface
         $this->contents = $contents;
         $this->remove = false;
         $this->copy = '';
+        $this->symlink = '';
         return $this;
     }
 
@@ -61,6 +68,7 @@ class FileTask implements TaskInterface
         $this->remove = true;
         $this->contents = '';
         $this->copy = '';
+        $this->symlink = '';
         return $this;
     }
 
@@ -71,6 +79,16 @@ class FileTask implements TaskInterface
     public function copy($source)
     {
         $this->copy = $source;
+        $this->contents = '';
+        $this->remove = false;
+        $this->symlink = '';
+        return $this;
+    }
+
+    public function symlink($pathToPutLink)
+    {
+        $this->symlink = $pathToPutLink;
+        $this->copy = '';
         $this->contents = '';
         $this->remove = false;
         return $this;
@@ -84,7 +102,8 @@ class FileTask implements TaskInterface
         return new Collection([
             'path' => $this->path,
             'contents' => $this->contents,
-            'remove' => $this->remove
+            'remove' => $this->remove,
+            'symlink' => $this->symlink
         ]);
     }
 }

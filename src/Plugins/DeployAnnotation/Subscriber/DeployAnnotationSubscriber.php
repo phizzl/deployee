@@ -31,13 +31,18 @@ class DeployAnnotationSubscriber implements EventSubscriberInterface
     {
         $env = $event->getContainer()[BootstrapArguments::CONATINER_ID]->getOption('env');
 
+        $unsetElements = [];
         foreach($event->getDefinitions() as $offset => $definition){
             if(!$this->canRunOnEnv($definition, $env)){
                 $event->getContainer()->logger()->debug("Skipping definition. Env does not match: " . get_class($definition));
-                $event->getDefinitions()->offsetUnset($offset);
-                $event->getDefinitions()->rewind();
+                $unsetElements[] = $offset;
             }
         }
+
+        foreach($unsetElements as $offset){
+            $event->getDefinitions()->offsetUnset($offset);
+        }
+        $event->getDefinitions()->rewind();
     }
 
     /**
@@ -67,13 +72,19 @@ class DeployAnnotationSubscriber implements EventSubscriberInterface
      */
     public function onPreAddToHistory(PreAddToHistoryEvent $event)
     {
+        $unsetElements = [];
         foreach($event->getDefinitions() as $offset => $definition){
+            $event->getContainer()->logger()->debug("!!!!!!" . get_class($definition));
             if($this->removeDefinitionFromHistory($definition)){
                 $event->getContainer()->logger()->debug("Prevent from adding to history. Run always tag found: " . get_class($definition));
-                $event->getDefinitions()->offsetUnset($offset);
-                $event->getDefinitions()->rewind();
+                $unsetElements[] = $offset;
             }
         }
+
+        foreach($unsetElements as $offset){
+            $event->getDefinitions()->offsetUnset($offset);
+        }
+        $event->getDefinitions()->rewind();
     }
 
     /**

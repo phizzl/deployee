@@ -74,7 +74,6 @@ class DeployAnnotationSubscriber implements EventSubscriberInterface
     {
         $unsetElements = [];
         foreach($event->getDefinitions() as $offset => $definition){
-            $event->getContainer()->logger()->debug("!!!!!!" . get_class($definition));
             if($this->removeDefinitionFromHistory($definition)){
                 $event->getContainer()->logger()->debug("Prevent from adding to history. Run always tag found: " . get_class($definition));
                 $unsetElements[] = $offset;

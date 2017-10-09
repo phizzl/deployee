@@ -75,7 +75,6 @@ class DeployOxidSubscriber implements EventSubscriberInterface
      */
     private function configureDbPlugin(ConfigureDbConnectionDataEvent $event)
     {
-        $container = $event->getContainer();
         if(!isset($this->pluginConfig['shop_path'])){
             throw new \RuntimeException("You have to configure \"shop_path\" when using \"configure_db_plugin\"");
         }
@@ -110,9 +109,9 @@ class DeployOxidSubscriber implements EventSubscriberInterface
     public function onTaskHelperCreated(TaskHelperCreatedEvent $event)
     {
         $taskHelper = $event->getTaskHelper();
-        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ModuleTask', 'module');
-        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopTask', 'shop');
-        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask', 'shopConfig');
+        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ModuleTask', 'oxidModule');
+        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopTask', 'oxidShop');
+        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask', 'oxidShopConfig');
     }
 
     /**

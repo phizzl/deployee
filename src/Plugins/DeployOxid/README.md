@@ -22,14 +22,14 @@ This task can be used for activating or deactivating one module.
 ### Creating new module task
 ```php
 $this
-    ->module("moduleid");
+    ->oxidModule("moduleid");
 ```
 The example above will create a new module task. After this you are required to configure al least wether the module should be activated or deactivated.
 
 ### Activating a module
 ```php
 $this
-    ->module("moduleid")
+    ->oxidModule("moduleid")
     ->activate();
 ```
 To activate the module just call the tasks activate method.
@@ -37,7 +37,7 @@ To activate the module just call the tasks activate method.
 ### Deactivating a module
 ```php
 $this
-    ->module("moduleid")
+    ->oxidModule("moduleid")
     ->deactivate();
 ```
 To deactivate the module you would call the tasks deactivate method.
@@ -45,7 +45,7 @@ To deactivate the module you would call the tasks deactivate method.
 ### Limiting task to specified shop instances
 ```php
 $this
-    ->module("moduleid")
+    ->oxidModule("moduleid")
     ->activate()
     ->forShopId(2)
     ->forShopId(5);
@@ -55,14 +55,14 @@ You can use the tasks forShopId method to add an id of a shop instance to apply 
 ## Shop cnfig tasks
 ### Adding or modify a databse shop config
 ```php
-$this->shopConfig($shopId, $varName, $varValue, $varType, $module);
+$this->oxidShopConfig($shopId, $varName, $varValue, $varType, $module);
 ```
 The basic usage is as shown above.
 
 A real example could be like
 ```php
-$this->shopConfig(1, "blShowTags", false, "bool");
-$this->shopConfig(1, "aDetailImageSizes", [
+$this->oxidShopConfig(1, "blShowTags", false, "bool");
+$this->oxidShopConfig(1, "aDetailImageSizes", [
   'oxpic1' => '579*579',
   'oxpic2' => '579*579',
   'oxpic3' => '579*579',
@@ -76,7 +76,7 @@ $this->shopConfig(1, "aDetailImageSizes", [
   'oxpic11' => '579*579',
   'oxpic12' => '579*579'
 ], "aarr", "theme:azure");
-$this->shopConfig(1, "aIpWhitelist", ["127.0.0.1", "192.168.1.1"], "arr", "module:phz_ipblock");
+$this->oxidShopConfig(1, "aIpWhitelist", ["127.0.0.1", "192.168.1.1"], "arr", "module:phz_ipblock");
 ```
 The example above shows how to set general or module and theme specific configuration.
 
@@ -86,14 +86,14 @@ This task povides common tasks to execute in the shop instance.
 ### Creating new shop task
 ```php
 $this
-    ->shop();
+    ->oxidShop();
 ```
 This example will add a new shop task. You may configure the task as followed.
 
 ### Clear tmp directory
 ```php
 $this
-    ->shop()
+    ->oxidShop()
     ->clearTmp();
 ```
 This task will recursively remove all files from the shops configured sCompileDir, except the .htaccess file.
@@ -101,7 +101,7 @@ This task will recursively remove all files from the shops configured sCompileDi
 ### Generate database views
 ```php
 $this
-    ->shop()
+    ->oxidShop()
     ->generateViews();
 ```
 This task will execute the shops view generation for all shop instances.
@@ -109,7 +109,7 @@ This task will execute the shops view generation for all shop instances.
 ### Create admin user
 ```php
 $this
-    ->shop()
+    ->oxidShop()
     ->createAdminUser('shopadmin', 'myawesomepassword');
 ```
 Creates a new malladmin user for backend usage

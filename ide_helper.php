@@ -46,17 +46,17 @@ trait ideHelperDeploymentDefinition
         return new PermissionsTask($path);
     }
 
-    public function module($moduleId)
+    public function oxidModule($moduleId)
     {
         return new ModuleTask($moduleId);
     }
 
-    public function shop()
+    public function oxidShop()
     {
         return new ShopTask();
     }
 
-    public function shopConfig($shopId, $varName, $varValue, $varType, $module)
+    public function oxidShopConfig($shopId, $varName, $varValue, $varType, $module)
     {
         return new ShopConfigTask($shopId, $varName, $varValue, $varType, $module);
     }

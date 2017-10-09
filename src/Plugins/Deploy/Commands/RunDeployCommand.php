@@ -44,10 +44,10 @@ class RunDeployCommand extends Command
             $output->writeln("Executing definition " . get_class($definition));
             $definition->define();
             $this->runTasks($definition->getTasks(), $output);
-        }
 
-        $event = new PostRunDeployEvent($this->container, $definitions);
-        $this->container->events()->dispatch(PostRunDeployEvent::EVENT_NAME, $event);
+            $event = new PostRunDeployEvent($this->container, $definition);
+            $this->container->events()->dispatch(PostRunDeployEvent::EVENT_NAME, $event);
+        }
     }
 
     /**

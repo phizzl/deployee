@@ -68,12 +68,12 @@ class DeployHistorySubscriber implements EventSubscriberInterface
     {
         /* @var HistoryService $historyService */
         $historyService = $event->getContainer()[HistoryService::CONTAINER_ID];
-        $definitions = $event->getDefinitions();
+        $definition = $event->getDefinition();
 
-        $event = new PreAddToHistoryEvent($event->getContainer(), clone $definitions);
+        $event = new PreAddToHistoryEvent($event->getContainer(), $definition);
         $event->getContainer()[EventDispatcher::CONTAINER_ID]->dispatch(PreAddToHistoryEvent::EVENT_NAME, $event);
 
-        foreach($event->getDefinitions() as $key => $definition){
+        if($event->canStore()) {
             $event->getContainer()->logger()->debug("Add to history " . get_class($definition));
             $historyService->store($definition);
         }

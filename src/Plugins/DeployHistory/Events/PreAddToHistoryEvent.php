@@ -4,7 +4,7 @@ namespace Deployee\Plugins\DeployHistory\Events;
 
 
 use Deployee\Container;
-use Deployee\Plugins\Deploy\Definitions\DefinitionCollection;
+use Deployee\Plugins\Deploy\Definitions\DeploymentDefinitionInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class PreAddToHistoryEvent extends Event
@@ -17,19 +17,25 @@ class PreAddToHistoryEvent extends Event
     private $container;
 
     /**
-     * @var DefinitionCollection
+     * @var DeploymentDefinitionInterface
      */
-    private $definitions;
+    private $definition;
+
+    /**
+     * @var bool
+     */
+    private $canStore;
 
     /**
      * ApplicationInitializedEvent constructor.
      * @param Container $container
-     * @param DefinitionCollection $definitions
+     * @param DeploymentDefinitionInterface $definition
      */
-    public function __construct(Container $container, DefinitionCollection $definitions)
+    public function __construct(Container $container, DeploymentDefinitionInterface $definition)
     {
         $this->container = $container;
-        $this->definitions = $definitions;
+        $this->definition = $definition;
+        $this->canStore = true;
     }
 
     /**
@@ -41,10 +47,26 @@ class PreAddToHistoryEvent extends Event
     }
 
     /**
-     * @return DefinitionCollection
+     * @return DeploymentDefinitionInterface
      */
-    public function getDefinitions()
+    public function getDefinition()
     {
-        return $this->definitions;
+        return $this->definition;
+    }
+
+    /**
+     * @param bool $canStore
+     */
+    public function setCanStore($canStore)
+    {
+        $this->canStore = $canStore;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canStore()
+    {
+        return $this->canStore;
     }
 }

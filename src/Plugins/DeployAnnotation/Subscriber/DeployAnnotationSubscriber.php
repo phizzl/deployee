@@ -72,18 +72,12 @@ class DeployAnnotationSubscriber implements EventSubscriberInterface
      */
     public function onPreAddToHistory(PreAddToHistoryEvent $event)
     {
-        $unsetElements = [];
-        foreach($event->getDefinitions() as $offset => $definition){
-            if($this->removeDefinitionFromHistory($definition)){
-                $event->getContainer()->logger()->debug("Prevent from adding to history. Run always tag found: " . get_class($definition));
-                $unsetElements[] = $offset;
-            }
+        if($this->removeDefinitionFromHistory($event->getDefinition())){
+            $event->getContainer()->logger()->debug(
+                "Prevent from adding to history. Run always tag found: " . get_class($event->getDefinition())
+            );
+            $event->setCanStore(false);
         }
-
-        foreach($unsetElements as $offset){
-            $event->getDefinitions()->offsetUnset($offset);
-        }
-        $event->getDefinitions()->rewind();
     }
 
     /**

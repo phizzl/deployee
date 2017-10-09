@@ -6,11 +6,13 @@ plugins:
     - Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
     - Deployee\Plugins\DeployShell\DeployShellPlugin
     - Deployee\Plugins\DeployAnnotation\DeployAnnotationPlugin
+    - Deployee\Plugins\DeployShopware\DeployShopwarePlugin:
+        enabled: false
     - Deployee\Plugins\DeployOxid\DeployOxidPlugin:
         enabled: false
     - Deployee\Plugins\DeployDb\DeployDbPlugin:
         host: "localhost"
         port: 3307
         user: "root"
-        password: "nexus123"
-        name: "deltav"
+        password: ~
+        name: "mydatabase"

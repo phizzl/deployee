@@ -6,6 +6,7 @@ namespace Deployee\Plugins\DeployOxid;
 
 use Deployee\Container;
 use Deployee\Plugins\AbstractPlugin;
+use Deployee\Plugins\DeployShopware\Subscriber\DeployShopwareSubscriber;
 
 class DeployShopwarePlugin extends AbstractPlugin
 {
@@ -24,7 +25,6 @@ class DeployShopwarePlugin extends AbstractPlugin
      */
     public function initialize(Container $container)
     {
-
+        $container->events()->addSubscriber(new DeployShopwareSubscriber());
     }
-
 }

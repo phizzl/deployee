@@ -48,6 +48,6 @@ class DeployShopwareSubscriber implements EventSubscriberInterface
             }
         }
 
-        throw new \RuntimeException("Shopware console could not be found in: " . implode($paths));
+        return './bin/console';
     }
 }

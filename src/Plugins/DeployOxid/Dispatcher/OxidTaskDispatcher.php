@@ -50,7 +50,7 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
 
         $shopIdOptions = "";
         foreach($definition['shopids'] as $shopId){
-            $shopIdOptions .= "--shopid={$shopId}";
+            $shopIdOptions .= " --shopid={$shopId}";
         }
 
         $shellTask = new ShellTask("oxid");

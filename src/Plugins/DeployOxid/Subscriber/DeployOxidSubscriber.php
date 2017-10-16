@@ -112,6 +112,11 @@ class DeployOxidSubscriber implements EventSubscriberInterface
         $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ModuleTask', 'oxidModule');
         $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopTask', 'oxidShop');
         $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask', 'oxidShopConfig');
+
+        // Legacy compatibility
+        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ModuleTask', 'module');
+        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopTask', 'shop');
+        $taskHelper->registerTask('Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask', 'shopConfig');
     }
 
     /**

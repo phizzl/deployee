@@ -55,6 +55,7 @@ class ShellTaskDispatcher extends AbstractTaskDispatcher
         $return = $command->run();
 
         $this->container->logger()->debug("Shell >> Exit code is: " . $return['code']);
+        $this->container->logger()->debug("Shell >> Output is: {$return['output']}");
 
         if($return['code'] !== ShellCommand::EXIT_CODE_OK){
             throw new \RuntimeException("Failed executing shell task. " . print_r($return, true));

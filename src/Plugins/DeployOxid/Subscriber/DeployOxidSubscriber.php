@@ -92,6 +92,7 @@ class DeployOxidSubscriber implements EventSubscriberInterface
             throw new \RuntimeException("Unable to locate config.inc.php");
         }
 
+        $this->pluginConfig['shop_path'] = $shopPath;
         $dbPluginConfig = $event->getConfig();
         $shopConfig = new ShopConfig($shopPath . DIRECTORY_SEPARATOR . "config.inc.php");
         $shopHost = explode(':', $shopConfig->get('dbHost'));

@@ -9,6 +9,7 @@ use Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
 use Deployee\Plugins\DeployShell\Tasks\ShellTask;
 use Deployee\Tasks\TaskInterface;
 use Deployee\Plugins\DeployFilesystem\Tasks\FileTask;
+use Deployee\Plugins\DeployOxid\DeployOxidPlugin;
 
 class OxidTaskDispatcher extends AbstractTaskDispatcher
 {
@@ -45,8 +46,11 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
      */
     protected function dispatchShopLangKeyTask(TaskInterface $task)
     {
+        $pluginConfig = $this->container->plugins()->offsetGet(DeployOxidPlugin::PLUGIN_ID)->getConfig();
         $definition = $task->getDefinition();
-        $path = $definition['path'];
+        $path = substr($definition['path'], 0, 1) !== '/'
+            ? $pluginConfig['shop_path'] . DIRECTORY_SEPARATOR . $definition['path']
+            : $definition['path'];
 
         $aLang = [];
         if(is_file($path)){

@@ -58,13 +58,13 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
         }
 
         $aLang['charset'] = 'UTF-8';
-        $aLang[$definition['key']] = $aLang['value'];
+        $aLang[$definition['key']] = $definition['value'];
         $languageArray = var_export($aLang, true);
 
         $contents = <<<EOF
 <?php
 
-    \$sLangName  = "{$definition['langAbbr']}";
+    \$sLangName  = "{$definition['langabbr']}";
     \$aLang = {$languageArray};
 EOF;
 

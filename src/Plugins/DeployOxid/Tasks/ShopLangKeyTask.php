@@ -6,7 +6,7 @@ namespace Deployee\Plugins\DeployOxid\Tasks;
 use Deployee\Collection;
 use Deployee\Tasks\TaskInterface;
 
-class ShopLangKey implements TaskInterface
+class ShopLangKeyTask implements TaskInterface
 {
     /**
      * @var string
@@ -39,7 +39,7 @@ class ShopLangKey implements TaskInterface
         $this->langAbbr = $langAbbr;
         $this->key = $key;
         $this->value = $value;
-        $this->path = "application/translations/{$langAbbr}";
+        $this->path = "application/translations/{$langAbbr}/deployee_{$langAbbr}_lang.php";
     }
 
     /**
@@ -48,6 +48,7 @@ class ShopLangKey implements TaskInterface
     public function saveTo($path)
     {
         $this->path = $path;
+        return $this;
     }
 
     /**

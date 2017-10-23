@@ -8,6 +8,7 @@ use Deployee\Plugins\DeployDb\Tasks\MySqlExecuteCommandTask;
 use Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
 use Deployee\Plugins\DeployShell\Tasks\ShellTask;
 use Deployee\Tasks\TaskInterface;
+use Deployee\Plugins\DeployFilesystem\Tasks\FileTask;
 
 class OxidTaskDispatcher extends AbstractTaskDispatcher
 {
@@ -33,8 +34,41 @@ class OxidTaskDispatcher extends AbstractTaskDispatcher
         return [
             'Deployee\Plugins\DeployOxid\Tasks\ModuleTask',
             'Deployee\Plugins\DeployOxid\Tasks\ShopTask',
-            'Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask'
+            'Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask',
+            'Deployee\Plugins\DeployOxid\Tasks\ShopLangKeyTask'
         ];
+    }
+
+    /**
+     * @param TaskInterface $task
+     * @return int
+     */
+    protected function dispatchShopLangKeyTask(TaskInterface $task)
+    {
+        $definition = $task->getDefinition();
+        $path = $definition['path'];
+
+        $aLang = [];
+        if(is_file($path)){
+            include $path;
+        }
+
+        $aLang['charset'] = 'UTF-8';
+        $aLang[$definition['key']] = $aLang['value'];
+        $languageArray = var_export($aLang, true);
+
+        $contents = <<<EOF
+<?php
+
+    \$sLangName  = "{$definition['langAbbr']}";
+    \$aLang = {$languageArray};
+EOF;
+
+        $fileTask = new FileTask($path);
+        $fileTask->contents($contents);
+        $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($fileTask);
+
+        return $dispatcher->dispatch($fileTask)->getExitCode();
     }
 
     /**

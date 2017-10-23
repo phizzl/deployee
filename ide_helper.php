@@ -8,6 +8,7 @@ use Deployee\Plugins\DeployFilesystem\Tasks\FileTask;
 use Deployee\Plugins\DeployFilesystem\Tasks\PermissionsTask;
 use Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
 use Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask;
+use Deployee\Plugins\DeployOxid\Tasks\ShopLangKeyTask;
 use Deployee\Plugins\DeployOxid\Tasks\ShopTask;
 use Deployee\Plugins\DeployShell\Tasks\ShellTask;
 
@@ -59,6 +60,11 @@ trait ideHelperDeploymentDefinition
     public function oxidShopConfig($shopId, $varName, $varValue, $varType, $module)
     {
         return new ShopConfigTask($shopId, $varName, $varValue, $varType, $module);
+    }
+
+    public function oxidShopLangKey($langAbbr, $key, $value)
+    {
+        return new ShopLangKeyTask($langAbbr, $key, $value);
     }
 
     public function shell($executable)

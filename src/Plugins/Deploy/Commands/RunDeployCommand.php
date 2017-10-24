@@ -67,7 +67,10 @@ class RunDeployCommand extends Command
             $this->container->events()->dispatch(PostRunDeployTaskEvent::EVENT_NAME, $event);
 
             if($result->getExitCode() > 0){
-                throw new \RuntimeException("Got exit code {$result->getExitCode()} from " . get_class($task));
+                throw new \RuntimeException(
+                    "Got exit code {$result->getExitCode()} from " . get_class($task) . PHP_EOL .
+                    print_r($result->getMessage(), true)
+                );
             }
         }
     }

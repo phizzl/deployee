@@ -8,6 +8,7 @@ use Deployee\Application\Command;
 use Deployee\CollectionInterface;
 use Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition;
 use Deployee\Plugins\Deploy\Definitions\DefinitionFinder;
+use Deployee\Plugins\Deploy\Definitions\DeploymentDefinitionInterface;
 use Deployee\Plugins\Deploy\Events\PostRunDeployEvent;
 use Deployee\Plugins\Deploy\Events\PostRunDeployTaskEvent;
 use Deployee\Plugins\Deploy\Events\PreRunDeployEvent;
@@ -43,7 +44,7 @@ class RunDeployCommand extends Command
         foreach($definitions as $definition){
             $output->writeln("Executing definition " . get_class($definition));
             $definition->define();
-            $this->runTasks($definition->getTasks(), $output);
+            $this->runTasks($definition, $output);
 
             $event = new PostRunDeployEvent($this->container, $definition);
             $this->container->events()->dispatch(PostRunDeployEvent::EVENT_NAME, $event);
@@ -54,9 +55,9 @@ class RunDeployCommand extends Command
      * @param CollectionInterface $tasks
      * @param OutputInterface $output
      */
-    private function runTasks(CollectionInterface $tasks, OutputInterface $output){
+    private function runTasks(DeploymentDefinitionInterface $definition, OutputInterface $output){
         /* @var TaskInterface $task */
-        foreach($tasks as $task) {
+        foreach($definition->getTasks() as $task) {
             $output->writeln("Executing task " . get_class($task), OutputInterface::VERBOSITY_DEBUG);
             $dispatcher = $this->container->taskDispatcher()->getDispatcherByTask($task);
 
@@ -68,6 +69,7 @@ class RunDeployCommand extends Command
 
             if($result->getExitCode() > 0){
                 throw new \RuntimeException(
+                    "Error while executing " . get_class($definition) . PHP_EOL .
                     "Got exit code {$result->getExitCode()} from " . get_class($task) . PHP_EOL .
                     print_r($result->getMessage(), true)
                 );

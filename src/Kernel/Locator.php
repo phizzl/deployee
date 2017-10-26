@@ -2,6 +2,8 @@
 
 namespace Deployee\Kernel;
 
+use Deployee\Kernel\Exceptions\ClassNotFoundException;
+
 class Locator
 {
     /**
@@ -10,12 +12,25 @@ class Locator
     private $dependencyProvider;
 
     /**
+     * @var ModuleCollection
+     */
+    private $modules;
+
+    /**
+     * @var array
+     */
+    private $namespaces;
+
+    /**
      * Locator constructor.
      * @param DependencyProviderInterface $dependencyProvider
+     * @param array $namespaces
      */
-    public function __construct(DependencyProviderInterface $dependencyProvider)
+    public function __construct(DependencyProviderInterface $dependencyProvider, array $namespaces = [])
     {
         $this->dependencyProvider = $dependencyProvider;
+        $this->modules = new ModuleCollection();
+        $this->namespaces = $namespaces;
     }
 
     /**
@@ -24,5 +39,69 @@ class Locator
     public function getDependencyProvider()
     {
         return $this->dependencyProvider;
+    }
+
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        if(!$this->modules->hasModule($name)){
+            $module = $this->createModule($name);
+            $this->modules->addModule($name, $module);
+        }
+
+        return $this->modules->getModule($name);
+    }
+
+    /**
+     * @param string $name
+     * @return ModuleInterface
+     */
+    private function createModule($name)
+    {
+        try {
+            $moduleClassName = $this->locateClassName($name . "Module");
+        }
+        catch (ClassNotFoundException $e){
+            $moduleClassName = Module::class;
+        }
+
+        /* @var ModuleInterface $module */
+        if(!($module = new $moduleClassName) instanceof ModuleInterface){
+            throw new \RuntimeException("Invalid module class {$moduleClassName}");
+        }
+
+        $factoryClassName = $this->locateClassName($name . "Factory");
+        $facadeClassName = $this->locateClassName($name . "Facade");
+
+        /* @var FactoryInterface $factory */
+        $factory = new $factoryClassName;
+        /* @var FacadeInterface $facade */
+        $facade = new $facadeClassName;
+        $facade->setFactory($factory);
+
+        $module->setFactory($factory);
+        $module->setFacade($facade);
+
+        return $module;
+    }
+
+    /**
+     * @param string $className
+     * @return string
+     * @throws ClassNotFoundException
+     */
+    private function locateClassName($className)
+    {
+        foreach($this->namespaces as $namespace){
+            if(class_exists($namespace . $className)){
+                return $namespace . $className;
+            }
+        }
+
+        throw new ClassNotFoundException("Could not locate \"{$className}\"");
     }
 }

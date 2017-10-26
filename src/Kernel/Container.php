@@ -1,13 +1,12 @@
 <?php
 
-namespace Deployee;
+namespace Deployee\Kernel;
 
 
 use Composer\Autoload\ClassLoader;
 use Deployee\Config\Config;
 use Deployee\Dispatcher\TaskDispatcherCollection;
 use Deployee\Events\EventDispatcher;
-use Deployee\Kernel\DependencyProviderInterface;
 use Deployee\Logger\Logger;
 use Deployee\Plugins\PluginContainer;
 

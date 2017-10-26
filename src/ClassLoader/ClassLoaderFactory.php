@@ -1,6 +1,6 @@
 <?php
 
-namespace Deployee\Components\ClassLoader;
+namespace Deployee\ClassLoader;
 
 
 use Composer\Autoload\ClassLoader;

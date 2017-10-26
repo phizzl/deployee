@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Deployee\Components\ClassLoader;
+namespace Deployee\ClassLoader;
 
 
 use Deployee\Kernel\Modules\AbstractFacade;

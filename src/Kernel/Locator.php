@@ -68,7 +68,7 @@ class Locator
     private function createModule($name)
     {
         try {
-            $moduleClassName = $this->locateClassName($name . "Module");
+            $moduleClassName = $this->locateClassName("{$name}\\{$name}Module");
         }
         catch (ClassNotFoundException $e){
             $moduleClassName = Module::class;
@@ -79,8 +79,8 @@ class Locator
             throw new \RuntimeException("Invalid module class {$moduleClassName}");
         }
 
-        $factoryClassName = $this->locateClassName($name . "Factory");
-        $facadeClassName = $this->locateClassName($name . "Facade");
+        $factoryClassName = $this->locateClassName("{$name}\\{$name}Factory");
+        $facadeClassName = $this->locateClassName("{$name}\\{$name}Facade");
 
         /* @var FactoryInterface $factory */
         $factory = new $factoryClassName;

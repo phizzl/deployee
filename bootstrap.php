@@ -4,8 +4,8 @@
  */
 
 use Composer\Autoload\ClassLoader;
-use Deployee\Components\ClassLoader\ClassLoaderModule;
-use Deployee\Kernel\DependencyProvider;
+use Deployee\ClassLoader\ClassLoaderModule;
+use Deployee\Kernel\DependencyProviderContainer;
 use Deployee\Kernel\KernelConstraints;
 use Deployee\Kernel\Locator;
 
@@ -28,22 +28,16 @@ if($loaderFile === ''){
 
 /* @var ClassLoader $loader */
 $loader = require $loaderFile;
-$namespaces = array_merge(
-    array_reverse(array_keys($loader->getPrefixesPsr4())),
-    [
-        "Deployee\\Components\\",
-        "\\"
-    ]
-);
+$namespaces = array_reverse(array_keys($loader->getPrefixesPsr4()));
 
-$dependencyProvider = new DependencyProvider();
+$dependencyProvider = new DependencyProviderContainer();
 $locator = new Locator($dependencyProvider, $namespaces);
 
-$di[KernelConstraints::LOCATOR] = $locator;
-$di[ClassLoaderModule::CLASS_LOADER_CONTAINER_ID] = $loader;
+$dependencyProvider[KernelConstraints::LOCATOR] = $locator;
+$dependencyProvider[ClassLoaderModule::CLASS_LOADER_CONTAINER_ID] = $loader;
 
 
 ////////////
-var_dump($locator->Config()->getFacade()->get("test", "1234"));
+var_dump($locator->Dependency());
 ////////////
 

@@ -13,6 +13,6 @@ class ClassLoaderFactory extends AbstractFactory
      */
     public function createClassLoader()
     {
-        return $this->locator->getDependencyProvider()->getDependency(ClassLoaderModule::CLASS_LOADER_CONTAINER_ID);
+        return $this->locator->getDependencyProviderContainer()->getDependency(ClassLoaderModule::CLASS_LOADER_CONTAINER_ID);
     }
 }

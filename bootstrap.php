@@ -31,9 +31,9 @@ $loader = require $loaderFile;
 $namespaces = array_reverse(array_keys($loader->getPrefixesPsr4()));
 
 $dependencyProviderContainer = new DependencyProviderContainer();
-$dependencyProviderContainer[ClassLoaderModule::CLASS_LOADER_CONTAINER_ID] = $loader;
 $locator = new Locator($dependencyProviderContainer, $namespaces);
 
-$locator->Dependency()->getFacade()->setDependency(KernelConstraints::LOCATOR, $locator);
+$dependencyProviderContainer[ClassLoaderModule::CLASS_LOADER_CONTAINER_ID] = $loader;
+$dependencyProviderContainer[KernelConstraints::LOCATOR] = $locator;
 
 return $locator;

@@ -72,6 +72,7 @@ class Locator
         if(!$this->modules->hasModule($name)){
             $module = $this->createModule($name);
             $this->modules->addModule($name, $module);
+            $module->onLoad();
         }
 
         return $this->modules->getModule($name);
@@ -110,8 +111,6 @@ class Locator
         $module->setFactory($factory);
         $module->setFacade($facade);
         $module->setLocator($this);
-
-        $module->onLoad();
 
         return $module;
     }

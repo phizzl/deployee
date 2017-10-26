@@ -1,18 +1,17 @@
 <?php
 
 
-namespace Deployee\Application;
+namespace Deployee\Application\Business;
 
-
-use Deployee\Container;
+use Deployee\Kernel\Locator;
 use Symfony\Component\Console\Input\InputOption;
 
 class Application extends \Symfony\Component\Console\Application
 {
     /**
-     * @var Container
+     * @var Locator
      */
-    private $container;
+    private $locator;
 
     /**
      * Application constructor.
@@ -28,11 +27,11 @@ class Application extends \Symfony\Component\Console\Application
     }
 
     /**
-     * @param Container $container
+     * @param Locator $container
      */
-    public function setContainer(Container $container)
+    public function setLocator(Locator $locator)
     {
-        $this->container = $container;
+        $this->locator = $locator;
     }
 
     /**
@@ -41,7 +40,7 @@ class Application extends \Symfony\Component\Console\Application
     public function add(\Symfony\Component\Console\Command\Command $command)
     {
         if($command instanceof Command) {
-            $command->setContainer($this->container);
+            $command->setLocator($this->locator);
         }
 
         parent::add($command);

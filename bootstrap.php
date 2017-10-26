@@ -3,8 +3,10 @@
  * Bootstrap file for Deployee task runner
  */
 
-use Deployee\Bootstrap\Bootstrap;
-use Deployee\Container;
+use Composer\Autoload\ClassLoader;
+use Deployee\Kernel\DependencyProvider;
+use Deployee\Kernel\KernelConstraints;
+use Deployee\Kernel\Locator;
 
 $findLoader = [
     __DIR__ . '/vendor',
@@ -23,11 +25,18 @@ if($loaderFile === ''){
     throw new \Exception("Could not find autoloader file");
 }
 
+/* @var ClassLoader $loader */
 $loader = require $loaderFile;
+$namespaces = array_reverse(array_keys($loader->getPrefixesPsr4()));
+$namespaces[] = "\\";
 
-$di = new Container();
-$di['composer.classloader'] = $loader;
-$di['args'] = isset($argv) && is_array($argv) ? $argv : [];
-$bootstrap = new Bootstrap($di);
+$dependencyProvider = new DependencyProvider();
+$locator = new Locator($dependencyProvider, $namespaces);
 
-return $bootstrap->bootstrap();
+$di[KernelConstraints::LOCATOR] = $locator;
+
+
+////////////
+$locator->Config();
+////////////
+

@@ -3,6 +3,11 @@
 namespace Deployee\Kernel;
 
 use Deployee\Kernel\Exceptions\ClassNotFoundException;
+use Deployee\Kernel\Modules\FacadeInterface;
+use Deployee\Kernel\Modules\FactoryInterface;
+use Deployee\Kernel\Modules\Module;
+use Deployee\Kernel\Modules\ModuleCollection;
+use Deployee\Kernel\Modules\ModuleInterface;
 
 class Locator
 {

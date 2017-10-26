@@ -12,9 +12,9 @@ use Deployee\Kernel\Modules\ModuleInterface;
 class Locator
 {
     /**
-     * @var DependencyProviderInterface
+     * @var DependencyProviderContainerInterface
      */
-    private $dependencyProvider;
+    private $dependencyProviderContainer;
 
     /**
      * @var ModuleCollection
@@ -28,22 +28,22 @@ class Locator
 
     /**
      * Locator constructor.
-     * @param DependencyProviderInterface $dependencyProvider
+     * @param DependencyProviderContainerInterface $dependencyProvider
      * @param array $namespaces
      */
-    public function __construct(DependencyProviderInterface $dependencyProvider, array $namespaces = [])
+    public function __construct(DependencyProviderContainerInterface $dependencyProviderContainer, array $namespaces = [])
     {
-        $this->dependencyProvider = $dependencyProvider;
+        $this->dependencyProviderContainer = $dependencyProviderContainer;
         $this->modules = new ModuleCollection();
         $this->namespaces = $namespaces;
     }
 
     /**
-     * @return DependencyProviderInterface
+     * @return DependencyProviderContainerInterface
      */
-    public function getDependencyProvider()
+    public function getDependencyProviderContainer()
     {
-        return $this->dependencyProvider;
+        return $this->dependencyProviderContainer;
     }
 
     /**

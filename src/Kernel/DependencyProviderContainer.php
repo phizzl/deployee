@@ -10,7 +10,7 @@ use Deployee\Events\EventDispatcher;
 use Deployee\Logger\Logger;
 use Deployee\Plugins\PluginContainer;
 
-class DependencyProvider extends \Pimple\Container implements DependencyProviderInterface
+class DependencyProviderContainer extends \Pimple\Container implements DependencyProviderContainerInterface
 {
     /**
      * @param string $id

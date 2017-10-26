@@ -3,7 +3,7 @@
 namespace Deployee\Kernel;
 
 
-interface DependencyProviderInterface
+interface DependencyProviderContainerInterface
 {
     /**
      * @param string $id

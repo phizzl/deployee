@@ -3,7 +3,9 @@
 namespace Deployee\Kernel\Modules;
 
 
-interface FactoryInterface
+use Deployee\Kernel\LocatorAwareInterface;
+
+interface FactoryInterface extends LocatorAwareInterface
 {
 
 }

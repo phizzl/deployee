@@ -84,9 +84,12 @@ class Locator
 
         /* @var FactoryInterface $factory */
         $factory = new $factoryClassName;
+        $factory->setLocator($this);
+
         /* @var FacadeInterface $facade */
         $facade = new $facadeClassName;
         $facade->setFactory($factory);
+        $factory->setLocator($this);
 
         $module->setFactory($factory);
         $module->setFacade($facade);

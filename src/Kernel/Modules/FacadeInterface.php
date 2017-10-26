@@ -2,8 +2,9 @@
 
 namespace Deployee\Kernel\Modules;
 
+use Deployee\Kernel\LocatorAwareInterface;
 
-interface FacadeInterface
+interface FacadeInterface extends LocatorAwareInterface
 {
     /**
      * @param FactoryInterface $factory

@@ -109,6 +109,7 @@ class Locator
 
         $module->setFactory($factory);
         $module->setFacade($facade);
+        $module->setLocator($this);
 
         $module->onLoad();
 

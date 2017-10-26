@@ -1,6 +1,6 @@
 <?php
 
-namespace Deployee\Components\Config;
+namespace Deployee\Config;
 
 
 use Deployee\Kernel\Modules\AbstractFactory;

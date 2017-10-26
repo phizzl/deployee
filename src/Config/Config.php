@@ -5,8 +5,6 @@ namespace Deployee\Config;
 
 class Config
 {
-    const CONTAINER_ID = "deployee.config";
-
     /**
      * @var array|\ArrayAccess
      */

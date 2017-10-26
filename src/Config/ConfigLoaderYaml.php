@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Deployee\Components\Config;
+namespace Deployee\Config;
 
 
 use Symfony\Component\Yaml\Yaml;

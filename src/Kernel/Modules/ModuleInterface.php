@@ -6,6 +6,8 @@ use Deployee\Kernel\Locator;
 
 interface ModuleInterface
 {
+    public function onLoad();
+
     /**
      * @param Locator $locator
      */

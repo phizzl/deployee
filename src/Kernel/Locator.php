@@ -47,6 +47,22 @@ class Locator
     }
 
     /**
+     * @param string $namespace
+     */
+    public function registerNamespace($namespace)
+    {
+        array_unshift($this->namespaces, $namespace);
+    }
+
+    /**
+     * @return array
+     */
+    public function getNamespaces()
+    {
+        return $this->namespaces;
+    }
+
+    /**
      * @param string $name
      * @param array $arguments
      * @return mixed
@@ -93,6 +109,8 @@ class Locator
 
         $module->setFactory($factory);
         $module->setFacade($facade);
+
+        $module->onLoad();
 
         return $module;
     }

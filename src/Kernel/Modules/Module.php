@@ -61,4 +61,12 @@ class Module implements ModuleInterface
     {
         return $this->facade;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function onLoad()
+    {
+
+    }
 }

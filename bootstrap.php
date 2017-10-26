@@ -4,6 +4,7 @@
  */
 
 use Composer\Autoload\ClassLoader;
+use Deployee\Components\ClassLoader\ClassLoaderModule;
 use Deployee\Kernel\DependencyProvider;
 use Deployee\Kernel\KernelConstraints;
 use Deployee\Kernel\Locator;
@@ -39,6 +40,7 @@ $dependencyProvider = new DependencyProvider();
 $locator = new Locator($dependencyProvider, $namespaces);
 
 $di[KernelConstraints::LOCATOR] = $locator;
+$di[ClassLoaderModule::CLASS_LOADER_CONTAINER_ID] = $loader;
 
 
 ////////////

@@ -36,4 +36,6 @@ $locator = new Locator($dependencyProvider, $namespaces);
 $dependencyProvider[KernelConstraints::LOCATOR] = $locator;
 $dependencyProvider[ClassLoaderModule::CLASS_LOADER_CONTAINER_ID] = $loader;
 
+$locator->Dependency();
+
 return $locator;

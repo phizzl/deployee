@@ -2,14 +2,6 @@
 
 namespace Deployee\Kernel;
 
-
-use Composer\Autoload\ClassLoader;
-use Deployee\Config\Config;
-use Deployee\Dispatcher\TaskDispatcherCollection;
-use Deployee\Events\EventDispatcher;
-use Deployee\Logger\Logger;
-use Deployee\Plugins\PluginContainer;
-
 class DependencyProviderContainer extends \Pimple\Container implements DependencyProviderContainerInterface
 {
     /**
@@ -22,50 +14,20 @@ class DependencyProviderContainer extends \Pimple\Container implements Dependenc
     }
 
     /**
-     * @return EventDispatcher
+     * @param string $id
+     * @param mixed $value
      */
-    public function events()
+    public function setDependency($id, $value)
     {
-        return $this[EventDispatcher::CONTAINER_ID];
+        $this[$id] = $value;
     }
 
     /**
-     * @return Config
+     * @param string $id
+     * @param callable $callable
      */
-    public function config()
+    public function extendDependency($id, callable $callable)
     {
-        return $this[Config::CONTAINER_ID];
-    }
-
-    /**
-     * @return PluginContainer
-     */
-    public function plugins()
-    {
-        return $this[PluginContainer::CONTAINER_ID];
-    }
-
-    /**
-     * @return ClassLoader
-     */
-    public function classLoader()
-    {
-        return $this['composer.classloader'];
-    }
-
-    /**
-     * @return TaskDispatcherCollection
-     */
-    public function taskDispatcher()
-    {
-        return $this[TaskDispatcherCollection::CONTAINER_ID];
-    }
-
-    /**
-     * @return Logger
-     */
-    public function logger()
-    {
-        return $this[Logger::CONTAINER_ID];
+        $this->extend($id, $callable);
     }
 }

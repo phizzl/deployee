@@ -30,12 +30,10 @@ if($loaderFile === ''){
 $loader = require $loaderFile;
 $namespaces = array_reverse(array_keys($loader->getPrefixesPsr4()));
 
-$dependencyProvider = new DependencyProviderContainer();
-$locator = new Locator($dependencyProvider, $namespaces);
+$dependencyProviderContainer = new DependencyProviderContainer();
+$dependencyProviderContainer[ClassLoaderModule::CLASS_LOADER_CONTAINER_ID] = $loader;
+$locator = new Locator($dependencyProviderContainer, $namespaces);
 
-$dependencyProvider[KernelConstraints::LOCATOR] = $locator;
-$dependencyProvider[ClassLoaderModule::CLASS_LOADER_CONTAINER_ID] = $loader;
-
-$locator->Dependency();
+$locator->Dependency()->getFacade()->setDependency(KernelConstraints::LOCATOR, $locator);
 
 return $locator;

@@ -27,8 +27,13 @@ if($loaderFile === ''){
 
 /* @var ClassLoader $loader */
 $loader = require $loaderFile;
-$namespaces = array_reverse(array_keys($loader->getPrefixesPsr4()));
-$namespaces[] = "\\";
+$namespaces = array_merge(
+    array_reverse(array_keys($loader->getPrefixesPsr4())),
+    [
+        "Deployee\\Components\\",
+        "\\"
+    ]
+);
 
 $dependencyProvider = new DependencyProvider();
 $locator = new Locator($dependencyProvider, $namespaces);
@@ -37,6 +42,6 @@ $di[KernelConstraints::LOCATOR] = $locator;
 
 
 ////////////
-$locator->Config();
+var_dump($locator->Config()->getFacade()->get("test", "1234"));
 ////////////
 

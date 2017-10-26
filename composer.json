@@ -22,9 +22,5 @@
   },
   "autoload": {
     "psr-4": {"Deployee\\": "src/"}
-  },
-  "repositories": [{
-    "type": "composer",
-    "url": "https://nexus:nexus123@www.nexus-netsoft.com/.satis"
-  }]
+  }
 }

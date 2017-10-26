@@ -47,6 +47,14 @@ class Module implements ModuleInterface
     }
 
     /**
+     * @return Locator
+     */
+    public function getLocator()
+    {
+        return $this->locator;
+    }
+
+    /**
      * @return FactoryInterface
      */
     public function getFactory()

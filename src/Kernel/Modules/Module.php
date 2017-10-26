@@ -1,7 +1,9 @@
 <?php
 
-namespace Deployee\Kernel;
+namespace Deployee\Kernel\Modules;
 
+
+use Deployee\Kernel\Locator;
 
 class Module implements ModuleInterface
 {

@@ -1,14 +1,8 @@
 <?php
-/**
- * ${CARET}<File description>
- *
- * @author Phillip Schleicher <schleicher@nexus-netsoft.com>
- * @package
- * @subpackage
- * @category
- */
 
-namespace Deployee\Kernel;
+namespace Deployee\Kernel\Modules;
+
+use Deployee\Kernel\Locator;
 
 interface ModuleInterface
 {

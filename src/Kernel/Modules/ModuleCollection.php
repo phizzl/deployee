@@ -1,6 +1,6 @@
 <?php
 
-namespace Deployee\Kernel;
+namespace Deployee\Kernel\Modules;
 
 
 class ModuleCollection

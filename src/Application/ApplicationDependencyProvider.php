@@ -32,7 +32,7 @@ class ApplicationDependencyProvider implements DependencyProviderInterface
                 $app = new Application("Deployee");
                 $app->setLocator($locator);
                 $app->addCommands($commandCollection->getCommands());
-                echo "la";
+
                 return $app;
             });
     }

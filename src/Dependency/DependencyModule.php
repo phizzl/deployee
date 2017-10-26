@@ -103,6 +103,13 @@ class DependencyModule extends Module
             $expectedClass = "{$namespace}{$basename}\\{$basename}{$suffix}";
             if(class_exists($expectedClass)){
                 $found[] = $expectedClass;
+                continue;
+            }
+
+            $expectedClass = "{$namespace}{$basename}\\Dependency\\{$basename}{$suffix}";
+            if(class_exists($expectedClass)){
+                $found[] = $expectedClass;
+                continue;
             }
         }
 

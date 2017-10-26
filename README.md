@@ -25,22 +25,22 @@ In the example above Deployee will try to read the configuration from a file cal
 
 ## Deployments
 ### Tasks
-There are several of tasks you can use to define your deployment. The functionality that makes it possible to define a deployment is stored in the Dpeloyment plugin. For more information see the documentation [here](src/Plugins/Deploy/README.md) 
+There are several of tasks you can use to define your deployment. The functionality that makes it possible to define a deployment is stored in the Dpeloyment plugin. For more information see the documentation [here](_trash/Plugins/Deploy/README.md) 
 
 #### Filesystem
-See documentation [here](src/Plugins/DeployFilesystem/README.md)
+See documentation [here](_trash/Plugins/DeployFilesystem/README.md)
 
 #### Shell
-See documentation [here](src/Plugins/DeployShell/README.md)
+See documentation [here](_trash/Plugins/DeployShell/README.md)
 
 #### MySQL database
-See documentation [here](src/Plugins/DeployDb/README.md)
+See documentation [here](_trash/Plugins/DeployDb/README.md)
 
 #### OXID eShop
-See documentation [here](src/Plugins/DeployOxid/README.md)
+See documentation [here](_trash/Plugins/DeployOxid/README.md)
 
 ### Annotation controlled deployments
-You can manipulate the behaviour of when a deplyoment is executed by setting annotations to the deployment definition. If you want to know more about how to force a deployment to run always or only when a specified environment is given take a look at the plugin docs [here](src/Plugins/DeployAnnotation/README.md)
+You can manipulate the behaviour of when a deplyoment is executed by setting annotations to the deployment definition. If you want to know more about how to force a deployment to run always or only when a specified environment is given take a look at the plugin docs [here](_trash/Plugins/DeployAnnotation/README.md)
 
 ## Plugins
 The system itself is designed to be event and plugin based. So the functionality to define a deployment is a plugin itself that adds events and commands to the system. 

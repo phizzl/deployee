@@ -1,6 +1,6 @@
 <?php
 
-namespace Deployee\Application;
+namespace Deployee\Application\Dependency;
 
 
 use Deployee\Application\Business\Application;

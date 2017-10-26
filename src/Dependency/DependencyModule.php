@@ -27,7 +27,7 @@ class DependencyModule extends Module
         foreach($dependencyProvider as $className){
             /* @var DependencyInjectionProviderInterface $provider */
             if(($provider = new $className) instanceof DependencyInjectionProviderInterface){
-                $provider->injectDependencies($this->getLocator()->getDependencyProviderContainer());
+                $provider->injectDependencies($this->getLocator());
             }
         }
     }
@@ -40,7 +40,7 @@ class DependencyModule extends Module
         foreach($dependencyProvider as $className){
             /* @var DependencyProviderInterface $provider */
             if(($provider = new $className) instanceof DependencyProviderInterface){
-                $provider->defineDependencies($this->getLocator()->getDependencyProviderContainer());
+                $provider->defineDependencies($this->getLocator());
             }
         }
     }

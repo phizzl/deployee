@@ -2,13 +2,12 @@
 
 namespace Deployee\Dependency;
 
-use Deployee\Kernel\DependencyProviderContainerInterface;
+use Deployee\Kernel\Locator;
 
 interface DependencyProviderInterface
 {
     /**
-     * @param DependencyProviderContainerInterface $container
-     * @return mixed
+     * @param Locator $locator
      */
-    public function defineDependencies(DependencyProviderContainerInterface $container);
+    public function defineDependencies(Locator $locator);
 }

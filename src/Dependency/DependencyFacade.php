@@ -31,4 +31,13 @@ class DependencyFacade extends AbstractFacade
     {
         return $this->factory->createDependencyProviderContainer()->setDependency($id, $value);
     }
+
+    /**
+     * @param string $id
+     * @param callable $callable
+     */
+    public function extendDependency($id, callable $callable)
+    {
+        $this->factory->createDependencyProviderContainer()->extendDependency($id, $callable);
+    }
 }

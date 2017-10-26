@@ -7,11 +7,21 @@ use Composer\Autoload\ClassLoader;
 use Deployee\Config\Config;
 use Deployee\Dispatcher\TaskDispatcherCollection;
 use Deployee\Events\EventDispatcher;
+use Deployee\Kernel\DependencyProviderInterface;
 use Deployee\Logger\Logger;
 use Deployee\Plugins\PluginContainer;
 
-class Container extends \Pimple\Container
+class Container extends \Pimple\Container implements DependencyProviderInterface
 {
+    /**
+     * @param string $id
+     * @return mixed
+     */
+    public function getDependency($id)
+    {
+        return $this[$id];
+    }
+
     /**
      * @return EventDispatcher
      */

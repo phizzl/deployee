@@ -3,6 +3,7 @@
 namespace Deployee\Application\Dependency;
 
 
+use Deployee\Application\ApplicationModule;
 use Deployee\Application\Business\Application;
 use Deployee\Application\Business\CommandCollection;
 use Deployee\Dependency\DependencyProviderInterface;

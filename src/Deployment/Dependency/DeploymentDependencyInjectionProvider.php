@@ -1,15 +1,15 @@
 <?php
 
-namespace Deployee\Plugins\DeployPlugin\Dependency;
+namespace Deployee\Deployment\Dependency;
 
 
 use Deployee\Application\ApplicationModule;
 use Deployee\Application\Business\CommandCollection;
 use Deployee\Dependency\DependencyInjectionProviderInterface;
+use Deployee\Deployment\Commands\DeployRunCommand;
 use Deployee\Kernel\Locator;
-use Deployee\Plugins\DeployPlugin\Commands\DeployRunCommand;
 
-class DeployPluginDependencyInjectionProvider implements DependencyInjectionProviderInterface
+class DeploymentDependencyInjectionProvider implements DependencyInjectionProviderInterface
 {
     /**
      * @param Locator $locator

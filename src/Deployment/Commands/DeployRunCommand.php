@@ -1,6 +1,6 @@
 <?php
 
-namespace Deployee\Plugins\DeployPlugin\Commands;
+namespace Deployee\Deployment\Commands;
 
 
 use Deployee\Application\Business\Command;

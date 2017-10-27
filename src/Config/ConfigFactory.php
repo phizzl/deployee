@@ -7,8 +7,15 @@ use Deployee\Kernel\Modules\AbstractFactory;
 
 class ConfigFactory extends AbstractFactory
 {
-    public function createConfig()
+    /**
+     * @param $params
+     * @return Config
+     */
+    public function createConfig($params)
     {
-        return new Config();
+        $config = new Config();
+        $config->setParams($params);
+
+        return $config;
     }
 }

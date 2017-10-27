@@ -15,7 +15,7 @@ class DeploymentDependencyProvider implements DependencyProviderInterface
     {
         $locator->Dependency()->getFacade()->setDependency(
             DeploymentModule::DEPLOYMENT_DEFINITION_FINDER_DEPENDENCY, function() use($locator){
-                $searchPath = $locator->Config()->getFacade()->get('definition_path');
+                $searchPath = $locator->Config()->getFacade()->get('definition_path', 'deployments');
                 return new DeploymentDefinitionClassMapFinder($searchPath);
             }
         );

@@ -3,6 +3,7 @@
 namespace Deployee\Events;
 
 
+use Deployee\Kernel\LocatorAwareInterface;
 use Deployee\Kernel\Modules\AbstractFacade;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -35,6 +36,10 @@ class EventsFacade extends AbstractFacade
      */
     public function dispatchEvent($name, Event $event)
     {
+        if($event instanceof LocatorAwareInterface){
+            $event->setLocator($this->locator);
+        }
+
         return $this->getEventDispatcher()->dispatch($name, $event);
     }
 

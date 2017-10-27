@@ -13,6 +13,6 @@ class EventsFactory extends AbstractFactory
      */
     public function createEventDispatcher()
     {
-        return new EventDispatcher();
+        return $this->locator->Dependency()->getFacade()->getDependency(EventsModule::EVENT_DISPATCHER_DEPENDENCY);
     }
 }

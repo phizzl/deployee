@@ -4,6 +4,8 @@ namespace Deployee\Plugins\RunDeploy\Commands;
 
 
 use Deployee\Application\Business\Command;
+use Deployee\Deployment\Definitions\Deployments\DeploymentDefinitionInterface;
+use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
 use Deployee\Plugins\RunDeploy\Events\FindExecutableDefinitionsEvent;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -29,14 +31,24 @@ class DeployRunCommand extends Command
         $output->writeln(sprintf("Executing %s definitions", count($definitions)));
         foreach($definitions as $className){
             $output->writeln(sprintf("Execute definition %s", $className), OutputInterface::VERBOSITY_VERBOSE);
-
+            $deployment = $this->locator->Deployment()->getFactory()->createDeploymentDefinition($className);
+            $this->runDepoymentDefinition($deployment, $output);
             $output->writeln(sprintf("Finished executing definition %s", $className), OutputInterface::VERBOSITY_DEBUG);
         }
     }
 
-    private function executeDefinition($className)
+    /**
+     * @param DeploymentDefinitionInterface $deployment
+     * @param OutputInterface $output
+     */
+    private function runDepoymentDefinition(DeploymentDefinitionInterface $deployment, OutputInterface $output)
     {
+        $deployment->define();
 
+        /* @var TaskDefinitionInterface $task */
+        foreach($deployment->getTasks()->getTasks() as $task){
+            $output->writeln("Executing " . get_class($task));
+        }
     }
 
     /**

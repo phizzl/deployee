@@ -1,14 +1,14 @@
 <?php
 
+namespace Deployee\Plugins\BackwardsCompatibility\Dependency;
 
-namespace Deployee\Plugins\BackwardsCompatibility;
 
+use Deployee\Dependency\DependencyInjectionProviderInterface;
+use Deployee\Kernel\Locator;
 
-use Deployee\Kernel\Modules\Module;
-
-class BackwardsCompatibilityModule extends Module
+class BackwardsCompatibilityDependencyInjectionProvider implements DependencyInjectionProviderInterface
 {
-    public function onLoad()
+    public function injectDependencies(Locator $locator)
     {
         if(!class_exists('\Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition')){
             class_alias(

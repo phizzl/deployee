@@ -15,10 +15,13 @@ class DeploymentDependencyProvider implements DependencyProviderInterface
     {
         $locator->Dependency()->getFacade()->setDependency(
             DeploymentModule::DEPLOYMENT_DEFINITION_FINDER_DEPENDENCY, function() use($locator){
-                $searchPath = $locator->Config()->getFacade()->get('definition_path', 'deployments');
-                return new DeploymentDefinitionClassMapFinder($searchPath);
+                return $locator->Deployment()->getFactory()->createDefinitionFinder();
             }
         );
+
+        $locator->Dependency()->getFacade()->setDependency(DeploymentModule::DEFINITION_HELPER_DEPENDENCY, function() use($locator){
+            return $locator->Deployment()->getFactory()->createDefinitionHelper();
+        });
     }
 
 }

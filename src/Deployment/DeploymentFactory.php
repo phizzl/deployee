@@ -7,6 +7,7 @@ namespace Deployee\Deployment;
 use Deployee\Deployment\Definitions\Deployments\DeploymentDefinitionInterface;
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
 use Deployee\Deployment\Finder\DeploymentDefinitionClassMapFinder;
+use Deployee\Deployment\Helper\TaskCreationHelper;
 use Deployee\Kernel\Modules\AbstractFactory;
 
 class DeploymentFactory extends AbstractFactory
@@ -31,10 +32,15 @@ class DeploymentFactory extends AbstractFactory
      * @param string $className
      * @return TaskDefinitionInterface
      */
-    public function createTaskDefinition($className)
+    public function createTaskDefinition($className, $arguments)
     {
+        $reflection = new \ReflectionClass($className);
+        $definition = $reflection->getConstructor() && $reflection->getConstructor()->getNumberOfParameters() > 0
+            ? $reflection->newInstanceArgs($arguments)
+            : new $className;
+
         /* @var TaskDefinitionInterface $definition */
-        if(!($definition = new $className) instanceof TaskDefinitionInterface){
+        if(!$definition instanceof TaskDefinitionInterface){
             throw new \RuntimeException("Invalid task definition class \"{$className}\"");
         }
 
@@ -48,6 +54,15 @@ class DeploymentFactory extends AbstractFactory
      */
     public function createDefinitionFinder()
     {
-        return $this->locator->Dependency()->getFacade()->getDependency(DeploymentModule::DEPLOYMENT_DEFINITION_FINDER_DEPENDENCY);
+        $searchPath = $this->locator->Config()->getFacade()->get('definition_path', 'deployments');
+        return new DeploymentDefinitionClassMapFinder($searchPath);
+    }
+
+    /**
+     * @return TaskCreationHelper
+     */
+    public function createDefinitionHelper()
+    {
+        return new TaskCreationHelper($this->locator);
     }
 }

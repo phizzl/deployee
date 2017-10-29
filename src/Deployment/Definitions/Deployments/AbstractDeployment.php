@@ -5,6 +5,8 @@ namespace Deployee\Deployment\Definitions\Deployments;
 
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionCollection;
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
+use Deployee\Deployment\DeploymentModule;
+use Deployee\Deployment\Helper\TaskCreationHelper;
 use Deployee\Kernel\Locator;
 
 abstract class AbstractDeployment implements DeploymentDefinitionInterface
@@ -51,4 +53,15 @@ abstract class AbstractDeployment implements DeploymentDefinitionInterface
         $this->locator = $locator;
     }
 
+    /**
+     * @param string $name
+     * @param $arguments
+     * @return TaskDefinitionInterface
+     */
+    public function __call($name, $arguments)
+    {
+        /* @var TaskCreationHelper $helper */
+        $helper = $this->locator->Dependency()->getFacade()->getDependency(DeploymentModule::DEFINITION_HELPER_DEPENDENCY);
+        return $helper->createTask($name, $arguments);
+    }
 }

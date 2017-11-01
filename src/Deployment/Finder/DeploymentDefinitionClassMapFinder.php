@@ -34,7 +34,7 @@ class DeploymentDefinitionClassMapFinder
     {
         $this->finder
             ->files()
-            ->name("DeployDefinition_*.php")
+            ->name('/^(DeployDefinition\_|Deploy\_).*\.php$/')
             ->depth("<= 1")
             ->sort(function(\SplFileInfo $a, \SplFileInfo $b){
                 return strcmp($a->getBasename(), $b->getBasename());

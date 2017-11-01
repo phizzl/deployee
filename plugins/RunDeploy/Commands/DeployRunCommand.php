@@ -7,7 +7,11 @@ use Deployee\Application\Business\Command;
 use Deployee\Deployment\Definitions\Deployments\DeploymentDefinitionInterface;
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
 use Deployee\Plugins\RunDeploy\Dispatcher\DispatcherFinder;
+use Deployee\Plugins\RunDeploy\Dispatcher\DispatchResult;
+use Deployee\Plugins\RunDeploy\Dispatcher\DispatchResultInterface;
 use Deployee\Plugins\RunDeploy\Events\FindExecutableDefinitionsEvent;
+use Deployee\Plugins\RunDeploy\Events\PostDispatchTaskEvent;
+use Deployee\Plugins\RunDeploy\Events\PreDispatchTaskEvent;
 use Deployee\Plugins\RunDeploy\Module;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,7 +38,7 @@ class DeployRunCommand extends Command
         foreach($definitions as $className){
             $output->writeln(sprintf("Execute definition %s", $className), OutputInterface::VERBOSITY_VERBOSE);
             $deployment = $this->locator->Deployment()->getFactory()->createDeploymentDefinition($className);
-            $this->runDepoymentDefinition($deployment, $output);
+            $this->runDeploymentDefinition($deployment, $output);
             $output->writeln(sprintf("Finished executing definition %s", $className), OutputInterface::VERBOSITY_DEBUG);
         }
     }
@@ -43,7 +47,7 @@ class DeployRunCommand extends Command
      * @param DeploymentDefinitionInterface $deployment
      * @param OutputInterface $output
      */
-    private function runDepoymentDefinition(DeploymentDefinitionInterface $deployment, OutputInterface $output)
+    private function runDeploymentDefinition(DeploymentDefinitionInterface $deployment, OutputInterface $output)
     {
         $deployment->define();
 
@@ -57,12 +61,36 @@ class DeployRunCommand extends Command
     /**
      * @param TaskDefinitionInterface $taskDefinition
      * @param OutputInterface $output
+     * @return DispatchResultInterface
      */
     private function runTaskDefinition(TaskDefinitionInterface $taskDefinition, OutputInterface $output){
+        $event = new PreDispatchTaskEvent($taskDefinition);
+        $this->locator->Events()->dispatchEvent(PreDispatchTaskEvent::class, $event);
+
+        if($event->isPreventDispatch() === true){
+            return new DispatchResult(0, 'Skipped execution of task definition', '');
+        }
+
         /* @var DispatcherFinder $finder */
         $finder = $this->locator->Dependency()->getDependency(Module::DISPATCHER_FINDER_DEPENDENCY);
         $dispatcher = $finder->findTaskDispatcherByDefinition($taskDefinition);
         $result = $dispatcher->dispatch($taskDefinition);
+
+        if($result->getExitCode() > 0){
+            $output->write(
+                sprintf(
+                    "Error while executing task. Exit code was %s.\n" .
+                    $result->getErrorOutput(),
+                    $result->getExitCode()
+                )
+            );
+        }
+
+        $output->writeln($result->getOutput(), OutputInterface::VERBOSITY_VERBOSE);
+
+        $this->locator->Events()->dispatchEvent(PostDispatchTaskEvent::class, new PostDispatchTaskEvent($taskDefinition, $result));
+
+        return $result;
     }
 
     /**

@@ -4,7 +4,7 @@ namespace Deployee\Application;
 
 use Deployee\Kernel\Modules\AbstractFacade;
 
-class ApplicationFacade extends AbstractFacade
+class Facade extends AbstractFacade
 {
     public function runApplication()
     {

@@ -3,9 +3,8 @@
 namespace Deployee\Application;
 
 
-use Deployee\Kernel\Modules\Module;
 
-class ApplicationModule extends Module
+class Module extends \Deployee\Kernel\Modules\Module
 {
     const APPLICATION_DEPENDENCY = "module.application";
 

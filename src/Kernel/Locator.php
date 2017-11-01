@@ -97,25 +97,53 @@ class Locator
             throw new \RuntimeException("Invalid module class {$moduleClassName}");
         }
 
-        $factoryClasses = ["{$name}\\{$name}Factory", "{$name}\\Factory"];
-        $factoryClassName = $this->locateClassName($factoryClasses, 'Deployee\Kernel\Modules\FactoryInterface');
-        $facadeClases = ["{$name}\\{$name}Facade", "{$name}\\Facade"];
-        $facadeClassName = $this->locateClassName($facadeClases, 'Deployee\Kernel\Modules\FacadeInterface');
 
-        /* @var FactoryInterface $factory */
-        $factory = new $factoryClassName;
-        $factory->setLocator($this);
+        $facade = $this->createFacade($name);
+        if($factory = $this->createFactory($name)){
+            $facade->setFactory($factory);
+            $module->setFactory($factory);
+        }
 
-        /* @var FacadeInterface $facade */
-        $facade = new $facadeClassName;
-        $facade->setFactory($factory);
-        $facade->setLocator($this);
-
-        $module->setFactory($factory);
         $module->setFacade($facade);
         $module->setLocator($this);
 
         return $module;
+    }
+
+    /**
+     * @param string $name
+     * @return FacadeInterface
+     */
+    private function createFacade($name)
+    {
+        $facadeClases = ["{$name}\\{$name}Facade", "{$name}\\Facade"];
+        $facadeClassName = $this->locateClassName($facadeClases, 'Deployee\Kernel\Modules\FacadeInterface');
+
+        /* @var FacadeInterface $facade */
+        $facade = new $facadeClassName;
+        $facade->setLocator($this);
+
+        return $facade;
+    }
+
+    /**
+     * @param string $name
+     * @return FactoryInterface|null
+     */
+    private function createFactory($name)
+    {
+        $factory = null;
+        try {
+            $factoryClasses = ["{$name}\\{$name}Factory", "{$name}\\Factory"];
+            $factoryClassName = $this->locateClassName($factoryClasses, 'Deployee\Kernel\Modules\FactoryInterface');
+
+            /* @var FactoryInterface $factory */
+            $factory = new $factoryClassName;
+            $factory->setLocator($this);
+        }
+        catch(ClassNotFoundException $e) {}
+
+        return $factory;
     }
 
     /**

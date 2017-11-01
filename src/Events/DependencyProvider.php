@@ -1,14 +1,14 @@
 <?php
 
-namespace Deployee\Events\Dependency;
+namespace Deployee\Events;
 
 
 use Deployee\Dependency\DependencyProviderInterface;
-use Deployee\Events\EventsModule;
+use Deployee\Events\Module;
 use Deployee\Kernel\Locator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class EventsDependencyProvider implements DependencyProviderInterface
+class DependencyProvider implements DependencyProviderInterface
 {
     /**
      * @param Locator $locator
@@ -18,7 +18,7 @@ class EventsDependencyProvider implements DependencyProviderInterface
         $locator
             ->Dependency()
             ->getFacade()
-            ->setDependency(EventsModule::EVENT_DISPATCHER_DEPENDENCY, function(){
+            ->setDependency(Module::EVENT_DISPATCHER_DEPENDENCY, function(){
                 return new EventDispatcher();
             });
     }

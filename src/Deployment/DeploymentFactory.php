@@ -61,7 +61,7 @@ class DeploymentFactory extends AbstractFactory
     /**
      * @return TaskCreationHelper
      */
-    public function createDefinitionHelper()
+    public function createTaskCreationHelper()
     {
         return new TaskCreationHelper($this->locator);
     }

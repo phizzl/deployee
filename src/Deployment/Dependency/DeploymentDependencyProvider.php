@@ -19,8 +19,8 @@ class DeploymentDependencyProvider implements DependencyProviderInterface
             }
         );
 
-        $locator->Dependency()->getFacade()->setDependency(DeploymentModule::DEFINITION_HELPER_DEPENDENCY, function() use($locator){
-            return $locator->Deployment()->getFactory()->createDefinitionHelper();
+        $locator->Dependency()->getFacade()->setDependency(DeploymentModule::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY, function() use($locator){
+            return $locator->Deployment()->getFactory()->createTaskCreationHelper();
         });
     }
 

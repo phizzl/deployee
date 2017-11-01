@@ -5,7 +5,7 @@ namespace Deployee\Config;
 
 use Deployee\Kernel\Modules\AbstractFactory;
 
-class ConfigFactory extends AbstractFactory
+class Factory extends AbstractFactory
 {
     /**
      * @param $params

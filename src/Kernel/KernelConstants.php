@@ -4,7 +4,7 @@
 namespace Deployee\Kernel;
 
 
-abstract class KernelConstraints
+abstract class KernelConstants
 {
     const LOCATOR = "Locator";
 

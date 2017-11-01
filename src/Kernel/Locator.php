@@ -100,7 +100,6 @@ class Locator
 
         $facade = $this->createFacade($name);
         if($factory = $this->createFactory($name)){
-            $facade->setFactory($factory);
             $module->setFactory($factory);
         }
 

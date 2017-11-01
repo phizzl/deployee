@@ -8,11 +8,6 @@ use Deployee\Kernel\Locator;
 abstract class AbstractFacade implements FacadeInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    protected $factory;
-
-    /**
      * @var Locator
      */
     protected $locator;
@@ -24,13 +19,4 @@ abstract class AbstractFacade implements FacadeInterface
     {
         $this->locator = $locator;
     }
-
-    /**
-     * @param FactoryInterface $factory
-     */
-    public function setFactory(FactoryInterface $factory)
-    {
-        $this->factory = $factory;
-    }
-
 }

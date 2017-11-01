@@ -100,16 +100,18 @@ class DependencyModule extends Module
             }
 
             $basename = $item->getBasename();
-            $expectedClass = "{$namespace}{$basename}\\{$basename}{$suffix}";
-            if(class_exists($expectedClass)){
-                $found[] = $expectedClass;
-                continue;
-            }
+            $expectedClassNames = [
+                "{$namespace}{$basename}\\{$basename}{$suffix}",
+                "{$namespace}{$basename}\\{$suffix}",
+                "{$namespace}{$basename}\\Dependency\\{$basename}{$suffix}",
+                "{$namespace}{$basename}\\Dependency\\{$suffix}"
+            ];
 
-            $expectedClass = "{$namespace}{$basename}\\Dependency\\{$basename}{$suffix}";
-            if(class_exists($expectedClass)){
-                $found[] = $expectedClass;
-                continue;
+            foreach($expectedClassNames as $expectedClassName){
+                if(class_exists($expectedClassName)){
+                    $found[] = $expectedClassName;
+                    continue;
+                }
             }
         }
 

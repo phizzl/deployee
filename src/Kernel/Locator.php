@@ -86,7 +86,7 @@ class Locator
     {
         try {
             $moduleClasses = ["{$name}\\{$name}Module", "{$name}\\Module"];
-            $moduleClassName = $this->locateClassName($moduleClasses);
+            $moduleClassName = $this->locateClassName($moduleClasses, 'Deployee\Kernel\Modules\ModuleInterface');
         }
         catch (ClassNotFoundException $e){
             $moduleClassName = Module::class;
@@ -98,9 +98,9 @@ class Locator
         }
 
         $factoryClasses = ["{$name}\\{$name}Factory", "{$name}\\Factory"];
-        $factoryClassName = $this->locateClassName($factoryClasses);
+        $factoryClassName = $this->locateClassName($factoryClasses, 'Deployee\Kernel\Modules\FactoryInterface');
         $facadeClases = ["{$name}\\{$name}Facade", "{$name}\\Facade"];
-        $facadeClassName = $this->locateClassName($facadeClases);
+        $facadeClassName = $this->locateClassName($facadeClases, 'Deployee\Kernel\Modules\FacadeInterface');
 
         /* @var FactoryInterface $factory */
         $factory = new $factoryClassName;
@@ -123,11 +123,12 @@ class Locator
      * @return string
      * @throws ClassNotFoundException
      */
-    private function locateClassName(array $classNames)
+    private function locateClassName(array $classNames, $mustBeSubClassOf = '')
     {
         foreach($this->namespaces as $namespace){
             foreach($classNames as $className) {
-                if (class_exists($namespace . $className)) {
+                if (class_exists($namespace . $className)
+                    && ($mustBeSubClassOf === '' || is_subclass_of($namespace . $className, $mustBeSubClassOf))) {
                     return $namespace . $className;
                 }
             }

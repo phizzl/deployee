@@ -37,7 +37,9 @@ class DeploymentDefinitionClassMapFinder
             ->name('/^(DeployDefinition\_|Deploy\_).*\.php$/')
             ->depth("<= 1")
             ->sort(function(\SplFileInfo $a, \SplFileInfo $b){
-                return strcmp($a->getBasename(), $b->getBasename());
+                $sortNameA = substr($a->getBasename(), strpos($a->getBasename(), '_')+1);
+                $sortNameB = substr($b->getBasename(), strpos($b->getBasename(), '_')+1);
+                return strcmp($sortNameA, $sortNameB);
             })
             ->in([$this->basepath]);
 

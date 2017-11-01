@@ -4,7 +4,7 @@
  */
 
 use Composer\Autoload\ClassLoader;
-use Deployee\ClassLoader\ClassLoaderModule;
+use Deployee\ClassLoader\Module;
 use Deployee\Kernel\DependencyProviderContainer;
 use Deployee\Kernel\KernelConstraints;
 use Deployee\Kernel\Locator;
@@ -33,7 +33,7 @@ $namespaces = array_reverse(array_keys($loader->getPrefixesPsr4()));
 $dependencyProviderContainer = new DependencyProviderContainer();
 $locator = new Locator($dependencyProviderContainer, $namespaces);
 
-$dependencyProviderContainer[ClassLoaderModule::CLASS_LOADER_CONTAINER_ID] = $loader;
+$dependencyProviderContainer[Module::CLASS_LOADER_CONTAINER_ID] = $loader;
 $dependencyProviderContainer[KernelConstraints::LOCATOR] = $locator;
 
 return $locator;

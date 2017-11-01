@@ -4,7 +4,7 @@
 namespace Deployee\Dependency;
 
 
-use Deployee\ClassLoader\ClassLoaderFacade;
+use Deployee\ClassLoader\Facade;
 use Deployee\Kernel\Modules\Module;
 
 class DependencyModule extends Module
@@ -50,7 +50,7 @@ class DependencyModule extends Module
      */
     private function locateProviderClasses()
     {
-        /* @var ClassLoaderFacade $classLoaderFacade */
+        /* @var Facade $classLoaderFacade */
         $classLoaderFacade = $this->getLocator()->ClassLoader()->getFacade();
         $dependencyProvider = [];
         $dependencyInjectionProvider = [];

@@ -2,10 +2,7 @@
 
 namespace Deployee\ClassLoader;
 
-
-use Deployee\Kernel\Modules\Module;
-
-class ClassLoaderModule extends Module
+class Module extends \Deployee\Kernel\Modules\Module
 {
     const CLASS_LOADER_CONTAINER_ID = "classloader";
 }

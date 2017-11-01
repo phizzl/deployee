@@ -6,7 +6,7 @@ namespace Deployee\ClassLoader;
 
 use Deployee\Kernel\Modules\AbstractFacade;
 
-class ClassLoaderFacade extends AbstractFacade
+class Facade extends AbstractFacade
 {
     /**
      * @return array

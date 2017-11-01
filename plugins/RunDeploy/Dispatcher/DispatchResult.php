@@ -1,6 +1,6 @@
 <?php
 
-namespace Deployee\Deployment\Definitions\Dispatcher;
+namespace Deployee\Plugins\RunDeploy\Dispatcher;
 
 
 class DispatchResult implements DispatchResultInterface

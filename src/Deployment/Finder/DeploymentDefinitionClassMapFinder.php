@@ -45,10 +45,10 @@ class DeploymentDefinitionClassMapFinder
 
         $classMap = [];
         foreach($this->finder as $file){
-            $filename = basename($file->getRealPath());
-            $classname = substr($filename, 0, strrpos($filename, '.'));
+            $filename = $file->getBasename();
+            $className = substr($filename, 0, strrpos($filename, '.'));
 
-            $classMap[$classname] = $file->getRealPath();
+            $classMap[$className] = $file->getRealPath();
         }
 
         return $classMap;

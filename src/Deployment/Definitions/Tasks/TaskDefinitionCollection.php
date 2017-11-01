@@ -29,7 +29,7 @@ class TaskDefinitionCollection implements TaskDefinitionCollectionInterface
     /**
      * @return array
      */
-    public function getTaskDefinitions()
+    public function toArray()
     {
         return $this->tasks;
     }

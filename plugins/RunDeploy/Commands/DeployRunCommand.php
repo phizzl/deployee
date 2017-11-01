@@ -46,7 +46,7 @@ class DeployRunCommand extends Command
         $deployment->define();
 
         /* @var TaskDefinitionInterface $task */
-        foreach($deployment->getTasks()->getTasks() as $task){
+        foreach($deployment->getTaskDefinitions()->toArray() as $task){
             $output->writeln("Executing " . get_class($task));
         }
     }

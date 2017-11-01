@@ -5,18 +5,18 @@ namespace Deployee\Deployment\Definitions\Deployments;
 
 
 use Deployee\Deployment\Definitions\DefinitionInterface;
+use Deployee\Deployment\Definitions\Tasks\TaskDefinitionCollectionInterface;
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
-use Deployee\Tasks\TaskCollectionInterface;
 
 interface DeploymentDefinitionInterface extends DefinitionInterface
 {
     /**
      * @param TaskDefinitionInterface $task
      */
-    public function addTask(TaskDefinitionInterface $task);
+    public function addTaskDefinition(TaskDefinitionInterface $task);
 
     /**
-     * @return TaskCollectionInterface
+     * @return TaskDefinitionCollectionInterface
      */
-    public function getTasks();
+    public function getTaskDefinitions();
 }

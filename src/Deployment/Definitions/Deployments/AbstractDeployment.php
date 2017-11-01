@@ -32,7 +32,7 @@ abstract class AbstractDeployment implements DeploymentDefinitionInterface
     /**
      * @param TaskDefinitionInterface $task
      */
-    public function addTask(TaskDefinitionInterface $task)
+    public function addTaskDefinition(TaskDefinitionInterface $task)
     {
         $this->tasks->addTaskDefinition($task);
     }
@@ -40,7 +40,7 @@ abstract class AbstractDeployment implements DeploymentDefinitionInterface
     /**
      * @return TaskDefinitionCollection
      */
-    public function getTasks()
+    public function getTaskDefinitions()
     {
         return $this->tasks;
     }
@@ -64,4 +64,6 @@ abstract class AbstractDeployment implements DeploymentDefinitionInterface
         $helper = $this->locator->Dependency()->getFacade()->getDependency(Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY);
         return $helper->createTask($name, $arguments);
     }
+
+
 }

@@ -12,5 +12,5 @@ interface TaskDefinitionCollectionInterface
     /**
      * @return array
      */
-    public function getTaskDefinitions();
+    public function toArray();
 }

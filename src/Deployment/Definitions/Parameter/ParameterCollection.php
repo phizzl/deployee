@@ -12,10 +12,11 @@ class ParameterCollection implements ParameterCollectionInterface
 
     /**
      * ParameterCollection constructor.
+     * @param array $values
      */
-    public function __construct()
+    public function __construct(array $values = [])
     {
-        $this->values = [];
+        $this->values = $values;
     }
 
     /**

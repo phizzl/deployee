@@ -5,8 +5,6 @@ namespace Deployee\Deployment;
 
 
 use Deployee\Dependency\DependencyProviderInterface;
-use Deployee\Deployment\Module;
-use Deployee\Deployment\Finder\DeploymentDefinitionClassMapFinder;
 use Deployee\Kernel\Locator;
 
 class DependencyProvider implements DependencyProviderInterface

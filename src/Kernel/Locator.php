@@ -133,6 +133,6 @@ class Locator
             }
         }
 
-        throw new ClassNotFoundException("Could not locate \"{$className}\"");
+        throw new ClassNotFoundException("Could not locate \"".implode(', ', $classNames)."\"");
     }
 }

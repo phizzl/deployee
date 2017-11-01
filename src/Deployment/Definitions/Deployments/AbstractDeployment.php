@@ -62,7 +62,9 @@ abstract class AbstractDeployment implements DeploymentDefinitionInterface
     {
         /* @var TaskCreationHelper $helper */
         $helper = $this->locator->Dependency()->getFacade()->getDependency(Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY);
-        return $helper->createTask($name, $arguments);
+        $task = $helper->createTaskDefinition($name, $arguments);
+        $this->addTaskDefinition($task);
+        return $task;
     }
 
 

@@ -45,10 +45,19 @@ class DeployRunCommand extends Command
     {
         $deployment->define();
 
-        /* @var TaskDefinitionInterface $task */
-        foreach($deployment->getTaskDefinitions()->toArray() as $task){
-            $output->writeln("Executing " . get_class($task));
+        /* @var TaskDefinitionInterface $taskDefinition */
+        foreach($deployment->getTaskDefinitions()->toArray() as $taskDefinition){
+            $output->writeln("Executing " . get_class($deployment) . ' -> ' . get_class($taskDefinition), OutputInterface::VERBOSITY_DEBUG);
+            $this->runTaskDefinition($taskDefinition, $output);
         }
+    }
+
+    /**
+     * @param TaskDefinitionInterface $taskDefinition
+     * @param OutputInterface $output
+     */
+    private function runTaskDefinition(TaskDefinitionInterface $taskDefinition, OutputInterface $output){
+
     }
 
     /**

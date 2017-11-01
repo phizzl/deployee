@@ -42,7 +42,7 @@ class TaskCreationHelper
      * @param $arguments
      * @return TaskDefinitionInterface
      */
-    public function createTask($aliasName, $arguments)
+    public function createTaskDefinition($aliasName, $arguments)
     {
         $className = isset($this->alias[$aliasName]) ? $this->alias[$aliasName] : $aliasName;
         return $this->locator->Deployment()->getFactory()->createTaskDefinition($className, $arguments);

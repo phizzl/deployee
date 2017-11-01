@@ -4,8 +4,9 @@ namespace Deployee\Plugins\RunDeploy\Dispatcher;
 
 
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
+use Deployee\Kernel\LocatorAwareInterface;
 
-interface DefinitionDispatcherInterface
+interface TaskDefinitionDispatcherInterface extends LocatorAwareInterface
 {
     /**
      * @param TaskDefinitionInterface $taskDefinition

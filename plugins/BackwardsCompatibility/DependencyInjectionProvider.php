@@ -1,12 +1,12 @@
 <?php
 
-namespace Deployee\Plugins\BackwardsCompatibility\Dependency;
+namespace Deployee\Plugins\BackwardsCompatibility;
 
 
 use Deployee\Dependency\DependencyInjectionProviderInterface;
 use Deployee\Kernel\Locator;
 
-class BackwardsCompatibilityDependencyInjectionProvider implements DependencyInjectionProviderInterface
+class DependencyInjectionProvider implements DependencyInjectionProviderInterface
 {
     public function injectDependencies(Locator $locator)
     {

@@ -6,7 +6,9 @@ namespace Deployee\Plugins\RunDeploy\Commands;
 use Deployee\Application\Business\Command;
 use Deployee\Deployment\Definitions\Deployments\DeploymentDefinitionInterface;
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
+use Deployee\Plugins\RunDeploy\Dispatcher\DispatcherFinder;
 use Deployee\Plugins\RunDeploy\Events\FindExecutableDefinitionsEvent;
+use Deployee\Plugins\RunDeploy\Module;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -57,7 +59,10 @@ class DeployRunCommand extends Command
      * @param OutputInterface $output
      */
     private function runTaskDefinition(TaskDefinitionInterface $taskDefinition, OutputInterface $output){
-
+        /* @var DispatcherFinder $finder */
+        $finder = $this->locator->Dependency()->getDependency(Module::DISPATCHER_FINDER_DEPENDENCY);
+        $dispatcher = $finder->findTaskDispatcherByDefinition($taskDefinition);
+        $result = $dispatcher->dispatch($taskDefinition);
     }
 
     /**

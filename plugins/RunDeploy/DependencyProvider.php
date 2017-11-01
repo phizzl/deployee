@@ -13,11 +13,11 @@ class DependencyProvider implements DependencyProviderInterface
      */
     public function defineDependencies(Locator $locator)
     {
-        $locator->Dependency()->defineDependency(Module::DISPATCHER_COLLECTION_DEPENDENCY, function() use($locator){
+        $locator->Dependency()->setDependency(Module::DISPATCHER_COLLECTION_DEPENDENCY, function() use($locator){
             return $locator->RunDeploy()->getFactory()->createDispatcherCollection();
         });
 
-        $locator->Dependency()->defineDependency(Module::DISPATCHER_FINDER_DEPENDENCY, function() use($locator){
+        $locator->Dependency()->setDependency(Module::DISPATCHER_FINDER_DEPENDENCY, function() use($locator){
             return $locator->RunDeploy()->getFactory()->createDispatcherFinder();
         });
     }

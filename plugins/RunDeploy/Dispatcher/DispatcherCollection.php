@@ -23,7 +23,7 @@ class DispatcherCollection
     /**
      * @param TaskDispatcherInterface $dispatcher
      */
-    public function addDispatcher(TaskDispatcherInterface $dispatcher)
+    public function addDispatcher(TaskDefinitionDispatcherInterface $dispatcher)
     {
         $this->dispatcher[] = $dispatcher;
     }

@@ -10,7 +10,7 @@ interface TaskDefinitionDispatcherInterface extends LocatorAwareInterface
 {
     /**
      * @param TaskDefinitionInterface $taskDefinition
-     * @return string
+     * @return bool
      */
     public function canDispatchTaskDefinition(TaskDefinitionInterface $taskDefinition);
 

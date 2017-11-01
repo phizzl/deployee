@@ -30,9 +30,10 @@ class DispatcherFinder
      */
     public function findTaskDispatcherByDefinition(TaskDefinitionInterface $taskDefinition)
     {
+        $collection = $this->locator->Dependency()->getDependency(Module::DISPATCHER_COLLECTION_DEPENDENCY)->toArray();
         /* @var TaskDefinitionDispatcherInterface $dispatcher */
-        foreach($this->locator->Dependency()->getDependency(Module::DISPATCHER_COLLECTION_DEPENDENCY) as $dispatcher){
-            if($dispatcher->canDispatchTaskDefinition($taskDefinition)){
+        foreach($collection as $dispatcher){
+            if($dispatcher->canDispatchTaskDefinition($taskDefinition) === true){
                 return $dispatcher;
             }
         }

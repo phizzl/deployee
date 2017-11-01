@@ -3,9 +3,7 @@
 namespace Deployee\Deployment;
 
 
-use Deployee\Kernel\Modules\Module;
-
-class DeploymentModule extends Module
+class Module extends \Deployee\Kernel\Modules\Module
 {
     const DEPLOYMENT_DEFINITION_FINDER_DEPENDENCY = "deployment.definitionfinder";
 

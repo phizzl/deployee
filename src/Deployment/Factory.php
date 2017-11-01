@@ -10,7 +10,7 @@ use Deployee\Deployment\Finder\DeploymentDefinitionClassMapFinder;
 use Deployee\Deployment\Helper\TaskCreationHelper;
 use Deployee\Kernel\Modules\AbstractFactory;
 
-class DeploymentFactory extends AbstractFactory
+class Factory extends AbstractFactory
 {
     /**
      * @param string $className

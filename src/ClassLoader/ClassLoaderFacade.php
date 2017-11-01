@@ -9,16 +9,11 @@ use Deployee\Kernel\Modules\AbstractFacade;
 class ClassLoaderFacade extends AbstractFacade
 {
     /**
-     * @var ClassLoaderFactory
-     */
-    protected $factory;
-
-    /**
      * @return array
      */
     public function getPrefixesPsr4()
     {
-        return $this->factory->createClassLoader()->getPrefixesPsr4();
+        return $this->locator->ClassLoader()->getFactory()->createClassLoader()->getPrefixesPsr4();
     }
 
     /**
@@ -34,6 +29,6 @@ class ClassLoaderFacade extends AbstractFacade
      */
     public function addClassMap(array $classMap)
     {
-        $this->factory->createClassLoader()->addClassMap($classMap);
+        $this->locator->ClassLoader()->getFactory()->createClassLoader()->addClassMap($classMap);
     }
 }

@@ -9,17 +9,12 @@ use Deployee\Kernel\Modules\AbstractFacade;
 class DependencyFacade extends AbstractFacade
 {
     /**
-     * @var DependencyFactory
-     */
-    protected $factory;
-
-    /**
      * @param string $id
      * @return mixed
      */
     public function getDependency($id)
     {
-        return $this->factory->createDependencyProviderContainer()->getDependency($id);
+        return $this->locator->Dependency()->getFactory()->createDependencyProviderContainer()->getDependency($id);
     }
 
     /**
@@ -29,7 +24,7 @@ class DependencyFacade extends AbstractFacade
      */
     public function setDependency($id, $value)
     {
-        return $this->factory->createDependencyProviderContainer()->setDependency($id, $value);
+        return $this->locator->Dependency()->getFactory()->createDependencyProviderContainer()->setDependency($id, $value);
     }
 
     /**
@@ -38,6 +33,6 @@ class DependencyFacade extends AbstractFacade
      */
     public function extendDependency($id, callable $callable)
     {
-        $this->factory->createDependencyProviderContainer()->extendDependency($id, $callable);
+        $this->locator->Dependency()->getFactory()->createDependencyProviderContainer()->extendDependency($id, $callable);
     }
 }

@@ -6,13 +6,8 @@ use Deployee\Kernel\Modules\AbstractFacade;
 
 class ApplicationFacade extends AbstractFacade
 {
-    /**
-     * @var ApplicationFactory
-     */
-    protected $factory;
-
     public function runApplication()
     {
-        $this->factory->createApplication()->run();
+        $this->locator->Application()->getFactory()->createApplication()->run();
     }
 }

@@ -10,11 +10,6 @@ use Symfony\Component\Yaml\Yaml;
 class ConfigFacade extends AbstractFacade
 {
     /**
-     * @var ConfigFactory
-     */
-    protected $factory;
-
-    /**
      * @var Config
      */
     private $config;
@@ -40,7 +35,7 @@ class ConfigFacade extends AbstractFacade
                 throw new \RuntimeException("Could not parse config file \"{$configFile}\"");
             }
 
-            $this->config = $this->factory->createConfig($params);
+            $this->config = $this->locator->Config()->getFactory()->createConfig($params);
         }
 
         return $this->config;

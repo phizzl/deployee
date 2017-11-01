@@ -12,11 +12,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class EventsFacade extends AbstractFacade
 {
     /**
-     * @var EventsFactory
-     */
-    protected $factory;
-
-    /**
      * @var EventDispatcher
      */
     private $dispatcher;
@@ -49,7 +44,7 @@ class EventsFacade extends AbstractFacade
     private function getEventDispatcher()
     {
         return $this->dispatcher === null
-            ? $this->dispatcher = $this->factory->createEventDispatcher()
+            ? $this->dispatcher = $this->locator->Events()->getFactory()->createEventDispatcher()
             : $this->dispatcher;
     }
 }

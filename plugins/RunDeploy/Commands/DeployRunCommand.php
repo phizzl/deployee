@@ -86,7 +86,9 @@ class DeployRunCommand extends Command
             );
         }
 
-        $output->writeln($result->getOutput(), OutputInterface::VERBOSITY_VERBOSE);
+        if($result->getOutput()) {
+            $output->writeln($result->getOutput(), OutputInterface::VERBOSITY_VERBOSE);
+        }
 
         $this->locator->Events()->dispatchEvent(PostDispatchTaskEvent::class, new PostDispatchTaskEvent($taskDefinition, $result));
 

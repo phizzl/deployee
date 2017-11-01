@@ -6,7 +6,7 @@ namespace Deployee\Dependency;
 
 use Deployee\Kernel\Modules\AbstractFactory;
 
-class DependencyFactory extends AbstractFactory
+class Factory extends AbstractFactory
 {
     /**
      * @return \Deployee\Kernel\DependencyProviderContainerInterface

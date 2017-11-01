@@ -6,7 +6,7 @@ namespace Deployee\Dependency;
 
 use Deployee\Kernel\Modules\AbstractFacade;
 
-class DependencyFacade extends AbstractFacade
+class Facade extends AbstractFacade
 {
     /**
      * @param string $id

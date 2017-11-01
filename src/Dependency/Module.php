@@ -3,11 +3,9 @@
 
 namespace Deployee\Dependency;
 
-
 use Deployee\ClassLoader\Facade;
-use Deployee\Kernel\Modules\Module;
 
-class DependencyModule extends Module
+class Module extends \Deployee\Kernel\Modules\Module
 {
     /**
      * @inheritdoc

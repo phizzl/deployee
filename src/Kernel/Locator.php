@@ -85,7 +85,8 @@ class Locator
     private function createModule($name)
     {
         try {
-            $moduleClassName = $this->locateClassName("{$name}\\{$name}Module");
+            $moduleClasses = ["{$name}\\{$name}Module", "{$name}\\Module"];
+            $moduleClassName = $this->locateClassName($moduleClasses);
         }
         catch (ClassNotFoundException $e){
             $moduleClassName = Module::class;
@@ -96,8 +97,10 @@ class Locator
             throw new \RuntimeException("Invalid module class {$moduleClassName}");
         }
 
-        $factoryClassName = $this->locateClassName("{$name}\\{$name}Factory");
-        $facadeClassName = $this->locateClassName("{$name}\\{$name}Facade");
+        $factoryClasses = ["{$name}\\{$name}Factory", "{$name}\\Factory"];
+        $factoryClassName = $this->locateClassName($factoryClasses);
+        $facadeClases = ["{$name}\\{$name}Facade", "{$name}\\Facade"];
+        $facadeClassName = $this->locateClassName($facadeClases);
 
         /* @var FactoryInterface $factory */
         $factory = new $factoryClassName;
@@ -116,15 +119,17 @@ class Locator
     }
 
     /**
-     * @param string $className
+     * @param array $classNames
      * @return string
      * @throws ClassNotFoundException
      */
-    private function locateClassName($className)
+    private function locateClassName(array $classNames)
     {
         foreach($this->namespaces as $namespace){
-            if(class_exists($namespace . $className)){
-                return $namespace . $className;
+            foreach($classNames as $className) {
+                if (class_exists($namespace . $className)) {
+                    return $namespace . $className;
+                }
             }
         }
 

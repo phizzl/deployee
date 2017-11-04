@@ -79,9 +79,10 @@ class DeployRunCommand extends Command
         if($result->getExitCode() > 0){
             $output->write(
                 sprintf(
-                    "Error while executing task. Exit code was %s.\n" .
-                    $result->getErrorOutput(),
-                    $result->getExitCode()
+                    "Error while executing task (%s)" . PHP_EOL . "Output: %s" . PHP_EOL . "Error output: %s",
+                    $result->getExitCode(),
+                    $result->getOutput(),
+                    $result->getErrorOutput()
                 )
             );
         }

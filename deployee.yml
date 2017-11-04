@@ -1,1 +1,7 @@
 definition_path: deployments
+mysql.host: ~
+mysql.port: ~
+mysql.username: ~
+mysql.password: ~
+mysql.database: ~
+mysql.bin: ~

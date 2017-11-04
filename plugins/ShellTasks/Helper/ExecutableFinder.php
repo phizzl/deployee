@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Deployee\Plugins\ShellTasks\Services;
+namespace Deployee\Plugins\ShellTasks\Helper;
 
 
 use Phizzl\PhpShellCommand\ShellCommand;
 
-class ExecutableFinderService
+class ExecutableFinder
 {
     /**
      * @var array

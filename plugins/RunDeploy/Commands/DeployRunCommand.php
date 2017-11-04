@@ -11,7 +11,9 @@ use Deployee\Plugins\RunDeploy\Dispatcher\DispatchResult;
 use Deployee\Plugins\RunDeploy\Dispatcher\DispatchResultInterface;
 use Deployee\Plugins\RunDeploy\Events\FindExecutableDefinitionsEvent;
 use Deployee\Plugins\RunDeploy\Events\PostDispatchTaskEvent;
+use Deployee\Plugins\RunDeploy\Events\PostRunDeploy;
 use Deployee\Plugins\RunDeploy\Events\PreDispatchTaskEvent;
+use Deployee\Plugins\RunDeploy\Events\PreRunDeploy;
 use Deployee\Plugins\RunDeploy\Module;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -33,8 +35,11 @@ class DeployRunCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->locator->Events()->dispatchEvent(PreRunDeploy::class, new PreRunDeploy());
+
         $definitions = $this->getExecutableDefinitions();
         $output->writeln(sprintf("Executing %s definitions", count($definitions)));
+        $success = true;
         foreach($definitions as $className){
             $output->writeln(sprintf("Execute definition %s", $className), OutputInterface::VERBOSITY_VERBOSE);
             $deployment = $this->locator->Deployment()->getFactory()->createDeploymentDefinition($className);
@@ -43,9 +48,12 @@ class DeployRunCommand extends Command
             }
             else{
                 $output->writeln(sprintf("Error while executing definition %s", $className));
+                $success = false;
                 break;
             }
         }
+
+        $this->locator->Events()->dispatchEvent(PostRunDeploy::class, new PostRunDeploy($success));
     }
 
     /**

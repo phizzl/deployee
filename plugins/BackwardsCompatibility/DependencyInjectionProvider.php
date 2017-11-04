@@ -4,8 +4,6 @@ namespace Deployee\Plugins\BackwardsCompatibility;
 
 
 use Deployee\Dependency\DependencyInjectionProviderInterface;
-use Deployee\Deployment\Helper\TaskCreationHelper;
-use Deployee\Deployment\Module;
 use Deployee\Kernel\Locator;
 
 class DependencyInjectionProvider implements DependencyInjectionProviderInterface

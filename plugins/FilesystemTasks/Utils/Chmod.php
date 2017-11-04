@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Deployee\Plugins\DeployFilesystem\Utils;
+namespace Deployee\Plugins\FilesystemTasks\Utils;
 
 class Chmod
 {

@@ -26,7 +26,7 @@ class DispatchResult implements DispatchResultInterface
      * @param string $stdOutput
      * @param string $errOutput
      */
-    public function __construct($exitCode, $stdOutput, $errOutput)
+    public function __construct($exitCode, $stdOutput, $errOutput = '')
     {
         $this->exitCode = $exitCode;
         $this->stdOutput = $stdOutput;

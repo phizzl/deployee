@@ -38,8 +38,13 @@ class DeployRunCommand extends Command
         foreach($definitions as $className){
             $output->writeln(sprintf("Execute definition %s", $className), OutputInterface::VERBOSITY_VERBOSE);
             $deployment = $this->locator->Deployment()->getFactory()->createDeploymentDefinition($className);
-            $this->runDeploymentDefinition($deployment, $output);
-            $output->writeln(sprintf("Finished executing definition %s", $className), OutputInterface::VERBOSITY_DEBUG);
+            if($this->runDeploymentDefinition($deployment, $output) === true) {
+                $output->writeln(sprintf("Finished executing definition %s", $className), OutputInterface::VERBOSITY_DEBUG);
+            }
+            else{
+                $output->writeln(sprintf("Error while executing definition %s", $className));
+                break;
+            }
         }
     }
 
@@ -49,13 +54,21 @@ class DeployRunCommand extends Command
      */
     private function runDeploymentDefinition(DeploymentDefinitionInterface $deployment, OutputInterface $output)
     {
+        $return = true;
         $deployment->define();
 
         /* @var TaskDefinitionInterface $taskDefinition */
         foreach($deployment->getTaskDefinitions()->toArray() as $taskDefinition){
             $output->writeln("Executing " . get_class($deployment) . ' -> ' . get_class($taskDefinition), OutputInterface::VERBOSITY_DEBUG);
-            $this->runTaskDefinition($taskDefinition, $output);
+            $result = $this->runTaskDefinition($taskDefinition, $output);
+
+            if($result->getExitCode() > 0){
+                $return = false;
+                break;
+            }
         }
+
+        return $return;
     }
 
     /**

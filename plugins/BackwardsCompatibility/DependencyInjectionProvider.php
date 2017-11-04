@@ -21,11 +21,5 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
                 '\Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition'
             );
         }
-
-        $locator->Dependency()->extendDependency(Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY, function(TaskCreationHelper $helper){
-            $helper->addAlias('mysqlfile', 'Deployee\Plugins\MySqlTasks\Definitions\MySqlFileDefinition');
-            $helper->addAlias('mysqlquery', 'Deployee\Plugins\MySqlTasks\Definitions\MySqlQueryDefinition');
-            return $helper;
-        });
     }
 }

@@ -46,14 +46,14 @@ class DeployRunCommand extends Command
             $output->writeln(sprintf("Execute definition %s", $className), OutputInterface::VERBOSITY_VERBOSE);
             $deployment = $this->locator->Deployment()->getFactory()->createDeploymentDefinition($className);
 
-            $this->locator->Events()->dispatchEvent(PostDispatchTaskEvent::class, new PreDispatchDeploymentEvent($deployment));
+            $this->locator->Events()->dispatchEvent(PreDispatchDeploymentEvent::class, new PreDispatchDeploymentEvent($deployment));
             if($this->runDeploymentDefinition($deployment, $output) === true) {
                 $output->writeln(sprintf("Finished executing definition %s", $className), OutputInterface::VERBOSITY_DEBUG);
-                $this->locator->Events()->dispatchEvent(PostDispatchTaskEvent::class, new PostDispatchDeploymentEvent($deployment, true));
+                $this->locator->Events()->dispatchEvent(PostDispatchDeploymentEvent::class, new PostDispatchDeploymentEvent($deployment, true));
             }
             else{
                 $output->writeln(sprintf("Error while executing definition %s", $className));
-                $this->locator->Events()->dispatchEvent(PostDispatchTaskEvent::class, new PostDispatchDeploymentEvent($deployment, false));
+                $this->locator->Events()->dispatchEvent(PostDispatchDeploymentEvent::class, new PostDispatchDeploymentEvent($deployment, false));
                 $success = false;
                 break;
             }

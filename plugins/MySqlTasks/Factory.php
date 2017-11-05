@@ -37,7 +37,7 @@ class Factory extends AbstractFactory
         }
 
         if($config->get('mysql.database')){
-            $credentials->setPassword($config->get('mysql.database'));
+            $credentials->setDatabase($config->get('mysql.database'));
         }
 
         return $credentials;

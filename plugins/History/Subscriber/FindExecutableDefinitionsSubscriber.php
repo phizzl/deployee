@@ -2,8 +2,6 @@
 
 namespace Deployee\Plugins\History\Subscriber;
 
-
-use Deployee\Deployment\Definitions\Deployments\DeploymentDefinitionInterface;
 use Deployee\Kernel\Locator;
 use Deployee\Plugins\Pdo\Facade;
 use Deployee\Plugins\RunDeploy\Events\FindExecutableDefinitionsEvent;

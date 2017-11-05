@@ -10,9 +10,7 @@ CREATE TABLE IF NOT EXISTS `deployee_history` (
 CREATE TABLE IF NOT EXISTS `deployee_history_deployments` (
   `name` VARCHAR(255) NOT NULL,
   `deploytime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `exitcode` TINYINT(1) UNSIGNED NOT NULL,
-  `output` TEXT NULL,
-  `erroroutput` TEXT NULL,
+  `success` TINYINT(1) UNSIGNED NOT NULL,
   PRIMARY KEY (`name`)
 )
   COLLATE='utf8_general_ci'

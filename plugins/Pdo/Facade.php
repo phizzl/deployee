@@ -10,6 +10,20 @@ class Facade extends AbstractFacade
     /**
      * @param string $sql
      * @param array $params
+     * @return bool
+     */
+    public function execute($sql, array $params = [])
+    {
+        $pdo = $this->getPdo();
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+
+        return true;
+    }
+
+    /**
+     * @param string $sql
+     * @param array $params
      * @return mixed|null
      */
     public function selectOne($sql, array $params = [])

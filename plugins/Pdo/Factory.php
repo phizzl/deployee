@@ -14,7 +14,7 @@ class Factory extends AbstractFactory
      */
     public function createPdo(Credentials $credentials)
     {
-        $host = $credentials->getHost();
+        $host = $credentials->getHost() ? $credentials->getHost() : "localhost";
         $port = $credentials->getPort() ? $credentials->getPort() : 3306;
         $username = $credentials->getUsername();
         $password = $credentials->getPassword();

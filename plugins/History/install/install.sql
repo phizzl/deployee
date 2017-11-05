@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `deployee_history_deployments` (
   ENGINE=InnoDB
 ;
 
+# Update old installations
 REPLACE INTO `deployee_history_deployments` (`name`, `deploytime`) SELECT `name`, `deploytime` FROM `deployee_history`;
 
 DROP TABLE `deployee_history`;

@@ -3,8 +3,8 @@
 namespace Deployee\Plugins\RunDeploy\Events;
 
 
+use Deployee\Deployment\Definitions\Deployments\DeploymentDefinitionInterface;
 use Deployee\Events\AbstractEvent;
-use Deployee\Plugins\Deploy\Definitions\DeploymentDefinitionInterface;
 
 class PreDispatchDeploymentEvent extends AbstractEvent
 {

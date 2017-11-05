@@ -42,7 +42,7 @@ class FindExecutableDefinitionsSubscriber implements EventSubscriberInterface
         $pdo = $this->locator->Pdo()->getFacade();
         $executableDefinitions = [];
         foreach($event->getDefinitions() as $className){
-            $sql = "SELECT COUNT(*) AS c FROM deployee_history_deployments WHERE name=:name AND exitcode=0";
+            $sql = "SELECT COUNT(*) AS c FROM deployee_history_deployments WHERE `name`=:name AND success=1";
             if((int)$pdo->selectOne($sql, [':name' => $className]) === 0){
                 $executableDefinitions[] = $className;
             }

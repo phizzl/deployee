@@ -18,6 +18,6 @@ CREATE TABLE IF NOT EXISTS `deployee_history_deployments` (
 ;
 
 # Update old installations
-REPLACE INTO `deployee_history_deployments` (`name`, `deploytime`) SELECT `name`, `deploytime` FROM `deployee_history`;
+REPLACE INTO `deployee_history_deployments` (`name`, `deploytime`, `success`) SELECT `name`, `deploytime`, 1 FROM `deployee_history`;
 
 DROP TABLE `deployee_history`;

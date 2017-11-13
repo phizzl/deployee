@@ -29,6 +29,8 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
             $credentials->setPassword($shopConfig->get('dbPwd'));
             $credentials->setHost($host[0]);
             $credentials->setPort(isset($host[1]) ? $host[1] : 3306);
+
+            return $credentials;
         });
 
         $searchPaths = [

@@ -1,6 +1,6 @@
 <?php
 
-namespace Deployee\Plugins\OxidEshopTasks\Dispatcher;
+namespace Deployee\Plugins\OxidEshopTasks\Compatibility;
 
 
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
@@ -10,7 +10,6 @@ use Deployee\Plugins\OxidEshopTasks\Definitions\CreateAdminUserDefinition;
 use Deployee\Plugins\OxidEshopTasks\Definitions\GenerateViewsDefinition;
 use Deployee\Plugins\RunDeploy\Dispatcher\AbstractTaskDefinitionDispatcher;
 use Deployee\Plugins\RunDeploy\Dispatcher\DispatchResultInterface;
-use Deployee\Plugins\ShellTasks\Definitions\ShellTaskDefinition;
 
 /**
  * @deprecated

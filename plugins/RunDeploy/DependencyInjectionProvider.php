@@ -26,5 +26,4 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
             }
         );
     }
-
 }

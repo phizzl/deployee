@@ -47,7 +47,7 @@ class ConfigDatabaseDefinition extends AbstractTaskDefinition
     /**
      * @return ParameterCollection
      */
-    public function getDefinition()
+    public function define()
     {
         return new ParameterCollection([
             'varname' => $this->varName,

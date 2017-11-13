@@ -87,7 +87,15 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
     private function backwardsCompatibility(Locator $locator)
     {
         $locator->Dependency()->extendDependency(\Deployee\Deployment\Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY, function(TaskCreationHelper $helper){
-            $helper->addAlias('oxidClearTmp', 'Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDefinition');
+            // v0.1
+            $helper->addAlias('oxidShop', 'Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDefinition');
+            $helper->addAlias('oxidShopLangKey', 'Deployee\Plugins\OxidEshopTasks\Definitions\LanguageKeyDefinition');
+            $helper->addAlias('oxidShopConfig', 'Deployee\Plugins\OxidEshopTasks\Definitions\ConfigDatabaseDefinition');
+
+            // v0.0
+            $helper->addAlias('shop', 'Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDefinition');
+            $helper->addAlias('module', 'Deployee\Plugins\OxidEshopTasks\Definitions\ModuleDefinition');
+            $helper->addAlias('shopConfig', 'Deployee\Plugins\OxidEshopTasks\Definitions\ConfigDatabaseDefinition');
             return $helper;
         });
 

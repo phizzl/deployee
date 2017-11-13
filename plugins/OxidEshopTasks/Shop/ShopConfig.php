@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Deployee\Plugins\DeployOxid\Shop;
+namespace Deployee\Plugins\OxidEshopTasks\Shop;
 
 
 class ShopConfig extends \stdClass

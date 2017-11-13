@@ -4,7 +4,6 @@ namespace Deployee\Plugins\OxidEshopTasks\Compatibility;
 
 
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
-use Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDefinition;
 use Deployee\Plugins\OxidEshopTasks\Definitions\ClearShopTempDefinition;
 use Deployee\Plugins\OxidEshopTasks\Definitions\CreateAdminUserDefinition;
 use Deployee\Plugins\OxidEshopTasks\Definitions\GenerateViewsDefinition;

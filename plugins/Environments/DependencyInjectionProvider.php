@@ -8,6 +8,7 @@ use Deployee\Application\Business\CommandCollection;
 use Deployee\Dependency\DependencyInjectionProviderInterface;
 use Deployee\Kernel\Locator;
 use Deployee\Plugins\Deploy\Commands\RunDeployCommand;
+use Deployee\Plugins\DescribeDeploy\Commands\DescribeDeployCommand;
 use Deployee\Plugins\Environments\Subscriber\FindExecutableDefinitionsSubscriber;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -26,7 +27,8 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
             function (CommandCollection $collection){
                 /* @var Command $command */
                 foreach($collection->getCommands() as $command){
-                    if($command instanceof RunDeployCommand){
+                    if($command instanceof RunDeployCommand
+                        || $command instanceof DescribeDeployCommand){
                         $command->addOption(
                             'env',
                             null,

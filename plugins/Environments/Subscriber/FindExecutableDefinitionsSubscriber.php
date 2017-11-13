@@ -49,9 +49,6 @@ class FindExecutableDefinitionsSubscriber implements EventSubscriberInterface
             }
         }
 
-        var_dump($executableDefinitions);
-        exit;
-
         $event->setDefinitions($executableDefinitions);
     }
 

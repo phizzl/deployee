@@ -22,52 +22,52 @@ class Facade extends AbstractFacade
     }
 
     /**
-     * @param object $object
+     * @param object|string $class
      * @return DocBlock\Tag[]
      */
-    public function getTags($object)
+    public function getTags($class)
     {
         /* @var DocBlock $docBlock */
-        $docBlock = $this->locator->Annotations()->getFacade()->getDocBlock($object);
+        $docBlock = $this->locator->Annotations()->getFacade()->getDocBlock($class);
 
         return $docBlock->getTags();
     }
 
     /**
-     * @param object $object
+     * @param object|string $class
      * @param string $tagName
      * @return bool
      */
-    public function hasTag($object, $tagName)
+    public function hasTag($class, $tagName)
     {
         /* @var DocBlock $docBlock */
-        $docBlock = $this->locator->Annotations()->getFacade()->getDocBlock($object);
+        $docBlock = $this->locator->Annotations()->getFacade()->getDocBlock($class);
 
         return $docBlock->hasTag($tagName);
     }
 
     /**
-     * @param object $object
+     * @param object|string $class
      * @param string $tagName
      * @return DocBlock\Tag[]
      */
-    public function getTagsByName($object, $tagName)
+    public function getTagsByName($class, $tagName)
     {
         /* @var DocBlock $docBlock */
-        $docBlock = $this->locator->Annotations()->getFacade()->getDocBlock($object);
+        $docBlock = $this->locator->Annotations()->getFacade()->getDocBlock($class);
 
         return $docBlock->getTagsByName($tagName);
     }
 
     /**
-     * @param object $object
+     * @param object|string $class
      * @return DocBlock
      */
-    public function getDocBlock($object)
+    public function getDocBlock($class)
     {
-        $hash = spl_object_hash($object);
+        $hash = is_object($class) ? spl_object_hash($class) : sha1($class);
         if(!isset($this->docBlocks[$hash])){
-            $this->docBlocks[$hash] = $this->locator->Annotations()->getFactory()->createInstanceDocBlock($object);
+            $this->docBlocks[$hash] = $this->locator->Annotations()->getFactory()->createInstanceDocBlock($class);
         }
 
         return $this->docBlocks[$hash];

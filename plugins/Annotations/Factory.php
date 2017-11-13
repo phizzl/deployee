@@ -12,13 +12,14 @@ class Factory extends AbstractFactory
      * @param object $object
      * @return \phpDocumentor\Reflection\DocBlock
      */
-    public function createInstanceDocBlock($object)
+    public function createInstanceDocBlock($class)
     {
-        if(!is_object($object)){
-            throw new \InvalidArgumentException("Expected object. Invalid argument given \n" . var_export($object, true));
+        if(!is_object($class)
+            && !class_exists($class)){
+            throw new \InvalidArgumentException("Expected object or class name. Invalid argument given \n" . var_export($class, true));
         }
 
-        return $this->createDocBlockFactory()->create(new \ReflectionClass($object));
+        return $this->createDocBlockFactory()->create(new \ReflectionClass($class));
     }
 
     /**

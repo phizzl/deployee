@@ -38,6 +38,14 @@ class TaskCreationHelper
     }
 
     /**
+     * @return array
+     */
+    public function getAllAlias()
+    {
+        return $this->alias;
+    }
+
+    /**
      * @param string $aliasName
      * @param $arguments
      * @return TaskDefinitionInterface

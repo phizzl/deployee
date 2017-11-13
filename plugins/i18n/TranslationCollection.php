@@ -38,12 +38,12 @@ class TranslationCollection
 
         while($line = fgets($handle)){
             $separator = strpos($line, '=');
-            $ident = trim(substr($line, $separator));
+            $ident = trim(substr($line, 0, $separator));
             $str = trim(substr($line, $separator +1));
             $this->add($ident, $str);
         }
 
-        fclose($line);
+        fclose($handle);
     }
 
     /**

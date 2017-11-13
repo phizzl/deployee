@@ -74,6 +74,28 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
 
             return $collection;
         });
+
+        $this->backwardsCompatibility($locator);
+    }
+
+    /**
+     * @deprecated
+     * @param Locator $locator
+     */
+    private function backwardsCompatibility(Locator $locator)
+    {
+        $locator->Dependency()->extendDependency(\Deployee\Deployment\Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY, function(TaskCreationHelper $helper){
+            $helper->addAlias('oxidClearTmp', 'Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDefinition');
+            return $helper;
+        });
+
+        $locator->Dependency()->extendDependency(\Deployee\Plugins\RunDeploy\Module::DISPATCHER_COLLECTION_DEPENDENCY, function(DispatcherCollection $collection) use($locator){
+            $collection->addDispatcher(
+                $locator->RunDeploy()->getFactory()->createDispatcher('Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDispatcher')
+            );
+
+            return $collection;
+        });
     }
 
 }

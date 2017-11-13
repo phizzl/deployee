@@ -31,7 +31,7 @@ class GenerateDeployCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $name = $input->getArgument('name');
-        $className = "DeployDefinition_" . time() . "_" . $name;
+        $className = "Deploy_" . time() . "_" . $name;
         $className = str_replace(["-", " "], "_", $className);
         $filePath = $this->locator->Config()->get('definition_path') . "/{$className}.php";
         $fileContents = $this->getPhpFileSkeleton($className);

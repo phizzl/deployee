@@ -1,74 +1,140 @@
 <?php
 
-use Deployee\Plugins\DeployDb\Tasks\MySqlDumpTask;
-use Deployee\Plugins\DeployDb\Tasks\MySqlExecuteCommandTask;
-use Deployee\Plugins\DeployDb\Tasks\MySqlFileImportTask;
-use Deployee\Plugins\DeployFilesystem\Tasks\DirectoryTask;
-use Deployee\Plugins\DeployFilesystem\Tasks\FileTask;
-use Deployee\Plugins\DeployFilesystem\Tasks\PermissionsTask;
-use Deployee\Plugins\DeployOxid\Tasks\ModuleTask;
-use Deployee\Plugins\DeployOxid\Tasks\ShopConfigTask;
-use Deployee\Plugins\DeployOxid\Tasks\ShopLangKeyTask;
-use Deployee\Plugins\DeployOxid\Tasks\ShopTask;
-use Deployee\Plugins\DeployShell\Tasks\ShellTask;
-
-/**
- * THIS TRAIT IS JUST FOR IDE SUPPORT! IT'S NOT BEING USED ANYWHERE ELSE!
- */
-trait ideHelperDeploymentDefinition
+class ideHelperDeploymentDefinition
 {
-    public function mysqldump($target)
-    {
-        return new MySqlDumpTask($target);
-    }
-
-    public function mysqlfile($source)
-    {
-        return new MySqlFileImportTask($source);
-    }
-
-    public function mysqlcmd($command)
-    {
-        return new MySqlExecuteCommandTask($command);
-    }
-
+        /**
+     * @return Deployee\Plugins\FilesystemTasks\Definitions\DirectoryTaskDefinition
+     */
     public function directory($path)
     {
-        return new DirectoryTask($path);
+        return new Deployee\Plugins\FilesystemTasks\Definitions\DirectoryTaskDefinition($path);
     }
 
+    /**
+     * @return Deployee\Plugins\FilesystemTasks\Definitions\FileTaskDefinition
+     */
     public function file($path)
     {
-        return new FileTask($path);
+        return new Deployee\Plugins\FilesystemTasks\Definitions\FileTaskDefinition($path);
     }
 
-    public function permission($path)
+    /**
+     * @return Deployee\Plugins\MySqlTasks\Definitions\MySqlFileDefinition
+     */
+    public function mysqlfile($source)
     {
-        return new PermissionsTask($path);
+        return new Deployee\Plugins\MySqlTasks\Definitions\MySqlFileDefinition($source);
     }
 
-    public function oxidModule($moduleId)
+    /**
+     * @return Deployee\Plugins\MySqlTasks\Definitions\MySqlQueryDefinition
+     */
+    public function mysqlquery($query)
     {
-        return new ModuleTask($moduleId);
+        return new Deployee\Plugins\MySqlTasks\Definitions\MySqlQueryDefinition($query);
     }
 
-    public function oxidShop()
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\ClearShopTempDefinition
+     */
+    public function oxidcleartmp()
     {
-        return new ShopTask();
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\ClearShopTempDefinition();
     }
 
-    public function oxidShopConfig($shopId, $varName, $varValue, $varType, $module)
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\GenerateViewsDefinition
+     */
+    public function oxidgenerateviews()
     {
-        return new ShopConfigTask($shopId, $varName, $varValue, $varType, $module);
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\GenerateViewsDefinition();
     }
 
-    public function oxidShopLangKey($langAbbr, $key, $value)
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\CreateAdminUserDefinition
+     */
+    public function oxidcreateadminuser($username, $password)
     {
-        return new ShopLangKeyTask($langAbbr, $key, $value);
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\CreateAdminUserDefinition($username, $password);
     }
 
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\ConfigDatabaseDefinition
+     */
+    public function oxidconfigdatabase($shopId, $varName, $varValue, $varType, $module = "")
+    {
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\ConfigDatabaseDefinition($shopId, $varName, $varValue, $varType, $module = "");
+    }
+
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\LanguageKeyDefinition
+     */
+    public function oxidlangkey($langAbbr, $key, $value)
+    {
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\LanguageKeyDefinition($langAbbr, $key, $value);
+    }
+
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\ModuleDefinition
+     */
+    public function oxidmodule($moduleId)
+    {
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\ModuleDefinition($moduleId);
+    }
+
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDefinition
+     */
+    public function oxidshop()
+    {
+        return new Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDefinition();
+    }
+
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\LanguageKeyDefinition
+     */
+    public function oxidshoplangkey($langAbbr, $key, $value)
+    {
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\LanguageKeyDefinition($langAbbr, $key, $value);
+    }
+
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\ConfigDatabaseDefinition
+     */
+    public function oxidshopconfig($shopId, $varName, $varValue, $varType, $module = "")
+    {
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\ConfigDatabaseDefinition($shopId, $varName, $varValue, $varType, $module = "");
+    }
+
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDefinition
+     */
+    public function shop()
+    {
+        return new Deployee\Plugins\OxidEshopTasks\Compatibility\BackwardsCompatibilityDefinition();
+    }
+
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\ModuleDefinition
+     */
+    public function module($moduleId)
+    {
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\ModuleDefinition($moduleId);
+    }
+
+    /**
+     * @return Deployee\Plugins\OxidEshopTasks\Definitions\ConfigDatabaseDefinition
+     */
+    public function shopconfig($shopId, $varName, $varValue, $varType, $module = "")
+    {
+        return new Deployee\Plugins\OxidEshopTasks\Definitions\ConfigDatabaseDefinition($shopId, $varName, $varValue, $varType, $module = "");
+    }
+
+    /**
+     * @return Deployee\Plugins\ShellTasks\Definitions\ShellTaskDefinition
+     */
     public function shell($executable)
     {
-        return new ShellTask($executable);
+        return new Deployee\Plugins\ShellTasks\Definitions\ShellTaskDefinition($executable);
     }
 }

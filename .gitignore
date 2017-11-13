@@ -2,5 +2,6 @@
 /vendor
 /composer.phar
 #/deployments/*
+/ide_helper.php
 
 !**.gitkeep

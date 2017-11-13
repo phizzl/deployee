@@ -54,6 +54,7 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
             $helper->addAlias('oxidCreateAdminUser', 'Deployee\Plugins\OxidEshopTasks\Definitions\CreateAdminUserDefinition');
             $helper->addAlias('oxidConfigDatabase', 'Deployee\Plugins\OxidEshopTasks\Definitions\ConfigDatabaseDefinition');
             $helper->addAlias('oxidLangKey', 'Deployee\Plugins\OxidEshopTasks\Definitions\LanguageKeyDefinition');
+            $helper->addAlias('oxidModule', 'Deployee\Plugins\OxidEshopTasks\Definitions\ModuleDefinition');
             return $helper;
         });
 
@@ -64,6 +65,7 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
                 'Deployee\Plugins\OxidEshopTasks\Dispatcher\GenerateViewsDispatcher',
                 'Deployee\Plugins\OxidEshopTasks\Dispatcher\ConfigDatabaseDispatcher',
                 'Deployee\Plugins\OxidEshopTasks\Dispatcher\LanguageKeyDispatcher',
+                'Deployee\Plugins\OxidEshopTasks\Dispatcher\ModuleDispatcher',
             ];
 
             foreach($addDispatcher as $dispatcherClass){

@@ -2,6 +2,7 @@
 
 /**
  * @mixin ideHelperDeploymentDefinition
+ * @runalways
  */
 class DeployDefinition_1499068619_testDirectoryTasks extends \Deployee\Plugins\Deploy\Definitions\AbstractDeploymentDefinition
 {

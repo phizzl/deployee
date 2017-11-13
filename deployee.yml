@@ -1,7 +1,8 @@
 definition_path: deployments
-mysql.host: ~
-mysql.port: ~
-mysql.username: ~
+mysql.host: localhost
+mysql.port: 3306
+mysql.username: root
 mysql.password: ~
-mysql.database: ~
+mysql.database: deltav_171019
 mysql.bin: ~
+oxid.path: D:\xampp\5.6\htdocs\oxid

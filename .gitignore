@@ -3,5 +3,6 @@
 /composer.phar
 #/deployments/*
 /ide_helper.php
+/deployee.yml
 
 !**.gitkeep

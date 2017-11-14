@@ -1,18 +1,8 @@
-plugins:
-    - Deployee\Plugins\Deploy\DeployPlugin:
-        path: deployments
-    - Deployee\Plugins\Describe\DescribePlugin
-    - Deployee\Plugins\DeployHistory\DeployHistoryPlugin
-    - Deployee\Plugins\DeployFilesystem\DeployFilesystemPlugin
-    - Deployee\Plugins\DeployShell\DeployShellPlugin
-    - Deployee\Plugins\DeployAnnotation\DeployAnnotationPlugin
-    - Deployee\Plugins\DeployShopware\DeployShopwarePlugin:
-        enabled: false
-    - Deployee\Plugins\DeployOxid\DeployOxidPlugin:
-        enabled: false
-    - Deployee\Plugins\DeployDb\DeployDbPlugin:
-        host: "localhost"
-        port: 3307
-        user: "root"
-        password: ~
-        name: "mydatabase"
+definition_path: deployments
+mysql.host: localhost
+mysql.port: 3306
+mysql.username: root
+mysql.password: ~
+mysql.database: ~
+mysql.bin: ~
+oxid.path: /var/www/oxid

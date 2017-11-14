@@ -3,6 +3,7 @@
 namespace Deployee\Plugins\Environments\Subscriber;
 
 use Deployee\Kernel\Locator;
+use Deployee\Plugins\Environments\Module;
 use Deployee\Plugins\Pdo\Facade;
 use Deployee\Plugins\RunDeploy\Events\FindExecutableDefinitionsEvent;
 use phpDocumentor\Reflection\DocBlock\Tags\Generic;
@@ -40,7 +41,7 @@ class FindExecutableDefinitionsSubscriber implements EventSubscriberInterface
     public function onFindExecutableDefinitions(FindExecutableDefinitionsEvent $event)
     {
         $executableDefinitions = [];
-        $selectedEnv = $event->getInput()->getOption('env');
+        $selectedEnv = $this->locator->Dependency()->getFacade()->getDependency(Module::CURRENT_ENVIRONMENT_DEPENDENCY)->getName();
         foreach($event->getDefinitions() as $className){
             $tags = $this->locator->Annotations()->getFacade()->getTagsByName($className, 'env');
             if(!count($tags)

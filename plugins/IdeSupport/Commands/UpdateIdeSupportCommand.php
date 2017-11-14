@@ -58,7 +58,7 @@ EOL;
         $classTemplate = <<<EOL
 <?php
 
-class DeployeeIdeSupportDefinitions
+class GeneratedDeployeeIdeSupportDefinitions
 {
     {$helperMethods}
 }
@@ -67,7 +67,7 @@ class DeployeeIdeSupportDefinitions
  * Backwards compatibility v0.1
  * @deprecated
  */
-class ideHelperDeploymentDefinition extends DeployeeIdeSupportDefinitions {}
+class ideHelperDeploymentDefinition extends GeneratedDeployeeIdeSupportDefinitions {}
 EOL;
 
         file_put_contents(getcwd() . '/.deployee_ide_helper.php', $classTemplate);

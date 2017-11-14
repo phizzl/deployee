@@ -3,6 +3,7 @@
 namespace Deployee\Kernel;
 
 use Deployee\Kernel\Exceptions\ClassNotFoundException;
+use Deployee\Kernel\Exceptions\ModuleNotFoundException;
 use Deployee\Kernel\Modules\FacadeInterface;
 use Deployee\Kernel\Modules\FactoryInterface;
 use Deployee\Kernel\Modules\Module;
@@ -94,7 +95,7 @@ class Locator
 
         /* @var ModuleInterface $module */
         if(!($module = new $moduleClassName) instanceof ModuleInterface){
-            throw new \RuntimeException("Invalid module class {$moduleClassName}");
+            throw new ModuleNotFoundException("Invalid module class {$moduleClassName}");
         }
 
 

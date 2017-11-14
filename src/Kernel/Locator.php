@@ -10,6 +10,9 @@ use Deployee\Kernel\Modules\Module;
 use Deployee\Kernel\Modules\ModuleCollection;
 use Deployee\Kernel\Modules\ModuleInterface;
 
+/**
+ * @mixin \GeneratedDeployeeIdeSupportLocator
+ */
 class Locator
 {
     /**

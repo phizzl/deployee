@@ -6,6 +6,8 @@ namespace Deployee\Plugins\IdeSupport\Commands;
 use Deployee\Application\Business\Command;
 use Deployee\Deployment\Helper\TaskCreationHelper;
 use Deployee\Deployment\Module;
+use Deployee\Kernel\Exceptions\ClassNotFoundException;
+use Deployee\Kernel\Exceptions\ModuleNotFoundException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -26,11 +28,67 @@ class UpdateIdeSupportCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->generateDeploymentDefinitionSupportClass();
+        $definitionSupport = $this->generateDeploymentDefinitionSupportClass();
+        $locatorSupport = $this->generateLocatorSupportClass();
+
+        $targetFile = getcwd() . '/.deployee_ide_helper.php';
+        $contents = <<<EOL
+<?php
+{$definitionSupport}
+
+{$locatorSupport}
+EOL;
+
+        file_put_contents($targetFile, $contents);
+        $output->writeln(sprintf("Generated helper classes to file %s", $targetFile));
+    }
+
+    private function generateLocatorSupportClass()
+    {
+        $methods = [];
+        foreach($this->locator->ClassLoader()->getFacade()->getPrefixesPsr4() as $prefixes){
+            foreach($prefixes as $prefix){
+                foreach(new \DirectoryIterator($prefix) as $item){
+                    if(!$item->isDir() || $item->isDot()){
+                        continue;
+                    }
+
+                    try{
+                        $module = call_user_func_array([$this->locator, $item->getBasename()], []);
+                        $returnClass = get_class($module);
+                        $methods[] = <<<EOL
+    /**
+     * @return {$returnClass}
+     */
+    public function {$item->getBasename()} ()
+    {
+        return new {$returnClass}();
+    }
+EOL;
+
+                    }
+                    catch(ModuleNotFoundException $e){}
+                    catch(ClassNotFoundException $e){}
+                }
+            }
+        }
+
+        $methods = implode(PHP_EOL.PHP_EOL, $methods);
+        return <<<EOL
+/**
+ * This class was generated
+ */
+abstract class GeneratedDeployeeIdeSupportLocator
+{
+{$methods}
+}
+EOL;
+
     }
 
     /**
      * Generate helper class for deployment definitions
+     * @return string
      */
     private function generateDeploymentDefinitionSupportClass()
     {
@@ -55,10 +113,11 @@ EOL;
 
         $helperMethods = implode(PHP_EOL . PHP_EOL, $helperMethods);
 
-        $classTemplate = <<<EOL
-<?php
-
-class GeneratedDeployeeIdeSupportDefinitions
+        return <<<EOL
+/**
+ * This class was generated
+ */
+abstract class GeneratedDeployeeIdeSupportDefinitions
 {
     {$helperMethods}
 }
@@ -69,8 +128,6 @@ class GeneratedDeployeeIdeSupportDefinitions
  */
 class ideHelperDeploymentDefinition extends GeneratedDeployeeIdeSupportDefinitions {}
 EOL;
-
-        file_put_contents(getcwd() . '/.deployee_ide_helper.php', $classTemplate);
     }
 
     /**

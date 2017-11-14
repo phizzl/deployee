@@ -6,3 +6,4 @@ mysql.password: ~
 mysql.database: ~
 mysql.bin: ~
 oxid.path: /var/www/oxid
+shopware.path: /var/www/shopware

@@ -7,9 +7,10 @@ namespace Deployee\Plugins\Environments;
 use Deployee\Application\Business\CommandCollection;
 use Deployee\Dependency\DependencyInjectionProviderInterface;
 use Deployee\Kernel\Locator;
-use Deployee\Plugins\Deploy\Commands\RunDeployCommand;
 use Deployee\Plugins\DescribeDeploy\Commands\DescribeDeployCommand;
 use Deployee\Plugins\Environments\Subscriber\FindExecutableDefinitionsSubscriber;
+use Deployee\Plugins\Environments\Subscriber\PreRunDeploySubscriber;
+use Deployee\Plugins\RunDeploy\Commands\DeployRunCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -20,14 +21,15 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
      */
     public function injectDependencies(Locator $locator)
     {
+        $locator->Events()->getFacade()->addSubscriber(new FindExecutableDefinitionsSubscriber($locator));
+        $locator->Events()->getFacade()->addSubscriber(new PreRunDeploySubscriber($locator));
 
-        $locator->Events()->addSubscriber(new FindExecutableDefinitionsSubscriber($locator));
-        $locator->Dependency()->extendDependency(
+        $locator->Dependency()->getFacade()->extendDependency(
             \Deployee\Application\Module::COMMAND_COLLECTION_DEPENDENCY,
             function (CommandCollection $collection){
                 /* @var Command $command */
                 foreach($collection->getCommands() as $command){
-                    if($command instanceof RunDeployCommand
+                    if($command instanceof DeployRunCommand
                         || $command instanceof DescribeDeployCommand){
                         $command->addOption(
                             'env',

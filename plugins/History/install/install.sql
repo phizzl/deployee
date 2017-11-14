@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `deployee_history` (
   ENGINE=InnoDB
 ;
 
-CREATE TABLE `deployee_history_deployments` (
+CREATE TABLE IF NOT EXISTS `deployee_history_deployments` (
   `name` VARCHAR(255) NOT NULL,
   `deploytime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `success` TINYINT(1) UNSIGNED NOT NULL,

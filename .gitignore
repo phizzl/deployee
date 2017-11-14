@@ -1,6 +1,7 @@
 /.idea
 /vendor
 /composer.phar
+/composer.lock
 #/deployments/*
 /ide_helper.php
 /deployee.yml

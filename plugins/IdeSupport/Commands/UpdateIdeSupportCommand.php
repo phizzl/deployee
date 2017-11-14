@@ -56,7 +56,7 @@ class ideHelperDeploymentDefinition
 }
 EOL;
 
-        file_put_contents(getcwd() . '/ide_helper.php', $classTemplate);
+        file_put_contents(getcwd() . '/.deployee_ide_helper.php', $classTemplate);
     }
 
     /**

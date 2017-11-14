@@ -43,6 +43,9 @@ EOL;
         $output->writeln(sprintf("Generated helper classes to file %s", $targetFile));
     }
 
+    /**
+     * @return string
+     */
     private function generateLocatorSupportClass()
     {
         $methods = [];

@@ -9,10 +9,10 @@ class Factory extends AbstractFactory
 {
     /**
      * @param string $name
-     * @return mixed
+     * @return Environment
      */
     public function createEnvironment($name)
     {
-        return new $name;
+        return new Environment($name);
     }
 }

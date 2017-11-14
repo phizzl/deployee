@@ -33,12 +33,14 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
 
         $locator->Dependency()->getFacade()->extendDependency(\Deployee\Deployment\Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY, function(TaskCreationHelper $helper){
             $helper->addAlias('swCreateAdminUser', 'Deployee\Plugins\ShopwareTasks\Definitions\CreateAdminUserDefinition');
+            $helper->addAlias('swCacheClear', 'Deployee\Plugins\ShopwareTasks\Definitions\CacheClearDefinition');
             return $helper;
         });
 
         $locator->Dependency()->getFacade()->extendDependency(\Deployee\Plugins\RunDeploy\Module::DISPATCHER_COLLECTION_DEPENDENCY, function(DispatcherCollection $collection) use($locator){
             $addDispatcher = [
                 'Deployee\Plugins\ShopwareTasks\Dispatcher\CreateAdminUserDispatcher',
+                'Deployee\Plugins\ShopwareTasks\Dispatcher\CacheClearDispatcher',
             ];
 
             foreach($addDispatcher as $dispatcherClass){

@@ -53,7 +53,7 @@ class GenerateDeployCommand extends Command
 use Deployee\\Deployment\\Definitions\\Deployments\\AbstractDeployment;
 
 /**
- * @mixin ideHelperDeploymentDefinition
+ * @mixin \DeployeeIdeSupportDefinitions
  */
 class $className extends AbstractDeployment
 {

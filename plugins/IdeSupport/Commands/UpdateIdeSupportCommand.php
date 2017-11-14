@@ -26,6 +26,14 @@ class UpdateIdeSupportCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->generateDeploymentDefinitionSupportClass();
+    }
+
+    /**
+     * Generate helper class for deployment definitions
+     */
+    private function generateDeploymentDefinitionSupportClass()
+    {
         /* @var TaskCreationHelper $taskHelper */
         $taskHelper = $this->locator->Dependency()->getDependency(Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY);
 
@@ -50,10 +58,16 @@ EOL;
         $classTemplate = <<<EOL
 <?php
 
-class ideHelperDeploymentDefinition
+class DeployeeIdeSupportDefinitions
 {
     {$helperMethods}
 }
+
+/**
+ * Backwards compatibility v0.1
+ * @deprecated
+ */
+class ideHelperDeploymentDefinition extends DeployeeIdeSupportDefinitions {}
 EOL;
 
         file_put_contents(getcwd() . '/.deployee_ide_helper.php', $classTemplate);

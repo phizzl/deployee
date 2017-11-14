@@ -8,6 +8,7 @@ use Deployee\Plugins\OxidEshopTasks\Definitions\ClearShopTempDefinition;
 use Deployee\Plugins\OxidEshopTasks\Definitions\CreateAdminUserDefinition;
 use Deployee\Plugins\OxidEshopTasks\Definitions\GenerateViewsDefinition;
 use Deployee\Plugins\RunDeploy\Dispatcher\AbstractTaskDefinitionDispatcher;
+use Deployee\Plugins\RunDeploy\Dispatcher\DispatchResult;
 use Deployee\Plugins\RunDeploy\Dispatcher\DispatchResultInterface;
 
 /**
@@ -40,6 +41,14 @@ class BackwardsCompatibilityDispatcher extends AbstractTaskDefinitionDispatcher
         }
 
         $adminUser = $parameter->get('adminuser');
-        return $this->delegate(new CreateAdminUserDefinition($adminUser['username'], $adminUser['password']));
+
+        foreach($adminUser as $user) {
+            $taskResult = $this->delegate(new CreateAdminUserDefinition($adminUser['username'], $adminUser['password']));
+            if($taskResult->getExitCode() > 0){
+                return $taskResult;
+            }
+        }
+
+        return new DispatchResult(0, '');
     }
 }

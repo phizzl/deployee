@@ -4,11 +4,11 @@ Deployee task runner
 ## Setup
 You can require deployee via composer
 ```bash
-composer require phizzl/deployee @dev
+composer require phizzl/deployee v0.2@dev
 ```
 
 ## Configuration
-Create a file called deployee.yml. You might copy it fom vendor/phizzl/deployee-cli/deployee.dist.yml.
+Create a file called deployee.yml. You might copy it fom vendor/phizzl/deployee/deployee.dist.yml.
 
 ### Load specified configuration by an OS environment var
 If you want to use another configuration you can change it by setting the environment variable DEPLOYEE_CONFIG with the absolute path to the configuration to use.

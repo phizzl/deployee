@@ -49,18 +49,20 @@ class Facade extends AbstractFacade
         $searchInPaths = [getcwd()];
 
         if($envConfig = getenv('DEPLOYEE_CONFIG')){
+            $envConfig = is_file($envConfig) ? dirname($envConfig) : $envConfig;
             array_unshift($searchInPaths, $envConfig);
         }
 
         $finder = new Finder();
         $finder
             ->name("deployee.yml")
+            ->depth("< 1")
             ->in($searchInPaths);
 
         foreach($finder as $fileInfo){
             return $fileInfo->getRealPath();
         }
 
-        throw new \RuntimeException("Could not locate deplyoee.yml");
+        throw new \RuntimeException("Could not locate deployee.yml");
     }
 }

@@ -8,6 +8,7 @@ use Deployee\Deployment\Helper\TaskCreationHelper;
 use Deployee\Deployment\Module;
 use Deployee\Kernel\Exceptions\ClassNotFoundException;
 use Deployee\Kernel\Exceptions\ModuleNotFoundException;
+use Deployee\Kernel\Modules\ModuleInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -44,11 +45,63 @@ EOL;
     }
 
     /**
+     * @param array $foundModules
+     * @return string
+     */
+    private function generateFacadeAndFactorySupportClasses(array $foundModules)
+    {
+        $classes = [];
+        /* @var ModuleInterface $module */
+        foreach($foundModules as $name => $module){
+            $methods = [];
+            if($factory = $module->getFactory()){
+                $factoryClass = get_class($factory);
+                $methods[] = <<<EOL
+    /**
+     * @return {$factoryClass}
+     */
+    public function getFactory()
+    {
+        return new {$factoryClass}();
+    }
+EOL;
+            }
+
+            $facadeClass = get_class($module->getFacade());
+            $methods[] = <<<EOL
+    /**
+     * @return {$facadeClass}
+     */
+    public function getFacade()
+    {
+        return new {$facadeClass}();
+    }
+EOL;
+            $methods = implode(PHP_EOL.PHP_EOL, $methods);
+            $moduleClass = get_class($module);
+            $generatedModuleClass = str_replace("\\", '_', $moduleClass) . "_{$name}_Generated";
+            $classes[] = <<<EOL
+/**
+ * This class was generated
+ */
+class {$generatedModuleClass} extends {$moduleClass}
+{
+{$methods}
+}
+EOL;
+
+        }
+
+        return implode(PHP_EOL.PHP_EOL, $classes);
+    }
+
+    /**
      * @return string
      */
     private function generateLocatorSupportClass()
     {
         $methods = [];
+        $foundModules = [];
         foreach($this->locator->ClassLoader()->getFacade()->getPrefixesPsr4() as $prefixes){
             foreach($prefixes as $prefix){
                 foreach(new \DirectoryIterator($prefix) as $item){
@@ -58,7 +111,8 @@ EOL;
 
                     try{
                         $module = call_user_func_array([$this->locator, $item->getBasename()], []);
-                        $returnClass = get_class($module);
+                        $returnClass = str_replace("\\", '_', get_class($module)) . "_{$item->getBasename()}_Generated";
+                        $foundModules[$item->getBasename()] = $module;
                         $methods[] = <<<EOL
     /**
      * @return {$returnClass}
@@ -76,6 +130,8 @@ EOL;
             }
         }
 
+        $facadeAndFactorySupport = $this->generateFacadeAndFactorySupportClasses($foundModules);
+
         $methods = implode(PHP_EOL.PHP_EOL, $methods);
         return <<<EOL
 /**
@@ -85,6 +141,8 @@ abstract class GeneratedDeployeeIdeSupportLocator
 {
 {$methods}
 }
+
+{$facadeAndFactorySupport}
 EOL;
 
     }

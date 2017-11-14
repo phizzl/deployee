@@ -33,5 +33,19 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
 
             return $collection;
         });
+
+        $this->backwardsCompatibility($locator);
+    }
+
+    /**
+     * @deprecated
+     * @param Locator $locator
+     */
+    private function backwardsCompatibility(Locator $locator)
+    {
+        $locator->Dependency()->extendDependency(Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY, function(TaskCreationHelper $helper){
+            $helper->addAlias('mysqlcmd', 'Deployee\Plugins\MySqlTasks\Definitions\MySqlQueryDefinition');
+            return $helper;
+        });
     }
 }

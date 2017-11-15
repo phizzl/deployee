@@ -6,9 +6,9 @@ namespace Deployee\Plugins\ShopwareTasks\Dispatcher;
 use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
 use Deployee\Plugins\RunDeploy\Dispatcher\AbstractTaskDefinitionDispatcher;
 use Deployee\Plugins\ShellTasks\Definitions\ShellTaskDefinition;
-use Deployee\Plugins\ShopwareTasks\Definitions\PluginInstallDefinition;
+use Deployee\Plugins\ShopwareTasks\Definitions\PluginReinstallDefinition;
 
-class PluginInstallDispatcher extends AbstractTaskDefinitionDispatcher
+class PluginReinstallDispatcher extends AbstractTaskDefinitionDispatcher
 {
     /**
      * @param TaskDefinitionInterface $taskDefinition
@@ -16,7 +16,7 @@ class PluginInstallDispatcher extends AbstractTaskDefinitionDispatcher
      */
     public function canDispatchTaskDefinition(TaskDefinitionInterface $taskDefinition)
     {
-        return $taskDefinition instanceof PluginInstallDefinition;
+        return $taskDefinition instanceof PluginReinstallDefinition;
     }
 
     /**
@@ -31,9 +31,9 @@ class PluginInstallDispatcher extends AbstractTaskDefinitionDispatcher
         $shellTask = new ShellTaskDefinition("{$shopPath}/bin/console");
         $shellTask->arguments(
             sprintf(
-                'sw:plugin:install -n %s %s',
+                'sw:plugin:reinstall -n %s %s',
                 $parameter->get('plugin'),
-                $parameter->get('activate') === true ? "--activate" : ""
+                $parameter->get('removedata') === true ? "--removedata" : ""
             )
         );
 

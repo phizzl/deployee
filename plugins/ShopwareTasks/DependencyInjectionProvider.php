@@ -36,6 +36,7 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
             $helper->addAlias('swCacheClear', 'Deployee\Plugins\ShopwareTasks\Definitions\CacheClearDefinition');
             $helper->addAlias('swGenerateAttributes', 'Deployee\Plugins\ShopwareTasks\Definitions\GenerateAttributesDefinition');
             $helper->addAlias('swPluginInstall', 'Deployee\Plugins\ShopwareTasks\Definitions\PluginInstallDefinition');
+            $helper->addAlias('swPluginReinstall', 'Deployee\Plugins\ShopwareTasks\Definitions\PluginReinstallDefinition');
             return $helper;
         });
 
@@ -45,6 +46,7 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
                 'Deployee\Plugins\ShopwareTasks\Dispatcher\CacheClearDispatcher',
                 'Deployee\Plugins\ShopwareTasks\Dispatcher\GenerateAttributesDispatcher',
                 'Deployee\Plugins\ShopwareTasks\Dispatcher\PluginInstallDispatcher',
+                'Deployee\Plugins\ShopwareTasks\Dispatcher\PluginReinstallDispatcher',
             ];
 
             foreach($addDispatcher as $dispatcherClass){

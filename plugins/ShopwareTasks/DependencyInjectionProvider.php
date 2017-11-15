@@ -38,6 +38,7 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
             $helper->addAlias('swPluginInstall', 'Deployee\Plugins\ShopwareTasks\Definitions\PluginInstallDefinition');
             $helper->addAlias('swPluginReinstall', 'Deployee\Plugins\ShopwareTasks\Definitions\PluginReinstallDefinition');
             $helper->addAlias('swPluginUninstall', 'Deployee\Plugins\ShopwareTasks\Definitions\PluginUninstallDefinition');
+            $helper->addAlias('swPluginUpdate', 'Deployee\Plugins\ShopwareTasks\Definitions\PluginUpdateDefinition');
             return $helper;
         });
 
@@ -49,6 +50,7 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
                 'Deployee\Plugins\ShopwareTasks\Dispatcher\PluginInstallDispatcher',
                 'Deployee\Plugins\ShopwareTasks\Dispatcher\PluginReinstallDispatcher',
                 'Deployee\Plugins\ShopwareTasks\Dispatcher\PluginUninstallDispatcher',
+                'Deployee\Plugins\ShopwareTasks\Dispatcher\PluginUpdateDispatcher',
             ];
 
             foreach($addDispatcher as $dispatcherClass){

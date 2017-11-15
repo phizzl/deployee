@@ -7,7 +7,6 @@ use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
 use Deployee\Plugins\RunDeploy\Dispatcher\AbstractTaskDefinitionDispatcher;
 use Deployee\Plugins\ShellTasks\Definitions\ShellTaskDefinition;
 use Deployee\Plugins\ShopwareTasks\Definitions\CacheClearDefinition;
-use Deployee\Plugins\ShopwareTasks\Definitions\CreateAdminUserDefinition;
 
 class CacheClearDispatcher extends AbstractTaskDefinitionDispatcher
 {
@@ -29,7 +28,7 @@ class CacheClearDispatcher extends AbstractTaskDefinitionDispatcher
         $shopPath = $this->locator->Config()->getFacade()->get('shopware.path');
 
         $shellTask = new ShellTaskDefinition("{$shopPath}/bin/console");
-        $shellTask->arguments('sw:cache:clear');
+        $shellTask->arguments('sw:cache:clear -n');
 
         return $this->delegate($shellTask);
     }

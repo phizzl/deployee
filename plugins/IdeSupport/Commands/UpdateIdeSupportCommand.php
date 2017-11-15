@@ -154,20 +154,20 @@ EOL;
     private function generateDeploymentDefinitionSupportClass()
     {
         /* @var TaskCreationHelper $taskHelper */
-        $taskHelper = $this->locator->Dependency()->getDependency(Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY);
+        $taskHelper = $this->locator->Dependency()->getFacade()->getDependency(Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY);
 
         $alias = $taskHelper->getAllAlias();
         $helperMethods = [];
 
-        foreach($alias as $helperName => $className){
-            $signatur = implode(", ", $this->getClassConstructorSignatur($className));
+        foreach($alias as $helperName => $aliasDefinition){
+            $signatur = implode(", ", $this->getClassConstructorSignatur($aliasDefinition['class']));
             $helperMethods[] = <<<EOL
     /**
-     * @return {$className}
+     * @return {$aliasDefinition['class']}
      */
-    public function {$helperName}({$signatur})
+    public function {$aliasDefinition['alias']}({$signatur})
     {
-        return new {$className}({$signatur});
+        return new {$aliasDefinition['class']}({$signatur});
     }
 EOL;
         }
@@ -208,12 +208,7 @@ EOL;
             $defaultValue = "";
 
             if($parameter->isOptional()){
-                if(is_string($parameter->getDefaultValue())){
-                    $defaultValue = "\"{$parameter->getDefaultValue()}\"";
-                }
-                else{
-                    $defaultValue = $parameter->getDefaultValue();
-                }
+                $defaultValue = var_export($parameter->getDefaultValue(), true);
             }
 
             $signatur[] = "\$" . $parameter->getName() . ($parameter->isOptional() ? " = {$defaultValue}" : "");

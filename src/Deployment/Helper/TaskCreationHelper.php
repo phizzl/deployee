@@ -34,7 +34,7 @@ class TaskCreationHelper
      */
     public function addAlias($aliasName, $className)
     {
-        $this->alias[strtolower($aliasName)] = $className;
+        $this->alias[strtolower($aliasName)] = ["alias" => $aliasName, "class" => $className];
     }
 
     /**
@@ -53,7 +53,7 @@ class TaskCreationHelper
     public function createTaskDefinition($aliasName, $arguments)
     {
         $aliasName = strtolower($aliasName);
-        $className = isset($this->alias[$aliasName]) ? $this->alias[$aliasName] : $aliasName;
-        return $this->locator->Deployment()->getFactory()->createTaskDefinition($className, $arguments);
+        $alias = isset($this->alias[$aliasName]) ? $this->alias[$aliasName] : $aliasName;
+        return $this->locator->Deployment()->getFactory()->createTaskDefinition($alias['class'], $arguments);
     }
 }

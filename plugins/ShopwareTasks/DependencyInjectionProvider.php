@@ -34,6 +34,7 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
         $locator->Dependency()->getFacade()->extendDependency(\Deployee\Deployment\Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY, function(TaskCreationHelper $helper){
             $helper->addAlias('swCreateAdminUser', 'Deployee\Plugins\ShopwareTasks\Definitions\CreateAdminUserDefinition');
             $helper->addAlias('swCacheClear', 'Deployee\Plugins\ShopwareTasks\Definitions\CacheClearDefinition');
+            $helper->addAlias('swGenerateAttributes', 'Deployee\Plugins\ShopwareTasks\Definitions\GenerateAttributesDefinition');
             return $helper;
         });
 
@@ -41,6 +42,7 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
             $addDispatcher = [
                 'Deployee\Plugins\ShopwareTasks\Dispatcher\CreateAdminUserDispatcher',
                 'Deployee\Plugins\ShopwareTasks\Dispatcher\CacheClearDispatcher',
+                'Deployee\Plugins\ShopwareTasks\Dispatcher\GenerateAttributesDispatcher',
             ];
 
             foreach($addDispatcher as $dispatcherClass){

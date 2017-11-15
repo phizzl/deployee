@@ -117,7 +117,7 @@ EOL;
     /**
      * @return {$returnClass}
      */
-    public function {$item->getBasename()} ()
+    public function {$item->getBasename()}()
     {
         return new {$returnClass}();
     }

@@ -8,7 +8,7 @@ use Deployee\Plugins\RunDeploy\Dispatcher\AbstractTaskDefinitionDispatcher;
 use Deployee\Plugins\ShellTasks\Definitions\ShellTaskDefinition;
 use Deployee\Plugins\ShopwareTasks\Definitions\PluginDeactivateDefinition;
 
-class PluginDectivateDispatcher extends AbstractTaskDefinitionDispatcher
+class PluginDeactivateDispatcher extends AbstractTaskDefinitionDispatcher
 {
     /**
      * @param TaskDefinitionInterface $taskDefinition

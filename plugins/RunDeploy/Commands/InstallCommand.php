@@ -27,7 +27,7 @@ class InstallCommand extends Command
     {
         $output->writeln('Running install');
 
-        $deploymentPath = $this->locator->Config()->getFacade()->get('deployment_path', 'deployments');
+        $deploymentPath = $this->locator->Config()->getFacade()->get('definition_path', 'deployments');
         if(!is_dir($deploymentPath)){
             $output->writeln("Create directory \"{$deploymentPath}\"");
 

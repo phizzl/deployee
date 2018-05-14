@@ -5,6 +5,7 @@ namespace Deployee\Plugins\History\Subscriber;
 use Deployee\Kernel\Locator;
 use Deployee\Plugins\Pdo\Facade;
 use Deployee\Plugins\RunDeploy\Events\FindExecutableDefinitionsEvent;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class FindExecutableDefinitionsSubscriber implements EventSubscriberInterface
@@ -43,9 +44,15 @@ class FindExecutableDefinitionsSubscriber implements EventSubscriberInterface
         $executableDefinitions = [];
         foreach($event->getDefinitions() as $className){
             $sql = "SELECT COUNT(*) AS c FROM deployee_history_deployments WHERE `name`=:name AND success=1";
-            if((int)$pdo->selectOne($sql, [':name' => $className]) === 0){
-                $executableDefinitions[] = $className;
+            if((int)$pdo->selectOne($sql, [':name' => $className]) > 0){
+                $event->getOutput()->writeln(
+                    sprintf('Deployment %s already executed. Skipping', $className),
+                    OutputInterface::VERBOSITY_DEBUG
+                );
+                continue;
             }
+
+            $executableDefinitions[] = $className;
         }
 
         $event->setDefinitions($executableDefinitions);

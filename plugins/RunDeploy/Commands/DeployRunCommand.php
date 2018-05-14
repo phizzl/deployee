@@ -39,7 +39,7 @@ class DeployRunCommand extends Command
     {
         $this->locator->Events()->getFacade()->dispatchEvent(PreRunDeployEvent::class, new PreRunDeployEvent($input));
 
-        $definitions = $this->getExecutableDefinitions($input);
+        $definitions = $this->getExecutableDefinitions($input, $output);
         $output->writeln(sprintf("Executing %s definitions", count($definitions)));
         $success = true;
         foreach($definitions as $className){
@@ -126,11 +126,11 @@ class DeployRunCommand extends Command
     /**
      * @return array
      */
-    private function getExecutableDefinitions(InputInterface $input)
+    private function getExecutableDefinitions(InputInterface $input, OutputInterface $output)
     {
         $deploymentDefinitions = $this->locator->Deployment()->getFacade()->findDeploymentDefinitions();
 
-        $event = new FindExecutableDefinitionsEvent($deploymentDefinitions, $input);
+        $event = new FindExecutableDefinitionsEvent($deploymentDefinitions, $input, $output);
 
         $this->locator->Events()->getFacade()->dispatchEvent(FindExecutableDefinitionsEvent::class, $event);
         return $event->getDefinitions();

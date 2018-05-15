@@ -148,8 +148,8 @@ EOL;
     }
 
     /**
-     * Generate helper class for deployment definitions
      * @return string
+     * @throws \ReflectionException
      */
     private function generateDeploymentDefinitionSupportClass()
     {
@@ -160,14 +160,15 @@ EOL;
         $helperMethods = [];
 
         foreach($alias as $helperName => $aliasDefinition){
-            $signatur = implode(", ", $this->getClassConstructorSignatur($aliasDefinition['class']));
+            $methodSignatur = implode(", ", $this->getClassConstructorSignatur($aliasDefinition['class']));
+            $instanciationSignatur = implode(", ", $this->getClassConstructorSignatur($aliasDefinition['class'], false));
             $helperMethods[] = <<<EOL
     /**
      * @return {$aliasDefinition['class']}
      */
-    public function {$aliasDefinition['alias']}({$signatur})
+    public function {$aliasDefinition['alias']}({$methodSignatur})
     {
-        return new {$aliasDefinition['class']}({$signatur});
+        return new {$aliasDefinition['class']}({$instanciationSignatur});
     }
 EOL;
         }
@@ -193,9 +194,11 @@ EOL;
 
     /**
      * @param string $className
+     * @param bool $includeTypeHins
      * @return array
+     * @throws \ReflectionException
      */
-    private function getClassConstructorSignatur($className)
+    private function getClassConstructorSignatur($className, $includeTypeHins = true)
     {
         $refection = new \ReflectionClass($className);
         if(!$refection->getConstructor()){
@@ -211,7 +214,12 @@ EOL;
                 $defaultValue = var_export($parameter->getDefaultValue(), true);
             }
 
-            $signatur[] = "\$" . $parameter->getName() . ($parameter->isOptional() ? " = {$defaultValue}" : "");
+            $signatur[] = trim(sprintf(
+                '%s $%s%s',
+                $includeTypeHins && $parameter->isArray() ? 'array' : '',
+                $parameter->getName(),
+                $parameter->isOptional() ? " = {$defaultValue}" : ''
+            ));
         }
 
         return $signatur;

@@ -9,6 +9,7 @@ use Deployee\Deployment\Definitions\Tasks\TaskDefinitionInterface;
 use Deployee\Plugins\RunDeploy\Dispatcher\DispatcherFinder;
 use Deployee\Plugins\RunDeploy\Dispatcher\DispatchResult;
 use Deployee\Plugins\RunDeploy\Dispatcher\DispatchResultInterface;
+use Deployee\Plugins\RunDeploy\Events\DeployFailedEvent;
 use Deployee\Plugins\RunDeploy\Events\FindExecutableDefinitionsEvent;
 use Deployee\Plugins\RunDeploy\Events\PostDispatchDeploymentEvent;
 use Deployee\Plugins\RunDeploy\Events\PostDispatchTaskEvent;
@@ -104,14 +105,7 @@ class DeployRunCommand extends Command
         $result = $dispatcher->dispatch($taskDefinition);
 
         if($result->getExitCode() > 0){
-            $output->write(
-                sprintf(
-                    "Error while executing task (%s)" . PHP_EOL . "Output: %s" . PHP_EOL . "Error output: %s",
-                    $result->getExitCode(),
-                    $result->getOutput(),
-                    $result->getErrorOutput()
-                )
-            );
+            $this->exitOnFail($result, $output);
         }
 
         if($result->getOutput()) {
@@ -121,6 +115,26 @@ class DeployRunCommand extends Command
         $this->locator->Events()->getFacade()->dispatchEvent(PostDispatchTaskEvent::class, new PostDispatchTaskEvent($taskDefinition, $result));
 
         return $result;
+    }
+
+    /**
+     * @param DispatchResultInterface $result
+     * @param OutputInterface $output
+     */
+    private function exitOnFail(DispatchResultInterface $result, OutputInterface $output)
+    {
+        $output->write(
+            sprintf(
+                "Error while executing task (%s)" . PHP_EOL . "Output: %s" . PHP_EOL . "Error output: %s",
+                $result->getExitCode(),
+                $result->getOutput(),
+                $result->getErrorOutput()
+            )
+        );
+
+        $this->locator->Events()->getFacade()->dispatchEvent(DeployFailedEvent::class, new DeployFailedEvent($result));
+
+        exit($result->getExitCode());
     }
 
     /**

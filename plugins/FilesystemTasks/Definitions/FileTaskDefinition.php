@@ -62,9 +62,9 @@ class FileTaskDefinition extends AbstractTaskDefinition
         return $this;
     }
 
-    public function symlink($symlinkTarget)
+    public function symlink($symlinkSource)
     {
-        $this->parameter->set('symlink', $symlinkTarget);
+        $this->parameter->set('symlink', $symlinkSource);
         $this->parameter->set('copy', null);
         $this->parameter->set('contents', null);
         $this->parameter->set('remove', null);

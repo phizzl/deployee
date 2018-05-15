@@ -17,7 +17,7 @@ class GenerateThemeCacheDefinition extends AbstractTaskDefinition
      * GenerateThemeCacheDefinition constructor.
      * @param int $shopId
      */
-    public function __construct(array $shopId)
+    public function __construct(array $shopId = [])
     {
         $this->shopId = $shopId;
     }

@@ -26,10 +26,16 @@ class GenerateThemeCacheDispatcher extends AbstractTaskDefinitionDispatcher
     public function dispatch(TaskDefinitionInterface $taskDefinition)
     {
         $parameter = $taskDefinition->define();
+        $shopIds = $parameter->get('shopId');
         $shopPath = $this->locator->Config()->getFacade()->get('shopware.path');
 
+        $arguments = '';
+        foreach($shopIds as $shopId){
+            $arguments .= ' --shopId=' . $shopId;
+        }
+
         $shellTask = new ShellTaskDefinition("{$shopPath}/bin/console");
-        $shellTask->arguments(sprintf('sw:theme:cache:generate -n --shopId=%s', $parameter->get('shopId')));
+        $shellTask->arguments(sprintf('sw:theme:cache:generate -n %s', $arguments));
 
         return $this->delegate($shellTask);
     }

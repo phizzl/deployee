@@ -65,9 +65,10 @@ class DeployRunCommand extends Command
             }
             finally {
                 $this->locator->Events()->getFacade()->dispatchEvent(PostDispatchDeploymentEvent::class, new PostDispatchDeploymentEvent($deployment, $success));
-                if($success === false){
-                    break;
-                }
+            }
+
+            if($success === false){
+                break;
             }
         }
 

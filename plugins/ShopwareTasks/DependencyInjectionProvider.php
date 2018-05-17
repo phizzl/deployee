@@ -17,19 +17,9 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
      */
     public function injectDependencies(Locator $locator)
     {
-        $locator->Dependency()->getFacade()->extendDependency(\Deployee\Plugins\MySqlTasks\Module::CREDENTIALS_DEPENDENCY, function(Credentials $credentials) use($locator){
-            /* @var ShopConfig $shopConfig */
-            $shopConfig = $locator->Dependency()->getFacade()->getDependency(Module::SHOP_CONFIG_DEPENDENCY);
-            $dbConfig = $shopConfig->get('db');
-
-            $credentials->setDatabase($dbConfig['dbname']);
-            $credentials->setUsername($dbConfig['username']);
-            $credentials->setPassword($dbConfig['password']);
-            $credentials->setHost($dbConfig['host']);
-            $credentials->setPort((int)$dbConfig['port']);
-
-            return $credentials;
-        });
+        if($locator->Config()->getFacade()->get('shopware.path')){
+            $this->extendDbConfigDependency($locator);
+        }
 
         $locator->Dependency()->getFacade()->extendDependency(\Deployee\Deployment\Module::DEFINITION_HELPER_TASK_CREATION_DEPENDENCY, function(TaskCreationHelper $helper){
             $helper->addAlias('swCreateAdminUser', 'Deployee\Plugins\ShopwareTasks\Definitions\CreateAdminUserDefinition');
@@ -68,6 +58,26 @@ class DependencyInjectionProvider implements DependencyInjectionProviderInterfac
             }
 
             return $collection;
+        });
+    }
+
+    /**
+     * @param Locator $locator
+     */
+    private function extendDbConfigDependency(Locator $locator)
+    {
+        $locator->Dependency()->getFacade()->extendDependency(\Deployee\Plugins\MySqlTasks\Module::CREDENTIALS_DEPENDENCY, function(Credentials $credentials) use($locator){
+            /* @var ShopConfig $shopConfig */
+            $shopConfig = $locator->Dependency()->getFacade()->getDependency(Module::SHOP_CONFIG_DEPENDENCY);
+            $dbConfig = $shopConfig->get('db');
+
+            $credentials->setDatabase($dbConfig['dbname']);
+            $credentials->setUsername($dbConfig['username']);
+            $credentials->setPassword($dbConfig['password']);
+            $credentials->setHost($dbConfig['host']);
+            $credentials->setPort((int)$dbConfig['port']);
+
+            return $credentials;
         });
     }
 }

@@ -35,6 +35,7 @@ class Facade extends AbstractFacade
                 throw new \RuntimeException("Could not parse config file \"{$configFile}\"");
             }
 
+            $params['basedir'] = dirname($configFile);
             $this->config = $this->locator->Config()->getFactory()->createConfig($params);
         }
 

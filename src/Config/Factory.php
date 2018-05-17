@@ -13,7 +13,6 @@ class Factory extends AbstractFactory
      */
     public function createConfig($params)
     {
-        $params['cwd'] = getcwd();
         $config = new Config();
         $config->setParams($params);
 

@@ -91,6 +91,10 @@ class Module extends \Deployee\Kernel\Modules\Module
      */
     private function locateInDirectory($namespace, $directory, $suffix)
     {
+        if(!is_dir($directory)){
+            return [];
+        }
+
         $found = [];
         foreach(new \DirectoryIterator($directory) as $item){
             if($item->isDot() || !$item->isDir()){

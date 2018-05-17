@@ -36,7 +36,7 @@ class Facade extends AbstractFacade
             }
 
             $params['deployee.confdir'] = dirname($configFile);
-            $params['deployee.cwd'] = dirname($configFile);
+            $params['deployee.cwd'] = getcwd();
 
             $this->config = $this->locator->Config()->getFactory()->createConfig($params);
         }

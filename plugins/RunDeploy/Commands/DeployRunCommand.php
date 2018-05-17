@@ -59,9 +59,10 @@ class DeployRunCommand extends Command
                 $output->writeln(sprintf("Finished executing definition %s", $className), OutputInterface::VERBOSITY_DEBUG);
                 $this->locator->Events()->getFacade()->dispatchEvent(PostDispatchDeploymentEvent::class, new PostDispatchDeploymentEvent($deployment, true));
             }
-            catch(FailedException $e){
-                $output->writeln(sprintf('ERROR: %s', $e->getMessage()));
+            catch(\Exception $e){
+                $output->writeln(sprintf('ERROR (%s): %s', get_class($e), $e->getMessage()));
                 $success = false;
+                $exitCode = 5;
             }
             finally {
                 $this->locator->Events()->getFacade()->dispatchEvent(PostDispatchDeploymentEvent::class, new PostDispatchDeploymentEvent($deployment, $success));

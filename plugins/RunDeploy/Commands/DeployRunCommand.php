@@ -106,6 +106,7 @@ class DeployRunCommand extends Command
      * @param TaskDefinitionInterface $taskDefinition
      * @param OutputInterface $output
      * @return DispatchResultInterface
+     * @throws FailedException
      */
     private function runTaskDefinition(TaskDefinitionInterface $taskDefinition, OutputInterface $output){
         $event = new PreDispatchTaskEvent($taskDefinition);

@@ -16,6 +16,7 @@ use Deployee\Plugins\RunDeploy\Events\PostRunDeploy;
 use Deployee\Plugins\RunDeploy\Events\PreDispatchDeploymentEvent;
 use Deployee\Plugins\RunDeploy\Events\PreDispatchTaskEvent;
 use Deployee\Plugins\RunDeploy\Events\PreRunDeployEvent;
+use Deployee\Plugins\RunDeploy\Exception\FailedException;
 use Deployee\Plugins\RunDeploy\Module;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -49,15 +50,24 @@ class DeployRunCommand extends Command
             $deployment = $this->locator->Deployment()->getFactory()->createDeploymentDefinition($className);
 
             $this->locator->Events()->getFacade()->dispatchEvent(PreDispatchDeploymentEvent::class, new PreDispatchDeploymentEvent($deployment));
-            if(($exitCode = $this->runDeploymentDefinition($deployment, $output)) === 0) {
+
+            try {
+                if (($exitCode = $this->runDeploymentDefinition($deployment, $output)) !== 0) {
+                    throw new FailedException(sprintf('Failed to execute definition %s', $className));
+                }
+
                 $output->writeln(sprintf("Finished executing definition %s", $className), OutputInterface::VERBOSITY_DEBUG);
                 $this->locator->Events()->getFacade()->dispatchEvent(PostDispatchDeploymentEvent::class, new PostDispatchDeploymentEvent($deployment, true));
             }
-            else{
-                $output->writeln(sprintf("Error while executing definition %s", $className));
-                $this->locator->Events()->getFacade()->dispatchEvent(PostDispatchDeploymentEvent::class, new PostDispatchDeploymentEvent($deployment, false));
+            catch(FailedException $e){
+                $output->writeln(sprintf('ERROR: %s', $e->getMessage()));
                 $success = false;
-                break;
+            }
+            finally {
+                $this->locator->Events()->getFacade()->dispatchEvent(PostDispatchDeploymentEvent::class, new PostDispatchDeploymentEvent($deployment, $success));
+                if($success === false){
+                    break;
+                }
             }
         }
 
@@ -69,6 +79,7 @@ class DeployRunCommand extends Command
     /**
      * @param DeploymentDefinitionInterface $deployment
      * @param OutputInterface $output
+     * @throws FailedException
      * @return int
      */
     private function runDeploymentDefinition(DeploymentDefinitionInterface $deployment, OutputInterface $output)

@@ -49,7 +49,7 @@ class Facade extends AbstractFacade
      */
     private function findConfigFile()
     {
-        $searchInPaths = [getcwd()];
+        $searchInPaths = [getcwd(), __DIR__ . '/../../../../../'];
 
         if($envConfig = getenv('DEPLOYEE_CONFIG')){
             $envConfig = is_file($envConfig) ? dirname($envConfig) : $envConfig;
